@@ -4,6 +4,9 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    colors:{
+      accent: "#6597E2"
+    },
     extend: {},
   },
   plugins: [],
