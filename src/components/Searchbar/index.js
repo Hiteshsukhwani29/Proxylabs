@@ -7,7 +7,7 @@ function Index() {
   return (
     <>
       <div
-        className="shadow-[0_16px_33px_rgba(89,163,201,0.35)] rounded-full inline-block m-4"
+        className="shadow-[0_16px_33px_rgba(89,163,201,0.35)] rounded-full inline-block m-4 bg-white"
         style={{ border: "1px solid #eeeeee" }}
       >
         <div className="flex items-center mx-1">
