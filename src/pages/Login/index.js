@@ -1,8 +1,11 @@
 import React from 'react'
 
+
 function index() {
   return (
-    <div>Login Page</div>
+    <div>
+      <h1>Login</h1>
+    </div>
   )
 }
 

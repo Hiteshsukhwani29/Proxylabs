@@ -2,7 +2,10 @@ import React from "react";
 import Searchbar from "../../components/Searchbar";
 import Banner from "../../components/Banner";
 import Labs from "../../components/Labs";
-import Navbar from "../../components/Navbar"
+import Students from "../../components/Students";
+import Navbar from "../../components/Navbar";
+import StudentProfile from "../../components/StudentProfile";
+
 
 function index() {
   return (
@@ -11,6 +14,9 @@ function index() {
       <Searchbar />
       <Banner />
       <Labs/>
+      <Students />
+      <StudentProfile/>
+    
     </div>
   );
 }
