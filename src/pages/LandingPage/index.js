@@ -2,6 +2,7 @@ import React from "react";
 import Searchbar from "../../components/Searchbar";
 import Banner from "../../components/Banner";
 import Labs from "../../components/Labs";
+import Students from "../../components/Students";
 
 function index() {
   return (
@@ -9,6 +10,7 @@ function index() {
       <Searchbar />
       <Banner />
       <Labs/>
+      <Students />
     </div>
   );
 }
