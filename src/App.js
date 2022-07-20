@@ -1,12 +1,13 @@
 import "./App.css";
-import Navbar from "./Component/Navbar/Navbar";
 import LandingPage from "./pages/LandingPage";
+import LoginPage from "./pages/Login"
 
 function App() {
   return (
     <>
-  <Navbar/>
       <LandingPage />
+      <LoginPage/>
+      
     </>
   );
 }
