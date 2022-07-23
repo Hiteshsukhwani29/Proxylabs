@@ -5,6 +5,7 @@ import Labs from "../../components/Labs";
 import Students from "../../components/Students";
 import Navbar from "../../components/Navbar";
 import StudentProfile from "../../components/StudentProfile";
+import Labrecord from "../../components/Labrecord"
 
 
 function index() {
@@ -16,6 +17,7 @@ function index() {
       <Labs/>
       <Students />
       <StudentProfile/>
+      <Labrecord/>
     
     </div>
   );
