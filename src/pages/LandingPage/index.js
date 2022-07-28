@@ -5,9 +5,9 @@ import Labs from "../../components/Labs";
 import Students from "../../components/Students";
 import Navbar from "../../components/Navbar";
 import StudentProfile from "../../components/StudentProfile";
+import ProfileDos from "../../components/ProfileDos"
 import Labrecord from "../../components/Labrecord";
 import ExperimentList from "../../components/ExperimentList";
-
 
 function index() {
   return (
@@ -19,8 +19,8 @@ function index() {
       <Students />
       <StudentProfile/>
       <Labrecord/>
+      <ProfileDos/>
       <ExperimentList/>
-    
     </div>
   );
 }
