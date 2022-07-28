@@ -6,7 +6,7 @@ import Students from "../../components/Students";
 import Navbar from "../../components/Navbar";
 import StudentProfile from "../../components/StudentProfile";
 import Labrecord from "../../components/Labrecord"
-
+import ProfileDos from "../../components/ProfileDos"
 
 function index() {
   return (
@@ -18,6 +18,7 @@ function index() {
       <Students />
       <StudentProfile/>
       <Labrecord/>
+      <ProfileDos/>
     
     </div>
   );
