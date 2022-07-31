@@ -5,22 +5,21 @@ import Labs from "../../components/Labs";
 import Students from "../../components/Students";
 import Navbar from "../../components/Navbar";
 import StudentProfile from "../../components/StudentProfile";
-import ProfileDos from "../../components/ProfileDos"
+import ProfileDos from "../../components/ProfileDos";
 import Labrecord from "../../components/Labrecord";
 import ExperimentList from "../../components/ExperimentList";
 
 function index() {
   return (
     <div className="bg-bg1">
-      <Navbar/>
+      <Navbar />
       <Searchbar />
       <Banner />
-      <Labs/>
+      <Labs />
       <Students />
-      <StudentProfile/>
-      <Labrecord/>
-      <ProfileDos/>
-      <ExperimentList/>
+      <StudentProfile />
+      <Labrecord />
+      <ExperimentList />
     </div>
   );
 }
