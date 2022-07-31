@@ -3,15 +3,6 @@ import ExperimentListItem from "./ExperimentListItem";
 import ProfileDos from "../../components/ProfileDos";
 
 function Index() {
-
-  const [dexpno, setdexpno] = useState(0);
-  const [edxpname, setdexpname] = useState(0);
-
-  function changeData(e1,e2){
-    setdexpno(e1);
-    setdexpname(e2);
-  }
-
   return (
     <div className="flex">
       <div
