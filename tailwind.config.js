@@ -13,7 +13,11 @@ module.exports = {
       temp2: "#EDF3F6",
       bg1: "#EDF3F6"
     },
-    extend: {},
+    extend: {
+      animation:{
+        'bounce-short': 'bounce 1s ease-in-out 5'
+      }
+    },
   },
   plugins: [],
 }
