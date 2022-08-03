@@ -1,9 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { X } from "heroicons-react";
 import { TextField, Button } from "@mui/material";
 import db from "../../firebase";
 import { auth } from "../../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+
+/**
+ * 
+ * @TODO Modify is already logged in from registration
+ */
 
 /**
  * Appropriate comments are must, otherwise changes will not be merged
@@ -18,6 +26,17 @@ function Index() {
    * Common States
    * /////////////////////////////////////////
    */
+  
+  const [AlreadyLoggedIn, setAlreadyLoggedIn] = useState(false);
+  const [Token, setToken] = useState("");
+
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem('token'));
+    if (token) {
+     setAlreadyLoggedIn(true);
+     setToken(token);
+    }
+  }, [Token]);
 
   /**
    * This state will store Email ID, which will be common for both signup and signin
@@ -49,6 +68,7 @@ function Index() {
   const [HideEmailBox, setHideEmailBox] = useState(false);
   const [ShowPasswordBox, setShowPasswordBox] = useState(false);
   const [HideNextBtn, setHideNextBtn] = useState(false);
+  const [ShowLoginBtn, setShowLoginBtn] = useState(false);
   const [ShowRegistrationBox, setShowRegistrationBox] = useState(false);
 
   /**
@@ -91,6 +111,8 @@ function Index() {
             setwelcomeText("Welcome " + snapshot.data().name);
             setHideEmailBox(true);
             setShowPasswordBox(true);
+            setHideNextBtn(true);
+            setShowLoginBtn(true);
           });
         } else {
           setcorrectMailId(true);
@@ -119,6 +141,43 @@ function Index() {
    * This State will store the password which is entered in login password box
    */
   const [LoginPassword, setLoginPassword] = useState("");
+  const [IsLoginPasswordCorrect, setIsLoginPasswordCorrect] = useState(true);
+  const [
+    IncorrectLoginPasswordHelpertext,
+    setIncorrectLoginPasswordHelpertext,
+  ] = useState("");
+
+  /**
+   * /////////////////////////////////////////
+   * ////////////////////////////////////////
+   */
+
+  /**
+   * /////////////////////////////////////////
+   * Login Functions
+   * /////////////////////////////////////////
+   */
+
+  const logInWithEmailAndPassword = async () => {
+    if (LoginPassword !== "") {
+      setIsLoginPasswordCorrect(true);
+      setIncorrectLoginPasswordHelpertext("");  
+      try {
+        const res = await signInWithEmailAndPassword(auth, Email, LoginPassword);
+        const uid = res.user.uid;
+        localStorage.setItem('token', JSON.stringify(uid));
+        setShowPasswordBox(false);
+        setShowLoginBtn(false);
+      } catch (err) {
+        setIsLoginPasswordCorrect(false);
+        setIncorrectLoginPasswordHelpertext("Incorrect password");  
+      }
+    } 
+    else {
+      setIsLoginPasswordCorrect(false);
+      setIncorrectLoginPasswordHelpertext("Password cannot be empty");
+    }
+  };
 
   /**
    * /////////////////////////////////////////
@@ -141,6 +200,10 @@ function Index() {
     DifferentConfirmPasswordHelpertext,
     setDifferentConfirmPasswordHelpertext,
   ] = useState("");
+
+  const [CreditCode, setCreditCode] = useState("");
+  const [IsCodeCorrect, setIsCodeCorrect] = useState(true);
+  const [IncorrectCodeHelpertext, setIncorrectCodeHelpertext] = useState("");
 
   /**
    * /////////////////////////////////////////
@@ -166,13 +229,56 @@ function Index() {
       } else {
         setIsConfirmPasswordSame(true);
         setDifferentConfirmPasswordHelpertext("");
+        checkCreditCode();
         // This function will register user with email, password and add user data in firestore
-        registerWithEmailAndPassword();
       }
     }
   };
 
-  const registerWithEmailAndPassword = async () => {
+  const checkCreditCode = () => {
+    if (CreditCode !== "") {
+      var CreditCodeRef = db.collection("CreditCode").doc(CreditCode);
+
+      CreditCodeRef.get().then((docSnapshot) => {
+        if (docSnapshot.exists) {
+          CreditCodeRef.get().then((snapshot) => {
+            const creditValue = snapshot.data().creditvalue;
+            const instituteuid = snapshot.data().instituteuid;
+            const course = snapshot.data().course;
+
+            var instituteRef = db.collection("Institute").doc(instituteuid);
+
+            instituteRef.get().then((snapshot) => {
+              if (snapshot.data().credits - creditValue > 0) {
+                instituteRef.update({
+                  credits: snapshot.data().credits - creditValue,
+                });
+
+                registerWithEmailAndPassword(course, creditValue, instituteuid);
+              } else {
+                setIsCodeCorrect(false);
+                setIncorrectCodeHelpertext(
+                  "Your college don't have enough credits, please contact your college"
+                );
+              }
+            });
+          });
+        } else {
+          setIsCodeCorrect(false);
+          setIncorrectCodeHelpertext("This code doesn't exists");
+        }
+      });
+    } else {
+      setIsCodeCorrect(true);
+      setIncorrectCodeHelpertext("");
+    }
+  };
+
+  const registerWithEmailAndPassword = async (
+    course,
+    credits,
+    instituteuid
+  ) => {
     try {
       const res = await createUserWithEmailAndPassword(
         auth,
@@ -188,11 +294,16 @@ function Index() {
         .doc(user.uid)
         .set({
           uid: user.uid,
-          name: "Hitesh",
-          authProvider: "local",
+          instituteuid: instituteuid,
+          credits: credits,
+          name: FullName,
+          course: course,
           Email,
         })
-        .then(setShowRegistrationBox(false));
+        .then(() =>{
+          setShowRegistrationBox(false);
+          localStorage.setItem('token', JSON.stringify(user.uid));
+        });
     } catch (err) {
       console.error(err);
       alert(err.message);
@@ -208,6 +319,8 @@ function Index() {
    * @TODO Add comments/break this in components
    */
   return (
+    <>
+    {!AlreadyLoggedIn?
     <div
       className="flex flex-col w-min p-5 rounded-xl bg-white whitespace-nowrap m-auto"
       style={{ border: "1px solid #eeeeee" }}
@@ -246,8 +359,8 @@ function Index() {
 
       {ShowPasswordBox ? (
         <TextField
-          error={correctMailId}
-          helperText={incorrectMailIdHelperText}
+          error={!IsLoginPasswordCorrect}
+          helperText={IncorrectLoginPasswordHelpertext}
           className="w-96"
           id="outlined-basic"
           label="Password"
@@ -268,6 +381,17 @@ function Index() {
           onClick={checkMailId}
         >
           Next
+        </Button>
+      ) : (
+        <></>
+      )}
+      {ShowLoginBtn ? (
+        <Button
+          className="!bg-accent !text-white !mt-6 !px-10  !py-2 !rounded-full"
+          variant="outlined"
+          onClick={logInWithEmailAndPassword}
+        >
+          Login
         </Button>
       ) : (
         <></>
@@ -307,6 +431,19 @@ function Index() {
               setConfirmPassword(e.target.value);
             }}
             value={ConfirmPassword}
+          />
+          <TextField
+            error={!IsCodeCorrect}
+            helperText={IncorrectCodeHelpertext}
+            className="w-96 !mt-4"
+            id="outlined-basic"
+            label="Credit Code"
+            placeholder="I have a code from my college (optional)"
+            variant="outlined"
+            onChange={(e) => {
+              setCreditCode(e.target.value);
+            }}
+            value={CreditCode}
           />
           <Button
             className="!bg-accent !text-white !mt-6 !px-10  !py-2 !rounded-full"
@@ -349,6 +486,8 @@ function Index() {
         </div>
       </div>
     </div>
+    :<></>}
+    </>
   );
 }
 
