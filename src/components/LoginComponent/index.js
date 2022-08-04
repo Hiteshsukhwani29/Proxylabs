@@ -6,10 +6,12 @@ import { auth } from "../../firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
 } from "firebase/auth";
 
 /**
- * 
+ *
  * @TODO Modify is already logged in from registration
  */
 
@@ -26,15 +28,15 @@ function Index() {
    * Common States
    * /////////////////////////////////////////
    */
-  
+
   const [AlreadyLoggedIn, setAlreadyLoggedIn] = useState(false);
   const [Token, setToken] = useState("");
 
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem('token'));
+    const token = JSON.parse(localStorage.getItem("token"));
     if (token) {
-     setAlreadyLoggedIn(true);
-     setToken(token);
+      setAlreadyLoggedIn(true);
+      setToken(token);
     }
   }, [Token]);
 
@@ -161,21 +163,56 @@ function Index() {
   const logInWithEmailAndPassword = async () => {
     if (LoginPassword !== "") {
       setIsLoginPasswordCorrect(true);
-      setIncorrectLoginPasswordHelpertext("");  
+      setIncorrectLoginPasswordHelpertext("");
       try {
-        const res = await signInWithEmailAndPassword(auth, Email, LoginPassword);
+        const res = await signInWithEmailAndPassword(
+          auth,
+          Email,
+          LoginPassword
+        );
         const uid = res.user.uid;
-        localStorage.setItem('token', JSON.stringify(uid));
+        localStorage.setItem("token", JSON.stringify(uid));
         setShowPasswordBox(false);
         setShowLoginBtn(false);
       } catch (err) {
         setIsLoginPasswordCorrect(false);
-        setIncorrectLoginPasswordHelpertext("Incorrect password");  
+        setIncorrectLoginPasswordHelpertext("Incorrect password");
       }
-    } 
-    else {
+    } else {
       setIsLoginPasswordCorrect(false);
       setIncorrectLoginPasswordHelpertext("Password cannot be empty");
+    }
+  };
+
+    // Google Authentication
+
+
+  const googleProvider = new GoogleAuthProvider();
+  const signInWithGoogle = async () => {
+    try {
+      const res = await signInWithPopup(auth, googleProvider);
+      const user = res.user;
+      await db.collection("allUsers").doc(user.email).set({
+        name: user.displayName,
+      });
+
+      await db
+      .collection("users")
+      .doc(user.uid)
+      .set({
+        uid: user.uid,
+        instituteuid: "",
+        credits: 0,
+        name: user.displayName,
+        course: "",
+        email: user.email,
+      })
+      .then(() => {
+        localStorage.setItem("token", JSON.stringify(user.uid));
+      });
+  } catch (err) {
+      console.error(err);
+      alert(err.message);
     }
   };
 
@@ -300,9 +337,9 @@ function Index() {
           course: course,
           Email,
         })
-        .then(() =>{
+        .then(() => {
           setShowRegistrationBox(false);
-          localStorage.setItem('token', JSON.stringify(user.uid));
+          localStorage.setItem("token", JSON.stringify(user.uid));
         });
     } catch (err) {
       console.error(err);
@@ -315,178 +352,186 @@ function Index() {
    * ////////////////////////////////////////
    */
 
+
   /**
    * @TODO Add comments/break this in components
    */
   return (
     <>
-    {!AlreadyLoggedIn?
-    <div
-      className="flex flex-col w-min p-5 rounded-xl bg-white whitespace-nowrap m-auto"
-      style={{ border: "1px solid #eeeeee" }}
-    >
-      <div className="flex items-center">
-        <X className="h-4 w-4 flex-0" />
-        <div className="text-lg whitespace-nowrap flex-1 text-center">
-          Login or Signup
-        </div>
-      </div>
-      <div className=" bg-gray w-auto h-[1px] mt-3 -mx-5 opacity-50"></div>
-      <div className="flex my-3">
-        <div className="flex-col">
-          <div className="text-sm mx-[1px] tracking-wider">Student</div>
-          <div className="bg-accent w-auto h-1 rounded-full"></div>
-        </div>
-        <div className="text-sm ml-5 mx-[1px] tracking-wider">Institute</div>
-      </div>
-      <div className="my-4 text-lg">{welcomeText}</div>
-      {!HideEmailBox ? (
-        <TextField
-          error={correctMailId}
-          helperText={incorrectMailIdHelperText}
-          className=" w-96"
-          id="outlined-basic"
-          label="Email"
-          variant="outlined"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-          value={Email}
-        />
-      ) : (
-        <></>
-      )}
-
-      {ShowPasswordBox ? (
-        <TextField
-          error={!IsLoginPasswordCorrect}
-          helperText={IncorrectLoginPasswordHelpertext}
-          className="w-96"
-          id="outlined-basic"
-          label="Password"
-          variant="outlined"
-          onChange={(e) => {
-            setLoginPassword(e.target.value);
-          }}
-          value={LoginPassword}
-        />
-      ) : (
-        <></>
-      )}
-
-      {!HideNextBtn ? (
-        <Button
-          className="!bg-accent !text-white !mt-6 !px-10  !py-2 !rounded-full"
-          variant="outlined"
-          onClick={checkMailId}
+      {!AlreadyLoggedIn ? (
+        <div
+          className="flex flex-col w-min p-5 rounded-xl bg-white whitespace-nowrap m-auto"
+          style={{ border: "1px solid #eeeeee" }}
         >
-          Next
-        </Button>
-      ) : (
-        <></>
-      )}
-      {ShowLoginBtn ? (
-        <Button
-          className="!bg-accent !text-white !mt-6 !px-10  !py-2 !rounded-full"
-          variant="outlined"
-          onClick={logInWithEmailAndPassword}
-        >
-          Login
-        </Button>
-      ) : (
-        <></>
-      )}
-      {ShowRegistrationBox ? (
-        <div className="flex flex-col mt-4">
-          <TextField
-            className="w-96"
-            id="outlined-basic"
-            label="Full Name"
-            variant="outlined"
-            onChange={(e) => {
-              setFullName(e.target.value);
-            }}
-            value={FullName}
-          />
-          <TextField
-            error={!IsPasswordSafe}
-            helperText={UnsafePasswordHelpertext}
-            className="w-96 !mt-4"
-            id="outlined-basic"
-            label="Password"
-            variant="outlined"
-            onChange={(e) => {
-              setNewPassword(e.target.value);
-            }}
-            value={NewPassword}
-          />
-          <TextField
-            error={!IsConfirmPasswordSame}
-            helperText={DifferentConfirmPasswordHelpertext}
-            className="w-96 !mt-4"
-            id="outlined-basic"
-            label="Confirm Password"
-            variant="outlined"
-            onChange={(e) => {
-              setConfirmPassword(e.target.value);
-            }}
-            value={ConfirmPassword}
-          />
-          <TextField
-            error={!IsCodeCorrect}
-            helperText={IncorrectCodeHelpertext}
-            className="w-96 !mt-4"
-            id="outlined-basic"
-            label="Credit Code"
-            placeholder="I have a code from my college (optional)"
-            variant="outlined"
-            onChange={(e) => {
-              setCreditCode(e.target.value);
-            }}
-            value={CreditCode}
-          />
-          <Button
-            className="!bg-accent !text-white !mt-6 !px-10  !py-2 !rounded-full"
-            variant="outlined"
-            onClick={checkUserBeforeRegistration}
+          <div className="flex items-center">
+            <X className="h-4 w-4 flex-0" />
+            <div className="text-lg whitespace-nowrap flex-1 text-center">
+              Login or Signup
+            </div>
+          </div>
+          <div className=" bg-gray w-auto h-[1px] mt-3 -mx-5 opacity-50"></div>
+          <div className="flex my-3">
+            <div className="flex-col">
+              <div className="text-sm mx-[1px] tracking-wider">Student</div>
+              <div className="bg-accent w-auto h-1 rounded-full"></div>
+            </div>
+            <div className="text-sm ml-5 mx-[1px] tracking-wider">
+              Institute
+            </div>
+          </div>
+          <div className="my-4 text-lg">{welcomeText}</div>
+          {!HideEmailBox ? (
+            <TextField
+              error={correctMailId}
+              helperText={incorrectMailIdHelperText}
+              className=" w-96"
+              id="outlined-basic"
+              label="Email"
+              variant="outlined"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              value={Email}
+            />
+          ) : (
+            <></>
+          )}
+
+          {ShowPasswordBox ? (
+            <TextField
+              error={!IsLoginPasswordCorrect}
+              helperText={IncorrectLoginPasswordHelpertext}
+              className="w-96"
+              id="outlined-basic"
+              label="Password"
+              variant="outlined"
+              onChange={(e) => {
+                setLoginPassword(e.target.value);
+              }}
+              value={LoginPassword}
+            />
+          ) : (
+            <></>
+          )}
+
+          {!HideNextBtn ? (
+            <Button
+              className="!bg-accent !text-white !mt-6 !px-10  !py-2 !rounded-full"
+              variant="outlined"
+              onClick={checkMailId}
+            >
+              Next
+            </Button>
+          ) : (
+            <></>
+          )}
+          {ShowLoginBtn ? (
+            <Button
+              className="!bg-accent !text-white !mt-6 !px-10  !py-2 !rounded-full"
+              variant="outlined"
+              onClick={logInWithEmailAndPassword}
+            >
+              Login
+            </Button>
+          ) : (
+            <></>
+          )}
+          {ShowRegistrationBox ? (
+            <div className="flex flex-col mt-4">
+              <TextField
+                className="w-96"
+                id="outlined-basic"
+                label="Full Name"
+                variant="outlined"
+                onChange={(e) => {
+                  setFullName(e.target.value);
+                }}
+                value={FullName}
+              />
+              <TextField
+                error={!IsPasswordSafe}
+                helperText={UnsafePasswordHelpertext}
+                className="w-96 !mt-4"
+                id="outlined-basic"
+                label="Password"
+                variant="outlined"
+                onChange={(e) => {
+                  setNewPassword(e.target.value);
+                }}
+                value={NewPassword}
+              />
+              <TextField
+                error={!IsConfirmPasswordSame}
+                helperText={DifferentConfirmPasswordHelpertext}
+                className="w-96 !mt-4"
+                id="outlined-basic"
+                label="Confirm Password"
+                variant="outlined"
+                onChange={(e) => {
+                  setConfirmPassword(e.target.value);
+                }}
+                value={ConfirmPassword}
+              />
+              <TextField
+                error={!IsCodeCorrect}
+                helperText={IncorrectCodeHelpertext}
+                className="w-96 !mt-4"
+                id="outlined-basic"
+                label="Credit Code"
+                placeholder="I have a code from my college (optional)"
+                variant="outlined"
+                onChange={(e) => {
+                  setCreditCode(e.target.value);
+                }}
+                value={CreditCode}
+              />
+              <Button
+                className="!bg-accent !text-white !mt-6 !px-10  !py-2 !rounded-full"
+                variant="outlined"
+                onClick={checkUserBeforeRegistration}
+              >
+                Register
+              </Button>
+            </div>
+          ) : (
+            <></>
+          )}
+          <div className="flex my-6">
+            <div className=" bg-gray flex-1 h-[1px] mt-3"></div>
+            <div className="mx-5 flex-0 text-gray">or</div>
+            <div className=" bg-gray flex-1 w-auto h-[1px] mt-3"></div>
+          </div>
+          <div
+            className="flex items-center rounded-full px-4 py-2"
+            style={{ border: "1px solid #eeeeee" }}
           >
-            Register
-          </Button>
+            <img
+              className="h-5 w-5 flex-0"
+              src="https://img.icons8.com/color/48/000000/google-logo.png"
+            />
+            <div
+              className="text-lg whitespace-nowrap flex-1 text-center opacity-50"
+              onClick={signInWithGoogle}
+            >
+              Continue with Google
+            </div>
+          </div>
+          <div
+            className="flex items-center rounded-full px-4 py-2 my-5"
+            style={{ border: "1px solid #eeeeee" }}
+          >
+            <img
+              className="h-5 w-5 flex-0"
+              src="https://img.icons8.com/fluency/48/000000/mail.png"
+            />
+            <div className="text-lg whitespace-nowrap flex-1 text-center opacity-50">
+              Continue with mail
+            </div>
+          </div>
         </div>
       ) : (
         <></>
       )}
-      <div className="flex my-6">
-        <div className=" bg-gray flex-1 h-[1px] mt-3"></div>
-        <div className="mx-5 flex-0 text-gray">or</div>
-        <div className=" bg-gray flex-1 w-auto h-[1px] mt-3"></div>
-      </div>
-      <div
-        className="flex items-center rounded-full px-4 py-2"
-        style={{ border: "1px solid #eeeeee" }}
-      >
-        <img
-          className="h-5 w-5 flex-0"
-          src="https://img.icons8.com/color/48/000000/google-logo.png"
-        />
-        <div className="text-lg whitespace-nowrap flex-1 text-center opacity-50">
-          Continue with Google
-        </div>
-      </div>
-      <div
-        className="flex items-center rounded-full px-4 py-2 my-5"
-        style={{ border: "1px solid #eeeeee" }}
-      >
-        <img
-          className="h-5 w-5 flex-0"
-          src="https://img.icons8.com/fluency/48/000000/mail.png"
-        />
-        <div className="text-lg whitespace-nowrap flex-1 text-center opacity-50">
-          Continue with mail
-        </div>
-      </div>
-    </div>
-    :<></>}
     </>
   );
 }
