@@ -20,7 +20,7 @@ import {
 /**
  * @author Hitesh Sukhwani
  */
-function Index() {
+function Index({ShowModal, setShowModal}) {
   /**
    * /////////////////////////////////////////
    * Common States
@@ -320,13 +320,15 @@ function Index() {
    */
   return (
     <>
+    {ShowModal?
+    <>
     {!AlreadyLoggedIn?
     <div
-      className="flex flex-col w-min p-5 rounded-xl bg-white whitespace-nowrap m-auto"
+      className="flex flex-col w-min p-5 rounded-xl bg-white whitespace-nowrap m-auto drop-shadow-xl"
       style={{ border: "1px solid #eeeeee" }}
     >
       <div className="flex items-center">
-        <X className="h-4 w-4 flex-0" />
+        <X className="h-4 w-4 flex-0 cursor-pointer" onClick={() => setShowModal(false)} />
         <div className="text-lg whitespace-nowrap flex-1 text-center">
           Login or Signup
         </div>
@@ -486,6 +488,8 @@ function Index() {
         </div>
       </div>
     </div>
+    :<></>}
+    </>
     :<></>}
     </>
   );
