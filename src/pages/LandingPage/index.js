@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Searchbar from "../../components/Searchbar";
 import Banner from "../../components/Banner";
 import Labs from "../../components/Labs";
@@ -8,7 +8,9 @@ import StudentProfile from "../../components/StudentProfile";
 import Labrecord from "../../components/Labrecord";
 import ExperimentList from "../../components/ExperimentList";
 import Login from "../../components/LoginComponent";
+import { Button } from "@mui/material";
 
+<<<<<<< HEAD
 import Landing_bg from "../../assets/Landing_bg.png";
 
 import { Button } from "@mui/material";
@@ -60,8 +62,28 @@ function index() {
       <div className="flex-0 mx-6">
         <Banner />
       </div>
+=======
+function Index() {
+  const [ShowModal, setShowModal] = useState(true);
+  return (
+    <div className="bg-bg1">
+      <Navbar />
+      <Button onClick={() => setShowModal(true)}>Show Login screen</Button>
+      <Login ShowModal={ShowModal} setShowModal={setShowModal}/>
+      {ShowModal?<div>
+      <Searchbar />
+      <Banner />
+      <Labs />
+      <Students />
+      <StudentProfile />
+      <Labrecord />
+      <ExperimentList />
+      </div>
+      :
+      <></>}
+>>>>>>> c1034125f44c8014b19b21459b73a49a83c8c822
     </div>
   );
 }
 
-export default index;
+export default Index;
