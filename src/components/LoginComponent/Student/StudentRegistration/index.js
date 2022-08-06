@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
 import db from "../../../../firebase";
 import { auth } from "../../../../firebase";
-import {
-    createUserWithEmailAndPassword,
-  } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
-function Index({Email, setShowRegistrationBox}) {
+function Index({ Email, setShowRegistrationBox }) {
   const [FullName, setFullName] = useState("");
   const [NewPassword, setNewPassword] = useState("");
   const [IsPasswordSafe, setIsPasswordSafe] = useState(true);
@@ -21,7 +19,6 @@ function Index({Email, setShowRegistrationBox}) {
   const [CreditCode, setCreditCode] = useState("");
   const [IsCodeCorrect, setIsCodeCorrect] = useState(true);
   const [IncorrectCodeHelpertext, setIncorrectCodeHelpertext] = useState("");
-
 
   const checkUserBeforeRegistration = () => {
     if (NewPassword.length < 6) {
@@ -107,9 +104,9 @@ function Index({Email, setShowRegistrationBox}) {
           course: course,
           Email,
         })
-        .then(() =>{
+        .then(() => {
           setShowRegistrationBox(false);
-          localStorage.setItem('token', JSON.stringify(user.uid));
+          localStorage.setItem("token", JSON.stringify(user.uid));
         });
     } catch (err) {
       console.error(err);

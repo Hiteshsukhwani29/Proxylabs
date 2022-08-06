@@ -13,11 +13,9 @@ import RoundedBoxButton from "../../RoundedBoxBotton";
  * @author Hitesh Sukhwani
  */
 function Index({ setwelcomeText }) {
-
   useEffect(() => {
     setwelcomeText("Welcome to Proxy Labs!");
-  }, [])
-  
+  }, []);
 
   /**
    * This state will store Email ID, which will be common for both signup and signin
@@ -95,30 +93,29 @@ function Index({ setwelcomeText }) {
     <>
       {!HideEmailBox ? (
         <>
-        <TextField
-          error={correctMailId}
-          helperText={incorrectMailIdHelperText}
-          className=" w-96"
-          id="outlined-basic"
-          label="Email"
-          variant="outlined"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-          value={Email}
-        />
-        <Button
-          className="!bg-accent !text-white !mt-6 !px-10  !py-2 !rounded-full"
-          variant="outlined"
-          onClick={checkMailId}
-        >
-          Next
-        </Button>
+          <TextField
+            error={correctMailId}
+            helperText={incorrectMailIdHelperText}
+            className=" w-96"
+            id="outlined-basic"
+            label="Email"
+            variant="outlined"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            value={Email}
+          />
+          <Button
+            className="!bg-accent !text-white !mt-6 !px-10  !py-2 !rounded-full"
+            variant="outlined"
+            onClick={checkMailId}
+          >
+            Next
+          </Button>
         </>
       ) : (
         <></>
       )}
-
 
       {ShowPasswordBox ? (
         <StudentLogin Email={Email} setShowPasswordBox={setShowPasswordBox} />

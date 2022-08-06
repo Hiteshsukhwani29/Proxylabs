@@ -1,13 +1,18 @@
-import React, { useState } from "react";
-import { TextField, Button } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import {
+  TextField,
+  Button,
+  Autocomplete,
+  Alert,
+  AlertTitle,
+} from "@mui/material";
 import db from "../../../../firebase";
 import { auth } from "../../../../firebase";
-import {
-    createUserWithEmailAndPassword,
-  } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { collegesList } from "../../../../assets/collegesList";
 
-function Index({Email, setShowRegistrationBox}) {
-  const [FullName, setFullName] = useState("");
+function Index({ Email, setShowRegistrationBox }) {
+  const [CollegeName, setCollegeName] = useState("");
   const [NewPassword, setNewPassword] = useState("");
   const [IsPasswordSafe, setIsPasswordSafe] = useState(true);
   const [UnsafePasswordHelpertext, setUnsafePasswordHelpertext] = useState("");
@@ -18,12 +23,12 @@ function Index({Email, setShowRegistrationBox}) {
     setDifferentConfirmPasswordHelpertext,
   ] = useState("");
 
-  const [CreditCode, setCreditCode] = useState("");
-  const [IsCodeCorrect, setIsCodeCorrect] = useState(true);
-  const [IncorrectCodeHelpertext, setIncorrectCodeHelpertext] = useState("");
+  const [NirfId, setNirfId] = useState("");
+  const [IsNirfIdCorrect, setIsNirfIdCorrect] = useState(true);
+  const [IncorrectNirfIdHelpertext, setIncorrectNirfIdHelpertext] =
+    useState("");
 
-
-  const checkUserBeforeRegistration = () => {
+  const checkInstituteBeforeRegistration = () => {
     if (NewPassword.length < 6) {
       setIsPasswordSafe(false);
       setUnsafePasswordHelpertext("Password cannot be less than 6 characters");
@@ -36,56 +41,13 @@ function Index({Email, setShowRegistrationBox}) {
       } else {
         setIsConfirmPasswordSame(true);
         setDifferentConfirmPasswordHelpertext("");
-        checkCreditCode();
         // This function will register user with email, password and add user data in firestore
+        registerWithEmailAndPassword();
       }
     }
   };
 
-  const checkCreditCode = () => {
-    if (CreditCode !== "") {
-      var CreditCodeRef = db.collection("CreditCode").doc(CreditCode);
-
-      CreditCodeRef.get().then((docSnapshot) => {
-        if (docSnapshot.exists) {
-          CreditCodeRef.get().then((snapshot) => {
-            const creditValue = snapshot.data().creditvalue;
-            const instituteuid = snapshot.data().instituteuid;
-            const course = snapshot.data().course;
-
-            var instituteRef = db.collection("Institute").doc(instituteuid);
-
-            instituteRef.get().then((snapshot) => {
-              if (snapshot.data().credits - creditValue > 0) {
-                instituteRef.update({
-                  credits: snapshot.data().credits - creditValue,
-                });
-
-                registerWithEmailAndPassword(course, creditValue, instituteuid);
-              } else {
-                setIsCodeCorrect(false);
-                setIncorrectCodeHelpertext(
-                  "Your college don't have enough credits, please contact your college"
-                );
-              }
-            });
-          });
-        } else {
-          setIsCodeCorrect(false);
-          setIncorrectCodeHelpertext("This code doesn't exists");
-        }
-      });
-    } else {
-      setIsCodeCorrect(true);
-      setIncorrectCodeHelpertext("");
-    }
-  };
-
-  const registerWithEmailAndPassword = async (
-    course,
-    credits,
-    instituteuid
-  ) => {
+  const registerWithEmailAndPassword = async () => {
     try {
       const res = await createUserWithEmailAndPassword(
         auth,
@@ -93,23 +55,23 @@ function Index({Email, setShowRegistrationBox}) {
         NewPassword
       );
       const user = res.user;
-      await db.collection("allUsers").doc(Email).set({
-        name: FullName,
+      await db.collection("allInstitutes").doc(Email).set({
+        name: CollegeName,
       });
       await db
-        .collection("users")
+        .collection("Institutes")
         .doc(user.uid)
         .set({
           uid: user.uid,
-          instituteuid: instituteuid,
-          credits: credits,
-          name: FullName,
-          course: course,
+          name: CollegeName,
+          nirf_id: NirfId,
           Email,
+          approved: false,
+          completepercent: 20,
         })
-        .then(() =>{
+        .then(() => {
           setShowRegistrationBox(false);
-          localStorage.setItem('token', JSON.stringify(user.uid));
+          localStorage.setItem("token", JSON.stringify(user.uid));
         });
     } catch (err) {
       console.error(err);
@@ -119,15 +81,33 @@ function Index({Email, setShowRegistrationBox}) {
 
   return (
     <div className="flex flex-col mt-4">
+      <Alert className="w-96 whitespace-normal" severity="info">
+        <AlertTitle>Note</AlertTitle>
+        After registration check your mail to verify your account
+      </Alert>
+      <Autocomplete
+        disableClearable
+        options={collegesList}
+        className="w-96 mt-4"
+        onChange={(e, v) => {
+          setCollegeName(v);
+        }}
+        renderInput={(params) => (
+          <TextField {...params} label="select college" />
+        )}
+      />
       <TextField
-        className="w-96"
+        error={!IsNirfIdCorrect}
+        helperText={IncorrectNirfIdHelpertext}
+        className="w-96 !mt-4"
         id="outlined-basic"
-        label="Full Name"
+        label="NIRF Institute ID"
+        placeholder="I have a code from my college (optional)"
         variant="outlined"
         onChange={(e) => {
-          setFullName(e.target.value);
+          setNirfId(e.target.value);
         }}
-        value={FullName}
+        value={NirfId}
       />
       <TextField
         error={!IsPasswordSafe}
@@ -153,23 +133,27 @@ function Index({Email, setShowRegistrationBox}) {
         }}
         value={ConfirmPassword}
       />
-      <TextField
-        error={!IsCodeCorrect}
-        helperText={IncorrectCodeHelpertext}
-        className="w-96 !mt-4"
-        id="outlined-basic"
-        label="Credit Code"
-        placeholder="I have a code from my college (optional)"
-        variant="outlined"
-        onChange={(e) => {
-          setCreditCode(e.target.value);
-        }}
-        value={CreditCode}
-      />
+
+      <div className="mt-4 text-xs text-gray w-96 whitespace-normal">
+        By selecting Agree and continue, I agree to Proxy Labs{" "}
+        <span className="text-accent underline cursor-pointer">
+          Terms of Service, Payments Terms of Service,
+        </span>{" "}
+        and{" "}
+        <span className="text-accent underline cursor-pointer">
+          Nondiscrimination Policy
+        </span>{" "}
+        and acknowledge the{" "}
+        <span className="text-accent underline cursor-pointer">
+          Privacy Policy
+        </span>
+        .
+      </div>
+
       <Button
         className="!bg-accent !text-white !mt-6 !px-10  !py-2 !rounded-full"
         variant="outlined"
-        onClick={checkUserBeforeRegistration}
+        onClick={checkInstituteBeforeRegistration}
       >
         Register
       </Button>

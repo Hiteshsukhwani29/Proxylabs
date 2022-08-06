@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
 import { auth } from "../../../../firebase";
-import {
-    signInWithEmailAndPassword,
-  } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
-function Index({Email, setShowPasswordBox}) {
-  
+function Index({ Email, setShowPasswordBox }) {
   const [LoginPassword, setLoginPassword] = useState("");
   const [IsLoginPasswordCorrect, setIsLoginPasswordCorrect] = useState(true);
   const [
@@ -27,7 +24,6 @@ function Index({Email, setShowPasswordBox}) {
         const uid = res.user.uid;
         localStorage.setItem("token", JSON.stringify(uid));
         setShowPasswordBox(false);
-        // setShowLoginBtn(false);
       } catch (err) {
         setIsLoginPasswordCorrect(false);
         setIncorrectLoginPasswordHelpertext("Incorrect password");
