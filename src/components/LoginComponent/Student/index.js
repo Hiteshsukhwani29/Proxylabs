@@ -138,12 +138,10 @@ function Index({ setwelcomeText }) {
       <RoundedBoxButton
         imgurl="https://img.icons8.com/color/48/000000/google-logo.png"
         text="Continue with Google"
-        marginY="0"
       />
       <RoundedBoxButton
         imgurl="https://img.icons8.com/fluency/48/000000/mail.png"
         text="Continue with mail"
-        marginY="5"
       />
     </>
   );

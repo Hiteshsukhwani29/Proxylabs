@@ -3,7 +3,7 @@ import React from "react";
 function index({imgurl,text,marginY}) {
   return (
     <div
-      className={`flex items-center rounded-full px-4 py-2 my-${marginY}`}
+      className={`flex items-center rounded-full px-4 py-2 my-2`}
       style={{ border: "1px solid #eeeeee" }}
     >
       <img
