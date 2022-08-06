@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import logo from "../../assets/logo.png";
 import Coin from "../../assets/animation_coin.gif";
 import OutlinePerson from "../../assets/nav_profile_icon.png";
+import LoginComponent from "../LoginComponent";
 
 function Index() {
   const [coins, setcoins] = useState(100);
-  const [profile, setprofile] = useState("Hitesh");
+  const [profile, setprofile] = useState("");
 
   return (
     <>
@@ -35,7 +36,7 @@ function Index() {
             </div>
           </div>
           <div className="bg-white flex h-min w-max px-4 py-1 rounded-full flex-0 justify-center">
-            <div>{profile}</div>
+            <div ><LoginComponent/></div>
             <img className="h-6 w-6 ml-2" src={OutlinePerson} />
           </div>
         </div>
