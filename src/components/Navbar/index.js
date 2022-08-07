@@ -4,9 +4,9 @@ import Coin from "../../assets/animation_coin.gif";
 import OutlinePerson from "../../assets/nav_profile_icon.png";
 import LoginComponent from "../LoginComponent";
 
-function Index() {
+function Index({profile}) {
   const [coins, setcoins] = useState(100);
-  const [profile, setprofile] = useState("");
+  //const [profile, setprofile] = useState("Login");
 
   return (
     <>
@@ -28,17 +28,22 @@ function Index() {
         </div>
         <div className="flex-1"></div>
         <div className="flex justify-around flex-1">
-          <div className="flex-0 flex items-center">
+          <div className="flex-0 flex items-center hidden">
             <img className="h-8 w-8" src={Coin} />
-            <div className="text-sm flex font-semibold mx-2 items-center">
+            <div className="text-sm flex font-semibold mx-2 items-center ">
               {coins}&nbsp;
               <div className="font-normal">coins left </div>
             </div>
           </div>
-          <div className="bg-white flex h-min w-max px-4 py-1 rounded-full flex-0 justify-center">
-            <div ><LoginComponent/></div>
+          <div
+            className="bg-white flex h-min w-max px-6 py-1 rounded-full flex-0 justify-center cursor-pointer"
+          
+          >
+            <div>{profile}</div>
             <img className="h-6 w-6 ml-2" src={OutlinePerson} />
           </div>
+
+        
         </div>
       </div>
     </>
