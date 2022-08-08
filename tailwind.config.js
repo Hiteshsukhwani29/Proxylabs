@@ -11,7 +11,8 @@ module.exports = {
       gray: "#C4C4C4",
       temp: "#71F1B3",
       temp2: "#EDF3F6",
-      bg1: "#EDF3F6"
+      bg1: "#EDF3F6",
+      focus_color_1: "#FFEEE1"
     },
     extend: {
       animation:{
