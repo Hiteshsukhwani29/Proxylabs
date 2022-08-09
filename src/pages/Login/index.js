@@ -1,12 +1,13 @@
 import React from 'react'
+import LoginComponent from '../../components/LoginComponent'
 
 
-function index() {
+function Index() {
   return (
     <div>
-      <h1>Login</h1>
+      <LoginComponent/>
     </div>
   )
 }
 
-export default index
+export default Index
