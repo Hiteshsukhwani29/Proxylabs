@@ -37,7 +37,7 @@ function Index({profile}) {
           </div>
           <div
             className="bg-white flex h-min w-max px-6 py-1 rounded-full flex-0 justify-center cursor-pointer"
-          
+            onClick={() => setShowModal(true)}
           >
             <div>{profile}</div>
             <img className="h-6 w-6 ml-2" src={OutlinePerson} />

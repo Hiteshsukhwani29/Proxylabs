@@ -9,15 +9,20 @@ import Labrecord from "../../components/Labrecord";
 import ExperimentList from "../../components/ExperimentList";
 import LandingBanner from "../../components/LandingBanner";
 import LoginComponent from "../../components/LoginComponent";
+import LabDetails from "../../components/LabDetails"
 import { Button } from "@mui/material";
-import { TrendingUp } from "heroicons-react";
+import { Login, TrendingUp } from "heroicons-react";
 
 function Index() {
   const [ShowModal, setShowModal] = useState(true);
+  const [Login, setLogin] = useState("Login")
+
+
+
 
   return (
     <div className="bg-bg1 h-screen">
-      <Navbar profile="Login"/>
+      {/* <Navbar profile={Login} />
       <Button onClick={() => setShowModal(true)}>Show Login screen</Button>
       <LoginComponent ShowModal={ShowModal} setShowModal={setShowModal}/>
       {ShowModal?<div>
@@ -26,7 +31,9 @@ function Index() {
       :
       <>
       <LandingBanner />
-        <Banner /></>}
+        <Banner /></>} */}
+
+        <LabDetails/>
     </div>
   );
 }
