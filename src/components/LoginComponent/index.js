@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { X } from "heroicons-react";
 import Student from "./Student";
 import Institute from "./Institute";
+import { useDispatch } from "react-redux";
+import { actionCreators } from "../../state/index";
+import db from "../../firebase";
 
 /**
  * Appropriate comments are must, otherwise changes will not be merged
@@ -14,11 +17,21 @@ function Index({ ShowModal, setShowModal }) {
   const [AlreadyLoggedIn, setAlreadyLoggedIn] = useState(false);
   const [Token, setToken] = useState("");
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("token"));
     if (token) {
       setAlreadyLoggedIn(true);
       setToken(token);
+      var userRef = db.collection("users").doc(token).get();
+      userRef.then((docSnapshot) => {
+        if (docSnapshot.exists) {
+          userRef.then((snapshot) => {
+            dispatch(actionCreators.setUser(snapshot.data()))
+          });
+        }
+      });
     }
   }, [Token]);
 
@@ -31,12 +44,12 @@ function Index({ ShowModal, setShowModal }) {
   };
 
   return (
-    <>
+    <div className="h-screen flex flex-col justify-center">
       {ShowModal ? (
         <>
           {!AlreadyLoggedIn ? (
             <div
-              className="flex flex-col w-min p-5 rounded-xl bg-white whitespace-nowrap m-auto drop-shadow-xl"
+              className="flex flex-col mt-0 mb-0 w-min p-5 rounded-xl bg-white whitespace-nowrap m-auto drop-shadow-xl"
               style={{ border: "1px solid #eeeeee" }}
             >
               <div className="flex items-center">
@@ -86,7 +99,7 @@ function Index({ ShowModal, setShowModal }) {
       ) : (
         <></>
       )}
-    </>
+    </div>
   );
 }
 

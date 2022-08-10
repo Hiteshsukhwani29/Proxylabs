@@ -7,26 +7,22 @@ import Navbar from "../../components/Navbar";
 import StudentProfile from "../../components/StudentProfile";
 import Labrecord from "../../components/Labrecord";
 import ExperimentList from "../../components/ExperimentList";
-import LandingBanner from "../../components/LandingBanner";
+import PageIntro from "../../components/PageIntro";
 import LoginComponent from "../../components/LoginComponent";
 import { Button } from "@mui/material";
 import { TrendingUp } from "heroicons-react";
 
 function Index() {
-  const [ShowModal, setShowModal] = useState(true);
+  const [ShowModal, setShowModal] = useState(false);
 
   return (
-    <div className="bg-bg1 h-screen">
-      <Navbar profile="Login"/>
-      <Button onClick={() => setShowModal(true)}>Show Login screen</Button>
-      <LoginComponent ShowModal={ShowModal} setShowModal={setShowModal}/>
-      {ShowModal?<div>
-        
-      </div>
-      :
-      <>
-      <LandingBanner />
-        <Banner /></>}
+    <div className="bg-bg1 flex flex-col justify-center">
+      <Navbar isAlreadyLoggedIn={false} setShowModal={setShowModal}/>
+      {/* <Button onClick={() => setShowModal(true)}>Show Login screen</Button> */}
+      {ShowModal?<LoginComponent ShowModal={ShowModal} setShowModal={setShowModal}/>:
+      <div className="flex-1">
+      <PageIntro />
+        <Banner /></div>}
     </div>
   );
 }
