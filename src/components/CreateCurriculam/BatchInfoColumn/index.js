@@ -41,30 +41,34 @@ function Index({ batchindex, Batch, setBatch }) {
     }
   }, [BatchName]);
 
+  const generateRandomCreditCode = () => {
+    var result           = '';
+    var capitalcharacters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    for ( var i = 0; i < 2; i++ ) {
+      result += capitalcharacters.charAt(Math.floor(Math.random() * 
+ capitalcharacters.length));
+   }
+    result+="-";
+    for ( var i = 0; i < 6; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * 
+ characters.length));
+   }
+   console.log(result);
+  }
+
   return (
-    <div className="flex flex-col border-r-[1px] border-gray">
-      <div className="flex items-center flex-0 border-gray border-b-[1px] text-sm pl-3 py-2 pr-2">
+    <div className="flex flex-col border-r-[1px] border-gray overflow-auto">
+      <div className="flex-0 flex items-center flex-0 border-gray border-b-[1px] text-sm pl-3 py-2 pr-2">
         <div className="h-3 w-3 bg-temp mr-2 rounded-full"></div>
         Batch Info
       </div>
-
-      <div className="flex flex-0 text-accent pl-2 py-2 pr-2 items-center">
-        <Plus className="mr-2 w-5 h-5" />
-        <div className="text-xs">Create Subject</div>
-      </div>
-      <input
-        autoFocus
-        className="outline-none bg-focus_color_1 px-9 py-1 font-medium"
-        id="standard-basic"
-        variant="standard"
-      />
-      <div className="flex-1">
-        <div className="cursor-pointer flex justify-between px-4" onClick={() => setBatch(BatchName)}>
+      <div className="cursor-pointer flex justify-between px-4 py-2 !border-t-0 !border-l-0 !border-r-0" style={{ border: "1px solid rgba(0,0,0,0.23)" }} onClick={() => setBatch(BatchName)}>
           <div>Subjects</div>
           <ArrowRight />
         </div>
-        <div className="overflow-y-scroll">
-        <div className="flex justify-between px-4 items-center mt-4">
+      <div className="flex-1 overflow-y-scroll">
+        <div className="flex justify-between px-4 items-center mt-2">
           <div className="text-sm">Total number of students</div>
           <TextField
             className="!w-14 !text-xs"
@@ -82,7 +86,7 @@ function Index({ batchindex, Batch, setBatch }) {
           />
         </div>
 
-        <div className="flex px-2 py-1 mx-4 mt-4 rounded-md justify-center items-center" style={{ border: "1px solid rgba(0,0,0,0.23)" }}>
+        <div className="flex px-2 py-1 mx-4 mt-4 rounded-md justify-center items-center cursor-pointer" style={{ border: "1px solid rgba(0,0,0,0.23)" }} onClick={() => generateRandomCreditCode()}>
           <Refresh className="!w-4 flex-0"/>
           <div className="flex-1 text-center">Auto generate code</div>
         </div>
@@ -90,12 +94,15 @@ function Index({ batchindex, Batch, setBatch }) {
         <div className="flex justify-between px-4 items-center mt-4">
           <div className="text-sm">Credit Value</div>
         <TextField
-          className="!w-20 !text-xs"
+          className="!w-20 !text-xs !text-right"
           variant="outlined"
           size="small"
           sx={{
             "& .MuiInputBase-root": {
-                height: 30
+                height: 30,
+            },
+            "& .MuiOutlinedInput-input":{
+              textAlign:"right"
             }
           }}          onChange={(e) => {
             setCreditValue(e.target.value);
@@ -103,13 +110,14 @@ function Index({ batchindex, Batch, setBatch }) {
           value={CreditValue}
         />
         </div>
-        <div className="flex px-2 py-1 mx-4 mt-4 rounded-md justify-center items-center" style={{ border: "1px solid rgba(0,0,0,0.23)" }}>
-          <div className="text-center">{TotalStudents * CreditValue} credits assigned to batch</div>
+        <div className="flex px-2 py-1 mx-4 my-4 rounded-sm justify-center items-center" style={{ border: "1px solid rgba(0,0,0,0.23)" }}>
+          <div className="text-sm text-center text-accent font-semibold">{TotalStudents * CreditValue} credits assigned to batch</div>
         </div>
         {/* <div className="mt-4 mx-4">Total credits assigned {TotalStudents * CreditValue}</div> */}
       </div>
+      <div className="flex-0 py-2 flex justify-end px-4 !border-b-0 !border-l-0 !border-r-0" style={{ border: "1px solid rgba(0,0,0,0.23)" }}>
+      <Button variant="outlined" size="small" className="w-min text-xs !px-7 whitespace-nowrap">Create Code/ Save Changes</Button>
       </div>
-      <Button variant="contained" className="w-min !bg-accent">Save</Button>
     </div>
   );
 }
