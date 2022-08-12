@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Index() {
   return (
-    <div className=' grid grid-flow-col  grid-cols-2 h-[30rem]  p-12'>
+    <div className=' grid grid-flow-col  grid-cols-2 h-[12rem] md:h-[20rem] lg:h-[30rem]   p-12'>
             <div className='bg-gray m-2 rounded-l-lg '>
             
             </div>
@@ -16,16 +16,6 @@ export default function Index() {
                 <div className='bg-gray ml-1 rounded-br-lg'></div>
                 </div>
             </div>
-
-
-
-
-
-        {/* <div><img src="https://assets.codepen.io/t-1869/fridays.png" alt="" /></div>
-        <div><img src="https://assets.codepen.io/t-1869/fridays.png" alt="" /></div>
-        <div><img src="https://assets.codepen.io/t-1869/fridays.png" alt="" /></div>
-        <div><img src="https://assets.codepen.io/t-1869/fridays.png" alt="" /></div>
-        <div><img src="https://assets.codepen.io/t-1869/fridays.png" alt="" /></div> */}
         
         
     </div>
