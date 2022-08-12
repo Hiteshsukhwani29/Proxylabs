@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { ArrowRight } from "heroicons-react";
 
-function Index({ text, isEmpty = true, ActiveItem, setActiveItem, Index }) {
+function Index({ text, isEmpty = true }) {
   return (
-    <div
-      className={`${ActiveItem === Index ? "bg-accent" : "bg-white"} flex justify-between px-4`}
-      onClick={() => (Index !== null ? setActiveItem(Index) : [])}
-    >
+    <div className={` flex justify-between px-4`}>
       <div>{text}</div>
       <ArrowRight className={`${!isEmpty ? "block" : "hidden"}`} />
     </div>
