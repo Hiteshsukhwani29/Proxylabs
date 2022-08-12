@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField, Button } from "@mui/material";
 import { auth } from "../../../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { actionCreators } from "../../../../state/index";
+import db from "../../../../firebase";
 
 function Index({ Email, setShowPasswordBox }) {
   const [LoginPassword, setLoginPassword] = useState("");
@@ -10,6 +13,25 @@ function Index({ Email, setShowPasswordBox }) {
     IncorrectLoginPasswordHelpertext,
     setIncorrectLoginPasswordHelpertext,
   ] = useState("");
+
+  const [Token, setToken] = useState("")
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (Token) {
+      var userRef = db.collection("users").doc(Token).get();
+      userRef.then((docSnapshot) => {
+        if (docSnapshot.exists) {
+          userRef.then((snapshot) => {
+            dispatch(actionCreators.setUser(snapshot.data()))
+          });
+        }
+      });
+    }
+  }, [Token])
+
+  function refreshPage() {
+    window.location.reload(false);
+  }
 
   const logInWithEmailAndPassword = async () => {
     if (LoginPassword !== "") {
@@ -24,6 +46,8 @@ function Index({ Email, setShowPasswordBox }) {
         const uid = res.user.uid;
         localStorage.setItem("token", JSON.stringify(uid));
         setShowPasswordBox(false);
+        setToken(uid);
+        refreshPage()
       } catch (err) {
         setIsLoginPasswordCorrect(false);
         setIncorrectLoginPasswordHelpertext("Incorrect password");
