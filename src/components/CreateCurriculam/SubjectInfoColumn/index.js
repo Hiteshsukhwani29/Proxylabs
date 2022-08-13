@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Plus } from "heroicons-react";
+import { Plus, Minus } from "heroicons-react";
 import db from "../../../firebase";
 import ListItem from "../ListItem";
 
-function Index({ batchname, setSubjectCode }) {
+function Index({ batchname, setSubjectCode, setBatch }) {
   const [Items, setItems] = useState([]);
   const [ItemsEmptyList, setItemsEmptyList] = useState([]);
 
@@ -74,10 +74,14 @@ function Index({ batchname, setSubjectCode }) {
   };
 
   return (
-    <div className="flex flex-col border-r-[1px] border-gray">
+    <div className="flex flex-col border-r-[1px] border-gray h-[100%]">
       <div className="flex items-center flex-0 border-gray border-b-[1px] text-sm pl-3 py-2 pr-2">
-        <div className="h-3 w-3 bg-temp mr-2 rounded-full"></div>
-        Subject Info
+      <div
+          className="flex group items-center justify-center h-3 w-3 bg-close mr-2 rounded-full z-0"
+          onClick={() => setBatch(null)}
+        >
+          <Minus className=" hidden group-hover:block p-[1.5px] group-hover:text-white duration-200 transition-transform z-10 " />
+        </div>        Subject Info
       </div>
 
       <div

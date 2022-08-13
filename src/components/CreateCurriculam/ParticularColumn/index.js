@@ -64,7 +64,7 @@ function Index({ setIndex }) {
   };
 
   return (
-    <div className="flex flex-col border-r-[1px] border-gray">
+    <div className="flex flex-col border-r-[1px] border-gray h-[100%]">
       <div className="flex items-center flex-0 border-gray border-b-[1px] text-sm pl-3 py-2 pr-2">
         <div className="h-3 w-3 bg-temp mr-2 rounded-full"></div>
         Batch

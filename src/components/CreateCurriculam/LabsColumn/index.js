@@ -1,35 +1,39 @@
 import React, { useEffect, useState } from "react";
-import { Plus } from "heroicons-react";
+import { Plus, Minus } from "heroicons-react";
 import db from "../../../firebase";
 import ListItem from "../ListItem";
 
-function Index({ batchname, SubjectCode }) {
+function Index({ batchname, SubjectCode, LabCode, setLabCode, setSubjectCode }) {
   const [Items, setItems] = useState([]);
   const [ItemsEmptyList, setItemsEmptyList] = useState([]);
   var TempList = [];
   var TempList1 = [];
-  var index=0;
+  var index = 0;
   const [ActiveIndex, setActiveIndex] = useState(null);
   const [ShowInputBox, setShowInputBox] = useState(false);
   const [InputText, setInputText] = useState("");
   const [IsFocussed, setIsFocussed] = useState(false);
   const [refresh, setrefresh] = useState(false);
   console.log("from labs", SubjectCode);
-  const SubjectRef = db
+  const SubjectRef = null;
+  useEffect(() => {
+    const SubjectRef = db
     .collection("curriculum")
     .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2")
-    .collection(batchname).doc(SubjectCode).collection("Lab");
-  useEffect(() => {
-        SubjectRef.onSnapshot((s)=>{
-            s.docs.map((doc) => {
-                var labname = doc.data().name;
-                var maxmarks = doc.data().name;
-                TempList.push({labname,maxmarks,index});
-                index++;
-            })
-            setItems(TempList);
+    .collection(batchname)
+    .doc(SubjectCode)
+    .collection("Lab");
+    SubjectRef.onSnapshot((s) => {
+      s.docs.map((doc) => {
+        var labcode = doc.id;
+        var labname = doc.data().name;
+        var maxmarks = doc.data().name;
+        TempList.push({ labname, maxmarks, index, labcode });
+        index++;
+      });
+      setItems(TempList);
     });
-  }, [refresh]);
+  }, [refresh, SubjectCode]);
 
   useEffect(() => {
     if (IsFocussed === false) {
@@ -37,7 +41,7 @@ function Index({ batchname, SubjectCode }) {
     }
   }, [IsFocussed]);
 
-  const createLab = async(e) => {
+  const createLab = async (e) => {
     e.preventDefault();
     var randomSubjectCode = "";
     var numbers = "123456789";
@@ -47,23 +51,30 @@ function Index({ batchname, SubjectCode }) {
       );
     }
     await SubjectRef.doc(randomSubjectCode).set({ name: InputText });
-    await SubjectRef.doc(randomSubjectCode).collection("Lab").doc("-1").set({});
     setIsFocussed(false);
     setrefresh(!refresh);
-  }
+  };
 
   return (
-    <div className="flex flex-col border-r-[1px] border-gray">
+    <div className={`flex flex-col ${LabCode===null?'':'border-r-[1px]'} border-gray h-[100%]`}>
       <div className="flex items-center flex-0 border-gray border-b-[1px] text-sm pl-3 py-2 pr-2">
-        <div className="h-3 w-3 bg-temp mr-2 rounded-full"></div>
+        <div
+          className="flex group items-center justify-center h-3 w-3 bg-close mr-2 rounded-full z-0"
+          onClick={() => setSubjectCode(null)}
+        >
+          <Minus className=" hidden group-hover:block p-[1.5px] group-hover:text-white duration-200 transition-transform z-10 " />
+        </div>
         Labs
       </div>
 
-      <div className="flex flex-0 text-accent pl-2 py-2 pr-2 items-center" onClick={() => {
+      <div
+        className="flex flex-0 text-accent pl-2 py-2 pr-2 items-center"
+        onClick={() => {
           setShowInputBox(true);
           setIsFocussed(true);
           setActiveIndex(null);
-        }}>
+        }}
+      >
         <Plus className="mr-2 w-5 h-5" />
         <div className="text-xs">Create Lab</div>
       </div>
@@ -95,12 +106,10 @@ function Index({ batchname, SubjectCode }) {
               } cursor-pointer py-1`}
               onClick={() => {
                 setActiveIndex(value.index);
+                setLabCode(value.labcode);
               }}
             >
-              <ListItem
-                text={value.labname}
-                isEmpty={true}
-              />
+              <ListItem text={value.labname} isEmpty={true} />
             </div>
           );
         })}
