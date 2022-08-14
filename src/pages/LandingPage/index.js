@@ -9,8 +9,12 @@ import Labrecord from "../../components/Labrecord";
 import ExperimentList from "../../components/ExperimentList";
 import PageIntro from "../../components/PageIntro";
 import LoginComponent from "../../components/LoginComponent";
+import LabDetails from "../../components/LabDetails"
+
+import PhotoGallery from '../../components/PhotoGallery'
+
 import { Button } from "@mui/material";
-import { TrendingUp } from "heroicons-react";
+import { Login, TrendingUp } from "heroicons-react";
 
 function Index() {
   const [ShowModal, setShowModal] = useState(false);
