@@ -25,10 +25,10 @@ function App() {
   }, [])
   return (
     <>
-      <LandingPage />
+      {/* <LandingPage /> */}
       {/* <LoginPage/> */}
   
-      {/* <CreateCurriculam/> */}
+      <CreateCurriculam/>
     </>
   );
 }

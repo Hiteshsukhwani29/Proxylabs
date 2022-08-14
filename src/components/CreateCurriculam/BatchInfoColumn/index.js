@@ -4,6 +4,7 @@ import db from "../../../firebase";
 import { TextField, Button, ToggleButton } from "@mui/material";
 import { ArrowRight, Refresh } from "heroicons-react";
 import { useSelector } from 'react-redux';
+import firebase from 'firebase/compat/app'
 
 function Index({ batchindex, Batch, setBatch }) {
 
@@ -18,15 +19,21 @@ function Index({ batchindex, Batch, setBatch }) {
   const [DbCreditCode, setDbCreditCode] = useState("");
   const [IsCodeActive, setIsCodeActive] = useState(false);
 
+  const [Batches, setBatches] = useState(null);
+
   console.log("from batch info", batchindex);
+
+  const InstituteRef = db
+  .collection("curriculum")
+  .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2");
+
   useEffect(() => {
-    const InstituteRef = db
-      .collection("curriculum")
-      .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2");
     InstituteRef.get().then((snapshot) => {
       console.log("Main is called");
+      setBatches(snapshot.data().Batches);
       console.log(snapshot.data().Batches[batchindex]);
       const res = snapshot.data().Batches[batchindex];
+      // snapshot.data().Batches
       setBatchName(res.name);
       setTotalStudents(res.totalstudents);
       console.log(BatchName);
@@ -59,13 +66,19 @@ function Index({ batchindex, Batch, setBatch }) {
     setCreditCode(result);
   };
 
-  const createCreditCode = () => {
-    db.collection("CreditCode").doc(CreditCode).set({
+  const createCreditCode = async() => {
+    await db.collection("CreditCode").doc(CreditCode).set({
       active: IsCodeActive,
       course: BatchName,
       creditvalue: CreditValue,
       instituteuid: state.user.uid
     })
+
+    await InstituteRef.update({
+      Batches: firebase.firestore.FieldValue.arrayUnion({ name:BatchName ,totalstudents: 20 }),
+      Batches: firebase.firestore.FieldValue.arrayRemove({name:BatchName,totalstudents:0}),
+    });
+    
   }
 
   return (
@@ -139,7 +152,7 @@ function Index({ batchindex, Batch, setBatch }) {
             {TotalStudents * CreditValue} credits assigned to batch
           </div>
         </div>
-        <div className="flex justify-between items-center px-4 items-center mt-4">
+        <div className="flex justify-between px-4 items-center mt-4">
           <div className="text-sm">Code Status</div>
         <ToggleButton
           value="enabled"

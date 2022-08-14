@@ -64,7 +64,7 @@ function Index({ setIndex }) {
   };
 
   return (
-    <div className="flex flex-col border-r-[1px] border-gray h-[100%]">
+    <div className="flex flex-col border-r-[1px] border-gray h-[33.88rem] overflow-y-none">
       <div className="flex items-center flex-0 border-gray border-b-[1px] text-sm pl-3 py-2 pr-2">
         <div className="h-3 w-3 bg-temp mr-2 rounded-full"></div>
         Batch
@@ -100,7 +100,7 @@ function Index({ setIndex }) {
       ) : (
         <></>
       )}
-      <div className="flex-1" onClick={() => setIsFocussed(false)}>
+      <div className="flex-1 overflow-y-scroll" onClick={() => setIsFocussed(false)}>
         {Items.map(({ index, name }) => {
           return (
             <div
