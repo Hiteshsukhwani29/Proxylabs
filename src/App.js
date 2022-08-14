@@ -2,6 +2,7 @@ import "./App.css";
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/Login";
 import CreateCurriculam from "./components/CreateCurriculam";
+import LabDetails from "./components/LabDetails"
 
 import { useDispatch } from "react-redux";
 import { actionCreators } from "./state/index";
@@ -25,10 +26,11 @@ function App() {
   }, [])
   return (
     <>
-      <LandingPage />
+      {/* <LandingPage /> */}
       {/* <LoginPage/> */}
   
-      {/* <CreateCurriculam/> */}
+      {/* <CreateCurriculam/>  */}
+      <LabDetails/>
     </>
   );
 }
