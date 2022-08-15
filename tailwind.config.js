@@ -18,7 +18,12 @@ module.exports = {
     extend: {
       animation:{
         'bounce-short': 'bounce 1s ease-in-out 5'
-      }
+      },
+      fontFamily: {
+        'montserrat': ['Montserrat'],
+        'lato': ['Lato'],
+        'garamond': ['Garamond']
+    }
     },
   },
   plugins: [],
