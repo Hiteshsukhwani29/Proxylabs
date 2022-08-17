@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "react-dates/initialize";
 import { SingleDatePicker } from "react-dates";
 import moment from "moment";
-import "./datePicker.css"
+import "./datePicker.css";
 import "react-dates/lib/css/_datepicker.css";
 
 /* https://github.com/airbnb/react-dates/issues/1030
@@ -12,19 +12,27 @@ import "react-dates/lib/css/_datepicker.css";
 export default class DatePicker extends React.Component {
   state = {
     focused: false,
-    date: moment()
+    date: moment(),
   };
+
   render() {
     return (
-      <div >
+      <div>
         <SingleDatePicker
           numberOfMonths={1}
-          onDateChange={date => this.setState({ date })}
+          onDateChange={(date) => this.setState({ date })}
           onFocusChange={({ focused }) => this.setState({ focused })}
           focused={this.state.focused}
-         
         />
-         </div>
+
+        <div
+          onClick={({ focused }) =>
+            this.setState({ focused })(console.log("true"))
+          }
+        >
+          ljgengnegdfhgnfhj
+        </div>
+      </div>
     );
   }
 }

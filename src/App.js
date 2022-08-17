@@ -4,6 +4,7 @@ import LoginPage from "./pages/Login";
 import CreateCurriculam from "./components/CreateCurriculam";
 import LabDetails from "./components/LabDetails"
 import LabBooking from "./components/LabBooking"
+import InstituteInfo from "./components/InstituteInfo"
 
 import { useDispatch } from "react-redux";
 import { actionCreators } from "./state/index";
@@ -32,7 +33,8 @@ function App() {
   
       {/* <CreateCurriculam/>  */}
       {/* <LabDetails/> */}
-      <LabBooking/>
+      {/* <LabBooking/> */}
+      <InstituteInfo/>
     </>
   );
 }

@@ -37,7 +37,7 @@ export default function Index() {
   }, [ActiveIndex]);
 
   return (
-    <div className="flex flex-col w-[30rem] overflow-x-clip px-8 py-5 rounded-xl bg-white whitespace-normal m-auto drop-shadow-xl">
+    <div className="flex flex-col w-[30rem] overflow-x-clip px-8 py-5 rounded-xl bg-white  m-auto drop-shadow-xl">
       <div className="">
         <div className="font-semibold text-lg whitespace-normal">
           Prebook a lab
