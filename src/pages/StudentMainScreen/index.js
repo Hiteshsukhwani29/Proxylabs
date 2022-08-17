@@ -7,7 +7,9 @@ function Index() {
 
   const [Items, setItems] = useState([]);
   const [ActiveIndex, setActiveIndex] = useState(0);
-  const [SubjectCode, setSubjectCode] = useState(null)
+  const [SubjectCode, setSubjectCode] = useState("-1");
+  const [TotalLabs, setTotalLabs] = useState(0);
+  const [TotalLabsCompleted, setTotalLabsCompleted] = useState(0);
 
   const state = useSelector(state => state.t1);
 
@@ -19,8 +21,32 @@ function Index() {
     .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2")
     .collection(state.user.course);
 
+    // const StudentMarksRef = db.collection("StudentMarks")
+    // .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2")
+    // .collection(state.user.course)
+    // .doc(SubjectCode)
+    // .collection("Students")
+    // .doc(state.user.uid)
+    // .collection("Lab");
+
+    const StudentMarksRef = db.collection("StudentsMarks")
+    .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2")
+    .collection(state.user.course)
+    .doc(state.user.uid);
+
   console.log("from subject info",state.user.course);
+  console.log(state.user.uid)
   useEffect(() => {
+    StudentMarksRef.onSnapshot((ss)=>{
+      if(ss.exists){
+        StudentMarksRef.get().then((s)=>{
+          setTotalLabsCompleted(s.data().totallabscompleted);
+        })
+      }
+    })
+    BatchRef.doc("-1").get().then((snapshot)=>{
+      setTotalLabs(snapshot.data().totallabs);
+    })
     BatchRef.onSnapshot((ss) => {
       console.log(ss.docs.map((doc) => doc.data()));
       ss.docs.map((doc) => {
@@ -35,8 +61,8 @@ function Index() {
         TempList.push({ name, index, subjectCode });
         index++;
       });
+      TempList.shift()
       setItems(TempList);
-
     });
     console.log(Items)
   }, []);
@@ -46,10 +72,13 @@ function Index() {
       <div className='font-semibold font-montserrat'>My Curriculum</div>
       
       <div className='flex mt-4'>
+        <div className='flex flex-1'>
       {Items.map(({name,index,subjectCode}) => {
         return(
-        <div className={`pr-7 ${ActiveIndex===index?'font-medium':'font-light'} hover:font-medium`} onClick={() => {setActiveIndex(index);setSubjectCode(subjectCode)}}>{name}</div>);
+        <div className={`mr-7 ${ActiveIndex===index?'font-medium':'font-light'} hover:font-medium`} onClick={() => {setActiveIndex(index);setSubjectCode(subjectCode)}}>{name}</div>);
       })}
+      </div>
+      <div className='flex-0'>{TotalLabsCompleted}/{TotalLabs}</div>
       </div>
       <LabDetails Course={state.user.course} SubjectCode={SubjectCode}/>
     </div>

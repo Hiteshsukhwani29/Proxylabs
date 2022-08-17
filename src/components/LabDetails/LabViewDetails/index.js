@@ -1,7 +1,28 @@
 import React from "react";
 import { Button } from "@mui/material";
+import db from "../../../firebase";
+import { useSelector } from "react-redux";
 
-export default function Index() {
+export default function Index({ LabCode, SubjectCode }) {
+
+  const state = useSelector(state => state.t1);
+
+  const StudentMarksRef = db
+      .collection("StudentsMarks")
+      .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2")
+      .collection(state.user.course)
+      .doc(state.user.uid)
+      .collection("subjects")
+      .doc(SubjectCode)
+      .collection("Lab")
+      .doc(LabCode);
+
+      const uploadAssignment = async() => {
+        await StudentMarksRef.set({
+          completed: true
+        })
+      }
+
   return (
     <>
       <div className=" bg-gray flex-1 h-[1px] mt-3"></div>
@@ -29,6 +50,7 @@ export default function Index() {
         <Button
           className="!bg-white !text-black !px-12  !py-2 !rounded-full "
           variant="outlined"
+          onClick={uploadAssignment}
         >
           Upload Experiment
         </Button>
