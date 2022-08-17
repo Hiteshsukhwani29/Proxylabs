@@ -21,3 +21,9 @@
   .CalendarDay__hovered_span {
     background: brown !important;
   }
+
+  .DayPicker{
+    margin-left: -194px;
+  }
+
+  

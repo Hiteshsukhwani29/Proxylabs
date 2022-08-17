@@ -1,6 +1,6 @@
-import React, { useState ,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Checkbox, Button } from "@mui/material";
-import DatePicker from "../datePicker"
+import DatePicker from "../../../LabDetails/datePicker";
 
 import "react-dates/initialize";
 
@@ -9,7 +9,7 @@ export default function Index() {
 
   const [dates, setdates] = useState(new Date());
 
-  const [ActiveIndex, setActiveIndex] = useState(false);
+  const [ActiveIndex, setActiveIndex] = useState("1");
 
   var monthList = [
     "JAN",
@@ -27,61 +27,92 @@ export default function Index() {
   ];
 
   var dayList = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-  console.log(dates.getDay())
+  console.log(dates.getDay());
 
   useEffect(() => {
     console.log(ActiveIndex);
-    if(ActiveIndex==='2'){
-      console.log("im working")
+    if (ActiveIndex === "2") {
+      console.log("im working");
     }
-  }, [ActiveIndex])
-  
+  }, [ActiveIndex]);
 
   return (
-    <div className="flex flex-col w-[32rem] overflow-x-clip px-8 py-5 rounded-xl bg-white whitespace-normal m-auto drop-shadow-xl">
+    <div className="flex flex-col w-[30rem] overflow-x-clip px-8 py-5 rounded-xl bg-white whitespace-normal m-auto drop-shadow-xl">
       <div className="">
-        <div className="font-semibold text-lg whitespace-normal">Prebook a lab</div>
+        <div className="font-semibold text-lg whitespace-normal">
+          Prebook a lab
+        </div>
         <div>Dropdown</div>
       </div>
       {/* Calender */}
 
       <div className="flex items-center my-4">
-        <div className={`${ActiveIndex==="1"?'text-2xl':'text-xs'} flex flex-col w-fit px-4 py-2 rounded-lg text-white mr-2`} onClick={() => setActiveIndex("")}>
+        <div
+          className={`${
+            ActiveIndex === "1" ? "bg-accent text-white" : "bg-white"
+          } flex flex-col w-fit px-4 py-2 rounded-lg  mr-2`}
+          onClick={() => setActiveIndex("1")}
+        >
           <div>{dayList[dates.getDay()]}</div>
           <div>{dates.getDate()}</div>
           <div>{monthList[dates.getMonth()]}</div>
         </div>
 
-        <div className={`${ActiveIndex?"!text-2xl":"!text-xs"}flex flex-col w-fit px-4 py-2 rounded-lg  mx-1`} onClick={() => setActiveIndex(true)}>
-          <div>{dayList[dates.getDay() + 1 >6?dates.getDay()-6:dates.getDay()+1]}</div>
+        <div
+          className={`${
+            ActiveIndex === "2" ? "bg-accent text-white" : "bg-white"
+          } flex flex-col w-fit px-4 py-2 rounded-lg  mr-2`}
+          onClick={() => setActiveIndex("2")}
+        >
+          <div>
+            {
+              dayList[
+                dates.getDay() + 1 > 6 ? dates.getDay() - 6 : dates.getDay() + 1
+              ]
+            }
+          </div>
           <div>{dates.getDate() + 1}</div>
           <div>{monthList[dates.getMonth()]}</div>
         </div>
 
-        <div className={`bg-${ActiveIndex==='2'?'accent':'white'}flex flex-col w-fit px-4 py-2 rounded-lg hover:bg-accent hover:text-white mx-1`} onClick={() => setActiveIndex('2')}>
-          <div>{dayList[dates.getDay() + 2 >6?dates.getDay()-6:dates.getDay()+2]}</div>
+        <div
+          className={`${
+            ActiveIndex === "3" ? "bg-accent text-white" : "bg-white"
+          } flex flex-col w-fit px-4 py-2 rounded-lg  mr-2`}
+          onClick={() => setActiveIndex("3")}
+        >
+          <div>
+            {
+              dayList[
+                dates.getDay() + 2 > 6 ? dates.getDay() - 6 : dates.getDay() + 2
+              ]
+            }
+          </div>
           <div>{dates.getDate() + 2}</div>
           <div>{monthList[dates.getMonth()]}</div>
         </div>
 
-        <div className={`${ActiveIndex===3?'bg-accent':'bg-white'}flex flex-col w-fit px-4 py-2 rounded-lg hover:bg-accent hover:text-white mx-1`} onClick={() => setActiveIndex(3)}>
-          <div>{dayList[dates.getDay() + 3 >6?dates.getDay()-6:dates.getDay()+3]}</div>
+        <div
+          className={`${
+            ActiveIndex === "4" ? "bg-accent text-white" : "bg-white "
+          } flex flex-col w-fit px-4 py-2 rounded-lg  mr-2`}
+          onClick={() => setActiveIndex("4")}
+        >
+          <div>
+            {
+              dayList[
+                dates.getDay() + 3 > 6 ? dates.getDay() - 6 : dates.getDay() + 3
+              ]
+            }
+          </div>
           <div>{dates.getDate() + 3}</div>
           <div>{monthList[dates.getMonth()]}</div>
         </div>
 
-        <div className={`bg-${ActiveIndex===4?'accent':'white'}flex flex-col w-fit px-4 py-2 rounded-lg hover:bg-accent hover:text-white mx-1`} onClick={() => setActiveIndex(4)}>
-          <div>{dayList[dates.getDay() + 4 >6?dates.getDay()-6:dates.getDay()+4]}</div>
-          <div>{dates.getDate() + 4}</div>
-          <div>{monthList[dates.getMonth()]}</div>
-        </div>
+    
 
-        
-
-        <div className="">
-          <div>
-            <DatePicker/>
-          </div>
+        <div>
+          <DatePicker/>
         </div>
       </div>
 

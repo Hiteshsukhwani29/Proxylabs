@@ -1,7 +1,6 @@
 import React from 'react'
 import LabDetailItem from "./LabDetailsItem"
 import LabReview from "./LabReview"
-import LabCalender from "./LabCalender"
 
 export default function Index() {
   return (
@@ -9,7 +8,7 @@ export default function Index() {
         {/* <LabDetailItem/>
         <LabReview/> */}
 
-        <LabCalender/>
+    
     </div>
   )
 }

@@ -3,6 +3,7 @@ import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/Login";
 import CreateCurriculam from "./components/CreateCurriculam";
 import LabDetails from "./components/LabDetails"
+import LabBooking from "./components/LabBooking"
 
 import { useDispatch } from "react-redux";
 import { actionCreators } from "./state/index";
@@ -30,7 +31,8 @@ function App() {
       {/* <LoginPage/> */}
   
       {/* <CreateCurriculam/>  */}
-      <LabDetails/>
+      {/* <LabDetails/> */}
+      <LabBooking/>
     </>
   );
 }
