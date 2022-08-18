@@ -1,35 +1,46 @@
 import React, { useEffect, useState } from "react";
-import { Plus } from "heroicons-react";
+import { Minus } from "heroicons-react";
 import db from "../../../firebase";
-import ListItem from "../ListItem";
+import { TextField, Button, withStyles } from "@mui/material";
+import { Refresh } from "heroicons-react";
 
-function Index({ batchname, SubjectCode }) {
+function Index({ batchname, SubjectCode, LabCode, setLabCode }) {
   const [Items, setItems] = useState([]);
   const [ItemsEmptyList, setItemsEmptyList] = useState([]);
   var TempList = [];
   var TempList1 = [];
-  var index=0;
+  var index = 0;
   const [ActiveIndex, setActiveIndex] = useState(null);
   const [ShowInputBox, setShowInputBox] = useState(false);
   const [InputText, setInputText] = useState("");
   const [IsFocussed, setIsFocussed] = useState(false);
   const [refresh, setrefresh] = useState(false);
-  console.log("from labs", SubjectCode);
-  const SubjectRef = db
-    .collection("curriculum")
-    .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2")
-    .collection(batchname).doc(SubjectCode).collection("Lab");
+  const [LabAim, setLabAim] = useState("");
+  const [LabDescription, setLabDescription] = useState("");
+  console.log("from lab info", LabCode);
+
   useEffect(() => {
-        SubjectRef.onSnapshot((s)=>{
-            s.docs.map((doc) => {
-                var labname = doc.data().name;
-                var maxmarks = doc.data().name;
-                TempList.push({labname,maxmarks,index});
-                index++;
-            })
-            setItems(TempList);
+    const LabRef = db
+      .collection("curriculum")
+      .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2")
+      .collection(batchname)
+      .doc(SubjectCode)
+      .collection("Lab")
+      .doc(LabCode);
+    LabRef.get().then((snapshot) => {
+      console.log(snapshot.data());
+      setLabAim(snapshot.data().name)
     });
-  }, [refresh]);
+    // SubjectRef.onSnapshot((s) => {
+    //   s.docs.map((doc) => {
+    //     var labname = doc.data().name;
+    //     var maxmarks = doc.data().name;
+    //     TempList.push({ labname, maxmarks, index });
+    //     index++;
+    //   });
+    //   setItems(TempList);
+    // });
+  }, [refresh, LabCode]);
 
   useEffect(() => {
     if (IsFocussed === false) {
@@ -37,7 +48,7 @@ function Index({ batchname, SubjectCode }) {
     }
   }, [IsFocussed]);
 
-  const createLab = async(e) => {
+  const createLab = async (e) => {
     e.preventDefault();
     var randomSubjectCode = "";
     var numbers = "123456789";
@@ -46,65 +57,60 @@ function Index({ batchname, SubjectCode }) {
         Math.floor(Math.random() * numbers.length)
       );
     }
-    await SubjectRef.doc(randomSubjectCode).set({ name: InputText });
-    await SubjectRef.doc(randomSubjectCode).collection("Lab").doc("-1").set({});
+    // await SubjectRef.doc(randomSubjectCode).set({ name: InputText });
+    // await SubjectRef.doc(randomSubjectCode).collection("Lab").doc("-1").set({});
     setIsFocussed(false);
     setrefresh(!refresh);
-  }
+  };
 
   return (
-    <div className="flex flex-col border-r-[1px] border-gray">
+    <div className="flex flex-col border-gray h-[34rem] overflow-y-none">
       <div className="flex items-center flex-0 border-gray border-b-[1px] text-sm pl-3 py-2 pr-2">
-        <div className="h-3 w-3 bg-temp mr-2 rounded-full"></div>
-        Labs
+        <div
+          className="flex group items-center justify-center h-3 w-3 bg-close mr-2 rounded-full z-0"
+          onClick={() => setLabCode(null)}
+        >
+          <Minus className=" hidden group-hover:block p-[1.5px] group-hover:text-white duration-200 transition-transform z-10 " />
+        </div>
+        Lab Info
       </div>
-
-      <div className="flex flex-0 text-accent pl-2 py-2 pr-2 items-center" onClick={() => {
-          setShowInputBox(true);
-          setIsFocussed(true);
-          setActiveIndex(null);
-        }}>
-        <Plus className="mr-2 w-5 h-5" />
-        <div className="text-xs">Create Lab</div>
-      </div>
-      {ShowInputBox && IsFocussed ? (
-        <form className="bg-focus_color_1" onSubmit={createLab}>
-          <input
-            className="outline-none bg-focus_color_1 pr-2 pl-4 py-1 font-medium"
-            autoFocus
-            onChange={(e) => {
-              setInputText(e.target.value);
-            }}
-            value={InputText}
-            onClick={(e) => {
-              setIsFocussed(true);
-              e.preventDefault();
-            }}
-            onKeyPress={(e) => e.key === "Enter"}
-          />
-        </form>
-      ) : (
-        <></>
-      )}
-      <div className="flex-1" onClick={() => setIsFocussed(false)}>
-        {Items.map((value) => {
-          return (
-            <div
-              className={`${
-                value.index === ActiveIndex ? "bg-focus_color_1" : "bg-white"
-              } cursor-pointer py-1`}
-              onClick={() => {
-                setActiveIndex(value.index);
-              }}
-            >
-              <ListItem
-                text={value.labname}
-                isEmpty={true}
-              />
-            </div>
-          );
-        })}
-      </div>
+      <div className="flex-1 flex-col items-start justify-start overflow-y-scroll" onClick={() => setIsFocussed(false)}>
+        <TextField
+        multiline
+          className="!w-96 !text-xs !m-4"
+          variant="outlined"
+          size="small"
+          label="Aim"
+          onChange={(e) => {
+            setLabAim(e.target.value);
+          }}
+          value={LabAim}
+        />
+        <TextField
+        multiline
+          minRows={7}
+          className="!w-96 !text-xs !mt-0 !m-4"
+          variant="outlined"
+          size="small"
+          label="Description"
+          onChange={(e) => {
+            setLabDescription(e.target.value);
+          }}
+          value={LabDescription}
+        />
+        </div>
+        <div
+          className="py-2 flex justify-end px-4 !border-b-0 !border-l-0 !border-r-0"
+          style={{ border: "1px solid rgba(0,0,0,0.23)" }}
+        >
+          <Button
+            variant="outlined"
+            size="small"
+            className="w-min text-xs !px-7 whitespace-nowrap"
+          >
+            Create Code/ Save Changes
+          </Button>
+        </div>
     </div>
   );
 }

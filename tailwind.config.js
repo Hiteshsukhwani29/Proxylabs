@@ -12,12 +12,18 @@ module.exports = {
       temp: "#71F1B3",
       temp2: "#EDF3F6",
       bg1: "#EDF3F6",
-      focus_color_1: "#FFEEE1"
+      focus_color_1: "#FFEEE1",
+      close: "#ff605c"
     },
     extend: {
       animation:{
         'bounce-short': 'bounce 1s ease-in-out 5'
-      }
+      },
+      fontFamily: {
+        'montserrat': ['Montserrat'],
+        'lato': ['Lato'],
+        'garamond': ['Garamond']
+    }
     },
   },
   plugins: [],

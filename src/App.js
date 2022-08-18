@@ -9,23 +9,30 @@ import InstituteInfo from "./components/InstituteInfo"
 import { useDispatch } from "react-redux";
 import { actionCreators } from "./state/index";
 import db from "./firebase";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const token = JSON.parse(localStorage.getItem("token"));
   const dispatch = useDispatch();
+
+  const [loaded, setloaded] = useState(false);
+
   useEffect(() => {
     if (token) {
       var userRef = db.collection("users").doc(token).get();
       userRef.then((docSnapshot) => {
         if (docSnapshot.exists) {
           userRef.then((snapshot) => {
-            dispatch(actionCreators.setUser(snapshot.data()))
+            dispatch(actionCreators.setUser(snapshot.data()));
+            setloaded(true);
           });
         }
       });
+    } else {
+      setloaded(true);
     }
-  }, [])
+  }, []);
+
   return (
     <>
       {/* <LandingPage /> */}
