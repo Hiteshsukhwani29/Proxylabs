@@ -120,21 +120,21 @@ export default function index() {
             <input
               className="w-full h-10 px-5 my-3 border rounded-full "
               type="text"
-              placeholder="Head of Institute"
+              placeholder="Admin Name"
               style={{ border: "1px solid #CBCBCB" }}
             />
 
             <input
               className="w-full h-10 px-5 my-3 border rounded-full "
               type="text"
-              placeholder="Head of Institute"
+              placeholder="Admin Phone"
               style={{ border: "1px solid #CBCBCB" }}
             />
 
             <input
               className="w-full h-10 px-5 my-3 border rounded-full "
               type="text"
-              placeholder="Head of Institute"
+              placeholder="Add Admin"
               style={{ border: "1px solid #CBCBCB" }}
             />
           </div>
@@ -142,14 +142,14 @@ export default function index() {
             <input
               className="w-full h-10 px-5 my-3 border rounded-full "
               type="text"
-              placeholder="Head of Institute"
+              placeholder="Admin Email"
               style={{ border: "1px solid #CBCBCB" }}
             />
 
             <input
               className="w-full h-10 px-5 my-3 border rounded-full "
               type="text"
-              placeholder="Head of Institute"
+              placeholder="Alternate Phone"
               style={{ border: "1px solid #CBCBCB" }}
             />
           </div>
@@ -160,46 +160,43 @@ export default function index() {
        * Students and Courses
        * ******************************/}
 
-
-<div>
-<div className=" bg-gray flex-1 h-[1px] -mx-8 "></div>
-  <div className="w-full text-xl font-semibold m-4 mt-8">
-  Students and Courses
-  </div>
-  <div className="grid grid-cols-2">
-       <div className="mx-6 my-4">
-        <div className="flex items-center justify-between font-semibold h-full">
-          <div>Total number of students</div>
-          <TextField
-            className="!w-14 !text-xs"
-            variant="outlined"
-            size="small"
-            sx={{
-              "& .MuiInputBase-root": {
-                  height: 30
-              }
-            }}
-          
-          />
-          
+      <div>
+        <div className=" bg-gray flex-1 h-[1px] -mx-8 "></div>
+        <div className="w-full text-xl font-semibold m-4 mt-8">
+          Students and Courses
         </div>
-       </div>
-       <div className="mx-6 my-4">
-       <CustomSelect
-            className="h-10 !rounded-full w-full !mx-0 !text-base !px-5 !my-3 border "
-            defaultValue={40}
-            style={{ border: "1px solid #CBCBCB" }}
-          >
-            <StyledOption value={40} disabled>
-            Courses we offer
-            </StyledOption>
-            <StyledOption value={10}>Ten</StyledOption>
-            <StyledOption value={20}>Twenty</StyledOption>
-            <StyledOption value={30}>Thirty</StyledOption>
-          </CustomSelect>
-       </div>
-  </div>
-</div>
+        <div className="grid grid-cols-2">
+          <div className="mx-6 my-4">
+            <div className="flex items-center justify-between font-semibold h-full">
+              <div>Total number of students</div>
+              <TextField
+                className="!w-14 !text-xs"
+                variant="outlined"
+                size="small"
+                sx={{
+                  "& .MuiInputBase-root": {
+                    height: 30,
+                  },
+                }}
+              />
+            </div>
+          </div>
+          <div className="mx-6 my-4">
+            <CustomSelect
+              className="h-10 !rounded-full w-full !mx-0 !text-base !px-5 !my-3 border "
+              defaultValue={40}
+              style={{ border: "1px solid #CBCBCB" }}
+            >
+              <StyledOption value={40} disabled>
+                Courses we offer
+              </StyledOption>
+              <StyledOption value={10}>Ten</StyledOption>
+              <StyledOption value={20}>Twenty</StyledOption>
+              <StyledOption value={30}>Thirty</StyledOption>
+            </CustomSelect>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
