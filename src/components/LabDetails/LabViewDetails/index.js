@@ -1,27 +1,69 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@mui/material";
 import db from "../../../firebase";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { actionCreators } from "../../../state/index";
 
-export default function Index({ LabCode, SubjectCode }) {
+export default function Index({ LabCode, SubjectCode, refresh, setrefresh }) {
+  const state = useSelector((state) => state.t1);
 
-  const state = useSelector(state => state.t1);
+  const dispatch = useDispatch();
+
+  const [TotalLabsCompleted, setTotalLabsCompleted] = useState();
 
   const StudentMarksRef = db
-      .collection("StudentsMarks")
-      .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2")
-      .collection(state.user.course)
-      .doc(state.user.uid)
-      .collection("subjects")
-      .doc(SubjectCode)
-      .collection("Lab")
-      .doc(LabCode);
+    .collection("StudentsMarks")
+    .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2")
+    .collection(state.user.course)
+    .doc(state.user.uid)
+    .collection("subjects")
+    .doc(SubjectCode)
+    .collection("Lab")
+    .doc(LabCode);
 
-      const uploadAssignment = async() => {
-        await StudentMarksRef.set({
-          completed: true
-        })
+  const TotalLabsCompletedRef = db
+    .collection("StudentsMarks")
+    .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2")
+    .collection(state.user.course)
+    .doc(state.user.uid);
+
+  // console.log(state.TotalLabsCompleted)
+
+  const uploadAssignment = async () => {
+    // setrefresh(!refresh);
+    await StudentMarksRef.set({
+      completed: true,
+    });
+    var i = 1;
+
+    TotalLabsCompletedRef.onSnapshot((ss) => {
+      if (ss.exists) {
+        TotalLabsCompletedRef.get().then((s) => {
+          console.log(s.data().totallabscompleted);
+          while (i > 0) {
+            TotalLabsCompletedRef.update({
+              totallabscompleted: s.data().totallabscompleted + 1,
+            });
+            i--;
+          }
+          refreshPage();
+        });
+      } else {
+        while (i > 0) {
+          TotalLabsCompletedRef.set({
+            totallabscompleted: 1,
+          });
+          i--;
+        }
+        refreshPage();
       }
+    });
+  };
+
+  function refreshPage() {
+    window.location.reload(false);
+  }
 
   return (
     <>

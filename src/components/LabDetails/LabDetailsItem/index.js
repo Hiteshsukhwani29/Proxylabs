@@ -3,7 +3,15 @@ import { Button } from "@mui/material";
 import LabViewDetails from "../LabViewDetails";
 import CompletedIcon from "../../../assets/completed_icon.png";
 
-export default function Idex({ LabName, Completed, LabCode, SubjectCode }) {
+export default function Index({
+  LabName,
+  Completed,
+  LabCode,
+  SubjectCode,
+  refresh,
+  setrefresh,
+  setTotalLabsCompleted,
+}) {
   const [TitleDesc, setTitleDesc] = useState(
     "Title of the experiment that student has to perform."
   );
@@ -27,12 +35,26 @@ export default function Idex({ LabName, Completed, LabCode, SubjectCode }) {
             </div>
             <div className="flex ml-6 mt-3">
               <div className="flex flex-col items-start justify-start">
-                {!Completed?<div className="leading-7">Incomplete</div>:<div className="leading-7">Completed</div>}
+                {!Completed ? (
+                  <div className="leading-7">Incomplete</div>
+                ) : (
+                  <div className="leading-7">Completed</div>
+                )}
                 <div className="leading-7 mt-3">Evaluation</div>
               </div>
               <div className="flex flex-col ml-3 items-center justify-start">
-              {!Completed?<div className="h-7 w-7 rounded-full" style={{ border: "1px solid #eeeeee" }}></div>:<img src={CompletedIcon}/>}
-                <div className="mt-3 h-7 w-20 rounded-md" style={{ border: "1px solid #eeeeee" }}></div>
+                {!Completed ? (
+                  <div
+                    className="h-7 w-7 rounded-full"
+                    style={{ border: "1px solid #eeeeee" }}
+                  ></div>
+                ) : (
+                  <img className="h-6 w-6 rounded-full" src={CompletedIcon} />
+                )}
+                <div
+                  className="mt-3 h-7 w-20 rounded-md"
+                  style={{ border: "1px solid #eeeeee" }}
+                ></div>
               </div>
             </div>
           </div>
@@ -56,7 +78,17 @@ export default function Idex({ LabName, Completed, LabCode, SubjectCode }) {
           </div>
         </div>
       </div>
-      {ViewDetails ? <LabViewDetails LabCode={LabCode} SubjectCode={SubjectCode} /> : <></>}
+      {ViewDetails ? (
+        <LabViewDetails
+          LabCode={LabCode}
+          SubjectCode={SubjectCode}
+          refresh={refresh}
+          setrefresh={setrefresh}
+          setTotalLabsCompleted={setTotalLabsCompleted}
+        />
+      ) : (
+        <></>
+      )}
     </div>
   );
 }
