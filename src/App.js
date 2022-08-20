@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { actionCreators } from "./state/index";
 import db from "./firebase";
 import { useEffect, useState } from "react";
+import Map from "./components/Map"
 
 function App() {
   const token = JSON.parse(localStorage.getItem("token"));
@@ -40,8 +41,9 @@ function App() {
   
       {/* <CreateCurriculam/>  */}
       {/* <LabDetails/> */}
-      {/* <LabBooking/> */}
-      <InstituteInfo/>
+      <LabBooking/>
+      {/* <InstituteInfo/> */}
+    
     </>
   );
 }
