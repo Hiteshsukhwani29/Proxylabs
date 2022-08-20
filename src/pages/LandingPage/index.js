@@ -11,7 +11,6 @@ import PageIntro from "../../components/PageIntro";
 import LoginComponent from "../../components/LoginComponent";
 import LabDetails from "../../components/LabDetails"
 
-import PhotoGallery from '../../components/PhotoGallery'
 
 import { Button } from "@mui/material";
 import { Login, TrendingUp } from "heroicons-react";
