@@ -2,12 +2,15 @@ import "./App.css";
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/Login";
 import CreateCurriculam from "./components/CreateCurriculam";
-import StudentMainScreen from "./pages/StudentMainScreen";
+import LabDetails from "./components/LabDetails"
+import LabBooking from "./components/LabBooking"
+import InstituteInfo from "./components/InstituteInfo"
 
 import { useDispatch } from "react-redux";
 import { actionCreators } from "./state/index";
 import db from "./firebase";
 import { useEffect, useState } from "react";
+import Map from "./components/Map"
 
 function App() {
   const token = JSON.parse(localStorage.getItem("token"));
@@ -32,19 +35,16 @@ function App() {
   }, []);
 
   return (
-    <div className="">
-      {loaded===true ? (
-        <>
-          {/* <LandingPage /> */}
-          {/* <LoginPage/> */}
-          <StudentMainScreen />
-
-          {/* <CreateCurriculam/> */}
-        </>
-      ) : (
-        <></>
-      )}
-    </div>
+    <>
+      {/* <LandingPage /> */}
+      {/* <LoginPage/> */}
+  
+      {/* <CreateCurriculam/>  */}
+      {/* <LabDetails/> */}
+      <LabBooking/>
+      {/* <InstituteInfo/> */}
+    
+    </>
   );
 }
 
