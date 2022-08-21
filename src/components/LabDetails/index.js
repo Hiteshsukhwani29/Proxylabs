@@ -2,42 +2,93 @@ import React, { useEffect, useState } from "react";
 import LabDetailItem from "./LabDetailsItem";
 import LabReview from "./LabReview";
 import db from "../../firebase";
+import { useSelector } from "react-redux";
+import { Refresh } from "heroicons-react";
 
-export default function Index({ Course, SubjectCode }) {
+export default function Index({ Course, SubjectCode, setTotalLabsCompleted }) {
   const [Items, setItems] = useState([]);
 
-  var TempList = [];
+  const [refresh, setrefresh] = useState(false);
+
+  const [counter, setcounter] = useState(0);
+
+  const state = useSelector((state) => state.t1);
+
   var index = 0;
 
   useEffect(() => {
+    var TempList = [];
+
+    console.log(Course, SubjectCode);
     const SubjectRef = db
       .collection("curriculum")
       .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2")
       .collection(Course)
       .doc(SubjectCode)
       .collection("Lab");
+
+    const StudentMarksRef = db
+      .collection("StudentsMarks")
+      .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2")
+      .collection(Course)
+      .doc(state.user.uid)
+      .collection("subjects")
+      .doc(SubjectCode)
+      .collection("Lab");
+
     SubjectRef.onSnapshot((s) => {
-      s.docs.map((doc) => {
-        var labcode = doc.id;
-        var labname = doc.data().name;
-        var maxmarks = doc.data().name;
-        TempList.push({ labname, maxmarks, index, labcode });
-        index++;
-      });
-      setItems(TempList);
+      if (!s.empty) {
+        s.docs.map((doc) => {
+          var labcode = doc.id;
+          var labname = doc.data().name;
+          var maxmarks = doc.data().name;
+          console.log(labcode);
+          StudentMarksRef.doc(labcode).onSnapshot((snapshot) => {
+            if (snapshot.exists) {
+              TempList.push({
+                labname,
+                maxmarks,
+                index,
+                labcode,
+                Completed: true,
+              });
+            } else {
+              TempList.push({
+                labname,
+                maxmarks,
+                index,
+                labcode,
+                Completed: false,
+              });
+            }
+            setItems(TempList);
+          });
+          index++;
+        });
+      } else {
+        setItems([]);
+      }
     });
     console.log(Items);
-  }, [SubjectCode]);
+  }, [SubjectCode, refresh]);
 
   return (
     <>
-      {Items.map(({ labcode, labname, maxmarks }) => {
+      {Items.map(({ labcode, labname, maxmarks, Completed }) => {
         return (
           <div
             className="my-10 rounded-xl shadow-lg"
             style={{ border: "1px solid #eeeeee" }}
           >
-            <LabDetailItem LabName={labname} />
+            <LabDetailItem
+              refresh={refresh}
+              setrefresh={setrefresh}
+              LabName={labname}
+              Completed={Completed}
+              LabCode={labcode}
+              SubjectCode={SubjectCode}
+              setTotalLabsCompleted={setTotalLabsCompleted}
+            />
           </div>
         );
       })}

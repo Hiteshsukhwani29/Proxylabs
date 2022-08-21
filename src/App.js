@@ -39,8 +39,12 @@ function App() {
 
   return (
     <>
+    <div className="">
+      {loaded===true ? (
+        <>
       {/* <LandingPage /> */}
       {/* <LoginPage/> */}
+      {/* <Search/> */}
   
       {/* <CreateCurriculam/>  */}
       {/* <LabDetails/> */}
@@ -53,7 +57,7 @@ function App() {
       {/* <InstituteInfo/> */}
     
     </>
-  );
+);
 }
 
 export default App;

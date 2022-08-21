@@ -6,3 +6,12 @@ export const setUser = (user) =>{
         })
     }
 }
+
+export const setLabsCompleted = (TotalLabsCompleted) =>{
+    return (dispatch) => {
+        dispatch({
+            type: 'set-labs-completed',
+            payload: TotalLabsCompleted
+        })
+    }
+}
