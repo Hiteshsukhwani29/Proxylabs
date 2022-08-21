@@ -55,7 +55,9 @@ function App() {
       <HostDetail/>
 
       {/* <InstituteInfo/> */}
-    
+      </>
+    ):<></>}
+    </div>
     </>
 );
 }
