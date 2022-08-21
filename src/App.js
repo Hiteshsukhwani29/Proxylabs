@@ -2,9 +2,12 @@ import "./App.css";
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/Login";
 import CreateCurriculam from "./components/CreateCurriculam";
-import LabDetails from "./components/LabDetails"
-import LabBooking from "./components/LabBooking"
-import InstituteInfo from "./components/InstituteInfo"
+import LabDetails from "./components/LabDetails";
+import LabBooking from "./components/LabBooking";
+import InstituteInfo from "./components/InstituteInfo";
+import StudentMainScreen from "./pages/StudentMainScreen";
+
+import Search from "./components/Searchbar";
 
 import { useDispatch } from "react-redux";
 import { actionCreators } from "./state/index";
@@ -36,16 +39,23 @@ function App() {
 
   return (
     <>
+    <div className="">
+      {loaded===true ? (
+        <>
       {/* <LandingPage /> */}
       {/* <LoginPage/> */}
+      {/* <Search/> */}
   
       {/* <CreateCurriculam/>  */}
       {/* <LabDetails/> */}
-      <LabBooking/>
+      {/* <LabBooking/> */}
       {/* <InstituteInfo/> */}
-    
+      <StudentMainScreen/>
+      </>)
+    :(<></>)}
+    </div>
     </>
-  );
+);
 }
 
 export default App;

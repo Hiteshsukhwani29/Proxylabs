@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import LabViewDetails from "../LabViewDetails";
 import CompletedIcon from "../../../assets/completed_icon.png";
+import UploadDocuments from "../../UploadDocuments";
 
 export default function Index({
   LabName,
@@ -16,10 +17,25 @@ export default function Index({
     "Title of the experiment that student has to perform."
   );
 
+  const [uploadExperimentUrl, setuploadExperimentUrl] = useState("");
+  const [uploadPituresUrl, setuploadPituresUrl] = useState("");
+  const [uploadBookingReceitUrl, setuploadBookingReceitUrl] = useState("");
+
   const [ViewDetails, setViewDetails] = useState(false);
 
+  const [ShowUploadModal, setShowUploadModal] = useState(false);
+
+  useEffect(() => {
+    console.log("working",uploadExperimentUrl)
+  }, [uploadExperimentUrl])
+  
+
   return (
-    <div className="bg-white rounded-lg px-16 py-6 mx-8 my-2">
+    <div className={`bg-white rounded-lg px-16 py-6 mx-8 my-2 flex flex-col`}>
+            {ShowUploadModal?
+        <div className="relative z-20">
+        <UploadDocuments setuploadExperimentUrl={setuploadExperimentUrl} setuploadPituresUrl={setuploadPituresUrl} setuploadBookingReceitUrl={setuploadBookingReceitUrl} setShowUploadModal={setShowUploadModal}/>
+        </div>:<></>}
       <div className="my-6 py-4">
         <div>
           <div className="flex flex-1">
@@ -85,6 +101,10 @@ export default function Index({
           refresh={refresh}
           setrefresh={setrefresh}
           setTotalLabsCompleted={setTotalLabsCompleted}
+          setShowUploadModal={setShowUploadModal}
+          uploadExperimentUrl={uploadExperimentUrl}
+          uploadPituresUrl={uploadPituresUrl}
+          uploadBookingReceitUrl={uploadBookingReceitUrl}
         />
       ) : (
         <></>

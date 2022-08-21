@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import db from "../../../firebase";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { actionCreators } from "../../../state/index";
 
-export default function Index({ LabCode, SubjectCode, refresh, setrefresh }) {
+export default function Index({ LabCode, SubjectCode, refresh, setrefresh, setShowUploadModal, uploadExperimentUrl, uploadPituresUrl, uploadBookingReceitUrl }) {
   const state = useSelector((state) => state.t1);
 
   const dispatch = useDispatch();
 
   const [TotalLabsCompleted, setTotalLabsCompleted] = useState();
+
+  useEffect(() => {
+    console.log(uploadExperimentUrl)
+  }, [uploadExperimentUrl])
+  
 
   const StudentMarksRef = db
     .collection("StudentsMarks")
@@ -32,8 +37,12 @@ export default function Index({ LabCode, SubjectCode, refresh, setrefresh }) {
 
   const uploadAssignment = async () => {
     // setrefresh(!refresh);
+    console.log(uploadExperimentUrl)
     await StudentMarksRef.set({
       completed: true,
+      experimentUrl: uploadExperimentUrl,
+      picturesUrl: uploadPituresUrl,
+      bookingreceitUrl: uploadBookingReceitUrl
     });
     var i = 1;
 
@@ -66,7 +75,7 @@ export default function Index({ LabCode, SubjectCode, refresh, setrefresh }) {
   }
 
   return (
-    <>
+    <div>
       <div className=" bg-gray flex-1 h-[1px] mt-3"></div>
       <div className=" my-6  py-4">
         <div className="font-semibold py-2">Requirements</div>
@@ -89,12 +98,21 @@ export default function Index({ LabCode, SubjectCode, refresh, setrefresh }) {
       </div>
       <div className=" bg-gray flex-1 h-[1px] mt-3"></div>
       <div className="flex justify-between items-center pt-6">
-        <Button
+        {/* <Button
           className="!bg-white !text-black !px-12  !py-2 !rounded-full "
           variant="outlined"
           onClick={uploadAssignment}
         >
           Upload Experiment
+        </Button> */}
+        <Button
+          className="!bg-white !text-black !px-12  !py-2 !rounded-full "
+          variant="outlined"
+          onClick={() => {
+            setShowUploadModal(true);
+          }}
+        >
+          Upload Documents
         </Button>
 
         <div>
@@ -108,11 +126,12 @@ export default function Index({ LabCode, SubjectCode, refresh, setrefresh }) {
           <Button
             className="!bg-accent !text-white !px-6  !py-2 !rounded-full"
             variant="outlined"
+            onClick={uploadAssignment}
           >
             Submit
           </Button>
         </div>
       </div>
-    </>
+    </div>
   );
 }
