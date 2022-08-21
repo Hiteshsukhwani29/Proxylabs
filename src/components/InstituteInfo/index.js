@@ -4,8 +4,8 @@ import WelcomeIntro from "./WelcomeIntro"
 export default function index() {
   return (
     <div>
-        {/* <CollegeDetail/> */}
-        <WelcomeIntro/>
+        <CollegeDetail/>
+        {/* <WelcomeIntro/> */}
 
     </div>
   )
