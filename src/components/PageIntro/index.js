@@ -3,7 +3,7 @@ import Landing_bg from "../../assets/Landing_bg.png";
 
 import { Button } from "@mui/material";
 
-export default function index() {
+export default function Index() {
   return (
     <div className="flex justify-between items-center my-24 p-4">
     <div className="m-14 flex-0 ">
