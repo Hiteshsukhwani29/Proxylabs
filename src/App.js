@@ -50,7 +50,8 @@ function App() {
       {/* <LabDetails/> */}
       {/* <LabBooking/> */}
       {/* <InstituteInfo/> */}
-      <StudentMainScreen/>
+      {/* <StudentMainScreen/> */}
+      <InstituteInfo/>
       </>)
     :(<></>)}
     </div>

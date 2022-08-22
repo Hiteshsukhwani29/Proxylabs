@@ -1,12 +1,9 @@
-import React from 'react'
-import { Button } from '@mui/material'
+import React from 'react';
+import { Button } from '@mui/material';
 
 export default function index() {
   return (
-    <div className='flex flex-col w-[48rem] overflow-x-clip px-8 py-5 rounded-xl bg-white  m-auto drop-shadow-xl' >
-        <div>
-        <div className=" bg-gray flex-1 h-[1px] -mx-8 "></div>
-        </div>
+    <div className='flex flex-col w-[48rem] overflow-x-clip px-8 py-5 rounded-xl bg-white  m-auto drop-shadow-xl' style={{ border: "1px solid #eeeeee" }}>
         <div className="flex justify-center">
         <div className="h-44 w-44 bg-temp rounded-full m-2"></div>
       </div>
