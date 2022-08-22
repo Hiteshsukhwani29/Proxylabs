@@ -60,6 +60,8 @@ export default function Index({ Course, SubjectCode, setTotalLabsCompleted }) {
                 labcode,
                 Completed: false,
               });
+              TempList.shift();
+
             }
             setItems(TempList);
           });

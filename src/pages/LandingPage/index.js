@@ -25,7 +25,7 @@ function Index() {
       {ShowModal?<LoginComponent ShowModal={ShowModal} setShowModal={setShowModal}/>:
       <div className="flex-1">
       <PageIntro />
-        <Banner /></div>}
+    </div>}
     </div>
   );
 }

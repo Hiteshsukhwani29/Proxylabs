@@ -37,11 +37,28 @@ function App() {
     }
    }, []);
 
+   let Component
+switch (window.location.pathname) {
+  case "/":
+    Component = LandingPage 
+    break;
+    case "/Institute":
+    Component = InstituteMainScreen 
+    break;
+    case "/Student":
+    Component = StudentMainScreen 
+    break;
+    
+  default:
+    break;
+}
+
   return (
     <>
     <div className="">
       {loaded===true ? (
         <>
+        <Component/>
       {/* <LandingPage /> */}
       {/* <LoginPage/> */}
       {/* <Search/> */}
@@ -52,8 +69,7 @@ function App() {
       {/* <StudentMainScreen/> */}
       {/* <InstituteMainScreen/> */}
       {/* <InstituteInfo/> */}
-      <HostDetail/>
-
+      {/* <HostDetail/> */}
       {/* <InstituteInfo/> */}
       </>
     ):<></>}
