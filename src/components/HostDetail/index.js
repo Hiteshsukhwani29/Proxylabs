@@ -1,5 +1,5 @@
 import React from "react";
-import InstituteBanner from "../LabBooking/InstituteBanner";
+import InstituteBanner from "../InstituteBanner";
 import HostForm from "./HostForm";
 import HostSchedular from "./HostSchedular";
 import HostExperimentDetail from "./HostExpermentDetail";

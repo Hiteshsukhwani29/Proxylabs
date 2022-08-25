@@ -3,6 +3,7 @@ import logo from "../../assets/logo.png";
 import Coin from "../../assets/animation_coin.gif";
 import OutlinePerson from "../../assets/nav_profile_icon.png";
 import LoginComponent from "../LoginComponent";
+import { Menu } from "heroicons-react";
 import { useSelector } from "react-redux";
 
 function Index({ setShowModal , setShowAddCurriculumCard, ShowAddCurriculumCard}) {
@@ -12,6 +13,7 @@ function Index({ setShowModal , setShowAddCurriculumCard, ShowAddCurriculumCard}
 
   const [AlreadyLoggedIn, setAlreadyLoggedIn] = useState(false);
   const [Token, setToken] = useState("");
+  const type = JSON.parse(localStorage.getItem("type"));
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("token"));
@@ -43,18 +45,14 @@ function Index({ setShowModal , setShowAddCurriculumCard, ShowAddCurriculumCard}
 
         <div
           className={`bg-white border !border-accent flex h-min w-max mx-4 px-6 py-1 rounded-full flex-0 justify-center cursor-pointer ${
-            AlreadyLoggedIn ? "hidden" : "block"
-            
+            type==="Institute" ? "block" : "hidden"
           }`}
-          onClick={() => {setShowAddCurriculumCard(!ShowAddCurriculumCard);(console.log("true"))}}
-          
-        >
+          onClick={() => {setShowAddCurriculumCard(!ShowAddCurriculumCard);(console.log("true"))}}>
           Add Curriculum
         </div>
-
         <div
           className={`bg-white border !border-accent flex h-min w-max px-6 py-1 rounded-full flex-0 justify-center cursor-pointer ${
-            AlreadyLoggedIn ? "hidden" : "block"
+            type==="Institute" ? "block" : "hidden"
           }`}
         >
           Complete Profile
@@ -81,8 +79,8 @@ function Index({ setShowModal , setShowAddCurriculumCard, ShowAddCurriculumCard}
               <img className="h-6 w-6 ml-2" src={OutlinePerson} />
             </div>
           ) : (
-            <div className="bg-white flex h-min w-max px-6 py-1 rounded-full flex-0 justify-center cursor-pointer">
-              {state.user ? <div>{state.user.name}</div> : <></>}
+            <div className="bg-white flex h-min w-max px-4 py-1 rounded-full flex-0 justify-center cursor-pointer">
+              <Menu className="text-gray"/>
               <img className="h-6 w-6 ml-2" src={OutlinePerson} />
             </div>
           )}

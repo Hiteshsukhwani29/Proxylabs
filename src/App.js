@@ -1,9 +1,8 @@
-import "./App.css";
+import { BrowserRouter } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/Login";
 import CreateCurriculam from "./components/CreateCurriculam";
 import LabDetails from "./components/LabDetails"
-import LabBooking from "./components/LabBooking"
 import InstituteInfo from "./components/InstituteInfo"
 import StudentMainScreen from "./pages/StudentMainScreen"
 import InstituteMainScreen from "./pages/InstituteMainScreen"
@@ -16,14 +15,16 @@ import { useEffect, useState } from "react";
 import Map from "./components/Map"
 
 function App() {
-   const token = JSON.parse(localStorage.getItem("token"));
-   const dispatch = useDispatch();
+  const token = JSON.parse(localStorage.getItem("token"));
+  const type = JSON.parse(localStorage.getItem("type"));
+  const dispatch = useDispatch();
 
    const [loaded, setloaded] = useState(false);
 
    useEffect(() => {
    if (token) {
-       var userRef = db.collection("users").doc(token).get();
+     if(type==="Institute"){
+       var userRef = db.collection("Institutes").doc(token).get();
        userRef.then((docSnapshot) => {
          if (docSnapshot.exists) {
           userRef.then((snapshot) => {
@@ -32,6 +33,18 @@ function App() {
            });
          }
        });
+      }
+      if(type==="Student"){
+        var userRef = db.collection("users").doc(token).get();
+        userRef.then((docSnapshot) => {
+          if (docSnapshot.exists) {
+           userRef.then((snapshot) => {
+              dispatch(actionCreators.setUser(snapshot.data()));
+              setloaded(true);
+            });
+          }
+        });
+       }
      } else {
        setloaded(true);
     }
@@ -39,10 +52,11 @@ function App() {
 
   return (
     <>
+      <BrowserRouter>
     <div className="">
       {loaded===true ? (
         <>
-      {/* <LandingPage /> */}
+      <LandingPage />
       {/* <LoginPage/> */}
       {/* <Search/> */}
   
@@ -52,14 +66,15 @@ function App() {
       {/* <StudentMainScreen/> */}
       {/* <InstituteMainScreen/> */}
       {/* <InstituteInfo/> */}
-      <HostDetail/>
+      {/* <HostDetail/> */}
 
       {/* <InstituteInfo/> */}
       {/* <StudentMainScreen/> */}
-      <InstituteInfo/>
+      {/* <InstituteInfo/> */}
       </>)
     :(<></>)}
     </div>
+    </BrowserRouter>
     </>
 );
 }

@@ -16,6 +16,40 @@ function Index() {
 
   const dispatch = useDispatch();
 
+  const token = JSON.parse(localStorage.getItem("token"));
+  const type = JSON.parse(localStorage.getItem("type"));
+
+   const [loaded, setloaded] = useState(false);
+
+   useEffect(() => {
+   if (token) {
+     if(type==="Institute"){
+       var userRef = db.collection("Institutes").doc(token).get();
+       userRef.then((docSnapshot) => {
+         if (docSnapshot.exists) {
+          userRef.then((snapshot) => {
+             dispatch(actionCreators.setUser(snapshot.data()));
+             setloaded(true);
+           });
+         }
+       });
+      }
+      if(type==="Student"){
+        var userRef = db.collection("users").doc(token).get();
+        userRef.then((docSnapshot) => {
+          if (docSnapshot.exists) {
+           userRef.then((snapshot) => {
+              dispatch(actionCreators.setUser(snapshot.data()));
+              setloaded(true);
+            });
+          }
+        });
+       }
+     } else {
+       setloaded(true);
+    }
+   }, []);
+
   var TempList = [];
   var index = 0;
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { TextField, Button } from "@mui/material";
 import { auth } from "../../../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -7,6 +8,9 @@ import { actionCreators } from "../../../../state/index";
 import db from "../../../../firebase";
 
 function Index({ Email, setShowPasswordBox }) {
+
+  let navigate = useNavigate();
+
   const [LoginPassword, setLoginPassword] = useState("");
   const [IsLoginPasswordCorrect, setIsLoginPasswordCorrect] = useState(true);
   const [
@@ -45,9 +49,10 @@ function Index({ Email, setShowPasswordBox }) {
         );
         const uid = res.user.uid;
         localStorage.setItem("token", JSON.stringify(uid));
+        localStorage.setItem("type", JSON.stringify("Student"));
         setShowPasswordBox(false);
         setToken(uid);
-        refreshPage()
+        navigate("/Student");
       } catch (err) {
         setIsLoginPasswordCorrect(false);
         setIncorrectLoginPasswordHelpertext("Incorrect password");

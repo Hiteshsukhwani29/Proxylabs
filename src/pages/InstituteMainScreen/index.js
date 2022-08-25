@@ -29,7 +29,6 @@ export default function Index() {
           ShowModal={ShowAddCurriculumCard}
           setShowModal={setShowAddCurriculumCard}
         />
-        
         </div>
       ) : (
         <></>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   TextField,
   Button,
@@ -12,6 +13,9 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { collegesList } from "../../../../assets/collegesList";
 
 function Index({ Email, setShowRegistrationBox }) {
+
+  let navigate = useNavigate();
+
   const [CollegeName, setCollegeName] = useState("");
   const [NewPassword, setNewPassword] = useState("");
   const [IsPasswordSafe, setIsPasswordSafe] = useState(true);
@@ -72,6 +76,8 @@ function Index({ Email, setShowRegistrationBox }) {
         .then(() => {
           setShowRegistrationBox(false);
           localStorage.setItem("token", JSON.stringify(user.uid));
+          localStorage.setItem("type", JSON.stringify("Institute"));
+          navigate("/Institute");
         });
     } catch (err) {
       console.error(err);
