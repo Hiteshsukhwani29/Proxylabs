@@ -1,13 +1,17 @@
 import React from "react";
-import { Checkbox,Button } from "@mui/material";
+import { Checkbox, Button } from "@mui/material";
+import DateRange from "../../LabBookingComponent/LabCalender/daterangepicker"
 
 export default function index() {
-    const label = { inputProps: { "aria-label": "Checkbox demo" } };
+  const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
   return (
     <div className="flex flex-col w-[34rem] h-fit overflow-x-clip px-8 py-5 rounded-xl bg-white  ml-6  drop-shadow-xl">
       <div className="font-semibold ">Assign lab dates and times</div>
-      <div className="h-52"></div>
+      <div className="">
+        <DateRange/>
+        
+      </div>
       <div>
         <div className="font-normal text-base">Preferred time slot</div>
         <div className="font-light text-sm">

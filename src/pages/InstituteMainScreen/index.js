@@ -10,7 +10,7 @@ export default function Index({
   ShowAddCurriculumCard,
   setShowAddCurriculumCard,
   ShowCompleteProfile,
-  setShowCompleteProfile
+  setShowCompleteProfile,
 }) {
   const [Items, setItems] = useState([]);
   const [ActiveIndex, setActiveIndex] = useState(0);
@@ -26,15 +26,21 @@ export default function Index({
     <div className="flex flex-col">
       <div className="flex-1" onClick={() => setShowAddCurriculumCard(false)}>
         <div className="absolute bg-white left-0 right-0 top-[15%]">
-          {ShowCompleteProfile?
+          {ShowCompleteProfile ? (
             <CollegeDetail
               ShowCompleteProfile={ShowCompleteProfile}
               setShowCompleteProfile={setShowCompleteProfile}
-            />:<></>
-          }
+            />
+          ) : (
+            <></>
+          )}
         </div>
         <div className="">
-          <PageIntro />
+          <PageIntro
+            Head="Register your students. Host your college for other students and get going! "
+            detail="Allow your location, select your field and dive into the list of colleges at your disposal :)"
+            imgUrl={Landing_bg}
+          />
           <Banner />
         </div>
       </div>

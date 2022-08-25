@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import Searchbar from "../Searchbar"
 
 import { Button } from "@mui/material";
@@ -18,6 +19,12 @@ export default function Index({ Head, detail, imgUrl }) {
     }
   }, [Token]);
 
+  let navigate = useNavigate(); 
+  const routeChange = () =>{ 
+    let path = `/hostLab`; 
+    navigate(path);
+  }
+
   return (
     <div className="flex justify-between items-center my-24 p-4">
       <div className="m-14 flex-0 ">
@@ -29,6 +36,7 @@ export default function Index({ Head, detail, imgUrl }) {
             <Button
               className={`!bg-white !text-black !px-6  !py-2 !rounded-3xl !mr-4 `}
               variant="outlined"
+              onClick={routeChange}
             >
               Host My College
             </Button>

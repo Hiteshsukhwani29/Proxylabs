@@ -1,8 +1,13 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { Button,TextareaAutosize } from "@mui/material";
 import { PlusSm } from "heroicons-react"
 
-export default function index() {
+export default function Index() {
+
+  const [LabName, setLabName] = useState("")
+
+
+
   return (
     <div className=" my-3">
         <div className=" bg-gray flex-1 h-[1px]  "></div>

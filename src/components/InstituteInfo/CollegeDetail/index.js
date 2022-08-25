@@ -1,15 +1,95 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { TextField, Button } from "@mui/material";
 import { Upload } from "heroicons-react";
 import { CustomSelect, StyledOption } from "../../Dropdown/Index";
 import db from "../../../firebase";
 
-export default function index() {
+export default function Index() {
+
+
+
+  const [inputValues, setInputValue] = useState({
+    Address: '',
+    City: '',
+    Pincode: '',
+    State: '',
+    AdminName: '',
+    AdminEmail:'',
+    adminPhone:''
+    
+  });
+
+  const [validation, setValidation] = useState({
+    Address: '',
+    City: '',
+    Pincode: '',
+    State: '',
+    AdminName: '',
+    AdminEmail:'',
+    adminPhone:''
+  });
+
+  //handle submit updates
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setInputValue({ ...inputValues, [name]: value });
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let errors = {...validation}
+
+
+    if (!inputValues.Address.trim()) {
+      errors.Address = 'Address is required';
+    } else {
+      errors.Address = '';
+    }
+    
+    if (!inputValues.City.trim()) {
+      errors.City = 'City is required';
+    } else {
+      errors.City = '';
+    }
+
+    if (!inputValues.Pincode.trim()) {
+      errors.Pincode = 'Pincode is required';
+    } else {
+      errors.Pincode = '';
+    }
+
+    if (!inputValues.State.trim()) {
+      errors.State = 'State is required';
+    } else {
+      errors.State = '';
+    }
+
+    if (!inputValues.AdminName.trim()) {
+      errors.AdminName = 'Admin Name is required';
+    } else {
+      errors.AdminName = '';
+    }
+
+    if (!inputValues.AdminEmail.trim()) {
+      errors.AdminEmail = 'Admin Email is required';
+    } else {
+      errors.AdminEmail = '';
+    }
+
+    if (!inputValues.adminPhone.trim()) {
+      errors.AdminPhone = 'Admin Phone is required';
+    } else {
+      errors.AdminPhone = '';
+    }
+    return setValidation(errors);
+  };
+
+
   const InstituteRef = db
     .collection("Institutes")
     .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2");
 
-    const submitDetails = () => {
+    const submitDetails = (e) => {
       InstituteRef.get().then(snapshot=>{
         InstituteRef.set({...snapshot, name:"Hitesh"})
       })
@@ -99,16 +179,25 @@ export default function index() {
             className="w-full h-10 px-5 mt-8 mb-3 border rounded-full"
             type="text"
             placeholder="Address"
+            name="Address"
             style={{ border: "1px solid #CBCBCB" }}
+            onChange={(e) => handleChange(e)}
+              value={inputValues.Address}
           />
+          {validation.Address && <p>{validation.Address}</p>}
+        
           <div className="grid grid-cols-2 mb-4 my-3">
             <div>
               <input
                 className="w-full h-10 px-5  border rounded-full"
                 type="text"
                 placeholder="City"
+                name="City"
                 style={{ border: "1px solid #CBCBCB" }}
+                onChange={(e) => handleChange(e)}
+              value={inputValues.City}
               />
+              {validation.City && <p>{validation.City}</p>}
             </div>
             <div>
               <input
@@ -117,6 +206,7 @@ export default function index() {
                 placeholder="Pincode"
                 style={{ border: "1px solid #CBCBCB" }}
               />
+              {validation.Pincode && <p>{validation.Pincode}</p>}
             </div>
           </div>
           <input
@@ -125,6 +215,7 @@ export default function index() {
             placeholder="State"
             style={{ border: "1px solid #CBCBCB" }}
           />
+          {validation.State && <p>{validation.State}</p>}
         </div>
         <div className="mx-6 my-4">
           <Button
@@ -163,6 +254,7 @@ export default function index() {
               placeholder="Admin Name"
               style={{ border: "1px solid #CBCBCB" }}
             />
+            {validation.AdminName && <p>{validation.AdminName}</p>}
 
             <input
               className="w-full h-10 px-5 my-3 border rounded-full "
@@ -170,7 +262,7 @@ export default function index() {
               placeholder="Admin Phone"
               style={{ border: "1px solid #CBCBCB" }}
             />
-
+{validation.AdminPhone && <p>{validation.AdminPhone}</p>}
             <input
               className="w-full h-10 px-5 my-3 border rounded-full "
               type="text"
@@ -185,6 +277,7 @@ export default function index() {
               placeholder="Admin Email"
               style={{ border: "1px solid #CBCBCB" }}
             />
+            {validation.AdminEmail && <p>{validation.AdminEmail}</p>}
 
             <input
               className="w-full h-10 px-5 my-3 border rounded-full "
@@ -249,6 +342,7 @@ export default function index() {
         <Button
           className="!bg-accent !text-white !px-16  !py-2 !rounded-2xl"
           variant="outlined"
+          onClick={handleSubmit}
         >
           Done
         </Button>
