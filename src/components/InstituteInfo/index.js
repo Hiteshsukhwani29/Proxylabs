@@ -5,7 +5,8 @@ export default function Index() {
   const [ShowCompleteProfile, setShowCompleteProfile] = useState(false)
   return (
     <div>
-        {ShowCompleteProfile?<CollegeDetail setShowCompleteProfile={setShowCompleteProfile}/>:<WelcomeIntro setShowCompleteProfile={setShowCompleteProfile}/>}
+        {/* {ShowCompleteProfile?<CollegeDetail setShowCompleteProfile={setShowCompleteProfile}/>:<WelcomeIntro setShowCompleteProfile={setShowCompleteProfile}/>} */}
+        <CollegeDetail/>
     </div>
   )
 }

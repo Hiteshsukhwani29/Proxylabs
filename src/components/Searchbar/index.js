@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { LocationMarker } from "heroicons-react";
 import SearchCircle from "../../assets/search_circle.png";
@@ -10,8 +10,14 @@ function Index({ SearchText, setSearchText }) {
 
   const SearchResults = (e) => {
     e.preventDefault();
-    navigate('/search',{Key:SearchText});
+     navigate('/search',{Key:SearchText});
   }
+
+  useEffect(() => {
+    console.log("true")
+  
+  }, [SearchResults])
+  
 
   return (
     <>

@@ -9,6 +9,11 @@ import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import CreateCurriculum from "./components/CreateCurriculam";
 import InstituteMainScreen from "./pages/InstituteMainScreen";
+import SearchPage from "./pages/SearchPage"
+import LabBooking from "./components/LabBookingComponent"
+import ResearchDashBoard from "./pages/ResearchDashboard"
+import HostDetail from "./components/HostDetail"
+import InstituteInfo from "./components/InstituteInfo"
 
 function App() {
   const token = JSON.parse(localStorage.getItem("token"));
@@ -48,22 +53,6 @@ function App() {
     }
   }, []);
 
-  //    let Component
-  // switch (window.location.pathname) {
-  //   case "/":
-  //     Component = Login
-  //     break;
-  //     case "/Institute":
-  //       Component = InstituteMainScreen;
-  //       break;
-  //     case "/Student":
-  //       Component = StudentMainScreen;
-  //       break;
-
-  //     default:
-  //       break;
-  //   }
-
   return (
     <div className="flex-col justify-center">
       <Navbar isAlreadyLoggedIn={false} setShowModal={setShowModal} />
@@ -81,6 +70,11 @@ function App() {
                 />
                 <Route path="/Student" element={<StudentMainScreen />} />
                 <Route path="/Institute" element={<InstituteMainScreen />} />
+                <Route path="/search" element={<SearchPage/>}/>
+                <Route path="/booklab" element={<LabBooking/>}/>
+                <Route path="/dashboard" element={<ResearchDashBoard/>}/>
+                <Route path="/hostdetail" element={<HostDetail/>}/>
+                <Route path="/instituteinfo" element={<InstituteInfo/>}/>
                 <Route
                   path="/CreateCurriculum"
                   element={<CreateCurriculum />}

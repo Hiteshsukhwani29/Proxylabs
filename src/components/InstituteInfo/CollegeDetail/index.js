@@ -6,6 +6,24 @@ import { CustomSelect, StyledOption } from "../../Dropdown/Index";
 export default function index() {
   return (
     <div className="flex flex-col w-[48rem] overflow-x-clip px-8 py-5 rounded-xl bg-white  m-auto drop-shadow-xl">
+      <div className="flex items-center">
+        <div class="w-10 h-10 rounded-full border-4 border-accent text-accent flex justify-center items-center">
+          <p>1</p>
+        </div>
+        <div className=" bg-gray flex-1 h-[4px]  "></div>
+
+        <div class="w-10 h-10 rounded-full border-4 border-accent text-accent flex justify-center items-center">
+          <p>2</p>
+        </div>
+        <div className=" bg-gray flex-1 h-[4px]  "></div>
+        <div class="w-10 h-10 rounded-full border-4 border-accent text-accent flex justify-center items-center">
+          <p>3</p>
+        </div>
+      </div>
+
+      <div>
+        <div className=" bg-gray flex-1 h-[1px] -mx-8 my-5"></div>
+      </div>
       <div className="w-full text-xl font-semibold m-4">College Details</div>
       <div className="grid grid-cols-2">
         <div className="mx-6 my-4">
@@ -196,6 +214,22 @@ export default function index() {
             </CustomSelect>
           </div>
         </div>
+        <div className=" bg-gray flex-1 h-[1px] -mx-8 mb-8 "></div>
+      </div>
+
+      <div className="flex justify-between">
+        <Button
+          className=" !text-black !px-6  !py-2 !rounded-2xl"
+          variant="outlined"
+        >
+          Continue later
+        </Button>
+        <Button
+          className="!bg-accent !text-white !px-16  !py-2 !rounded-2xl"
+          variant="outlined"
+        >
+          Done
+        </Button>
       </div>
     </div>
   );

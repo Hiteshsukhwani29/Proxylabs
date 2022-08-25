@@ -108,7 +108,7 @@ function Index() {
     <div className="flex flex-col mx-48">
       <div className="font-semibold font-montserrat">My Curriculum</div>
 
-      <div className="flex mt-4">
+      <div className="flex my-4">
         <div className="flex flex-1">
           {Items.map(({ name, index, subjectCode }) => {
             return (

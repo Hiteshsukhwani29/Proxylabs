@@ -4,7 +4,7 @@ import PageIntro from "../../components/PageIntro";
 import Landing_bg from "../../assets/Landing_bg.png";
 import { useState } from "react";
 
-function index() {
+function Index() {
   const [SearchText, setSearchText] = useState("");
 
   return (

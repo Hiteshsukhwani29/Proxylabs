@@ -1,8 +1,8 @@
 import React, { useState , useEffect } from "react";
 import PageIntro from "../../components/PageIntro";
 import Navbar from "../../components/Navbar";
-import LoginComponent from "../../components/LoginComponent";
 import Banner from "../../components/Banner";
+import Landing_bg from "../../assets/Landing_bg.png";
 import AddCurriculumCard from "../../components/Navbar/AddCurriculumCard";
 
 export default function Index() {
@@ -25,7 +25,13 @@ export default function Index() {
       <Navbar isAlreadyLoggedIn={false}  setShowAddCurriculumCard={setShowAddCurriculumCard} ShowAddCurriculumCard={ShowAddCurriculumCard} />
       {/* <Button onClick={() => setShowModal(true)}>Show Login screen</Button> */}
       <div className="flex-1"  onClick={() => setShowAddCurriculumCard(false)}>
-          <PageIntro />
+      <PageIntro
+        Head="Laboratories at everyone’s comfort. Laboratories at"
+        detail="Allow your location, select your field and dive into the list of colleges at your disposal :)"
+        imgUrl={Landing_bg}
+        
+      
+      />
           <Banner />
         </div>
       {ShowAddCurriculumCard ? (
