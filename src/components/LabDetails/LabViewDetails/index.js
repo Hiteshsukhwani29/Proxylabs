@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { actionCreators } from "../../../state/index";
 
-export default function Index({ LabCode, SubjectCode, refresh, setrefresh, setShowUploadModal, uploadExperimentUrl, uploadPituresUrl, uploadBookingReceitUrl }) {
+export default function Index({ LabCode, SubjectCode, refresh, setrefresh, setShowUploadModal,setshowReviewModel, uploadExperimentUrl, uploadPituresUrl, uploadBookingReceitUrl }) {
   const state = useSelector((state) => state.t1);
 
   const dispatch = useDispatch();
@@ -119,6 +119,10 @@ export default function Index({ LabCode, SubjectCode, refresh, setrefresh, setSh
           <Button
             className="!bg-white !text-black !px-6  !py-2 !rounded-full !mr-4 "
             variant="outlined"
+            onClick={() =>{
+              setshowReviewModel(true);
+              console.log("true")
+            }}
           >
             Add Review
           </Button>

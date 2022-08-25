@@ -2,14 +2,15 @@ import React from "react";
 import { X } from "heroicons-react";
 import { Button, Rating, TextareaAutosize } from "@mui/material";
 
-export default function Index() {
+export default function Index({setshowReviewModel}) {
   return (
     <div
       className="flex flex-col w-[30rem] px-8 py-5 rounded-xl bg-white whitespace-nowrap m-auto drop-shadow-xl"
       style={{ border: "1px solid #eeeeee" }}
     >
       <div className="flex items-center">
-        <X className="h-4 w-4 -px-6 flex-0 cursor-pointer" />
+        <X className="h-4 w-4 -px-6 flex-0 cursor-pointer" 
+        onClick={() => setshowReviewModel(false)}/>
         <div className="text-lg font-semibold whitespace-nowrap flex-1 text-center">
           Review
         </div>
