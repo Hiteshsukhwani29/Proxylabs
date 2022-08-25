@@ -2,6 +2,7 @@ import { BrowserRouter } from "react-router-dom";
 import StudentMainScreen from "./pages/StudentMainScreen";
 import Login from "./pages/Login";
 import { Routes, Route, Link } from "react-router-dom";
+
 import { useDispatch } from "react-redux";
 import { actionCreators } from "./state/index";
 import db from "./firebase";
@@ -9,11 +10,7 @@ import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import CreateCurriculum from "./components/CreateCurriculam";
 import InstituteMainScreen from "./pages/InstituteMainScreen";
-import SearchPage from "./pages/SearchPage"
-import LabBooking from "./components/LabBookingComponent"
-import ResearchDashBoard from "./pages/ResearchDashboard"
-import HostDetail from "./components/HostDetail"
-import InstituteInfo from "./components/InstituteInfo"
+import SearchPage from "./pages/SearchPage";
 
 function App() {
   const token = JSON.parse(localStorage.getItem("token"));
@@ -23,6 +20,8 @@ function App() {
   const [loaded, setloaded] = useState(false);
 
   const [ShowModal, setShowModal] = useState(false);
+  const [ShowAddCurriculumCard, setShowAddCurriculumCard] = useState(false);
+  const [ShowCompleteProfile, setShowCompleteProfile] = useState(false);
 
   useEffect(() => {
     if (token) {
@@ -55,7 +54,13 @@ function App() {
 
   return (
     <div className="flex-col justify-center">
-      <Navbar isAlreadyLoggedIn={false} setShowModal={setShowModal} />
+      <Navbar
+        isAlreadyLoggedIn={false}
+        setShowModal={setShowModal}
+        setShowAddCurriculumCard={setShowAddCurriculumCard}
+        ShowCompleteProfile={ShowCompleteProfile}
+        setShowCompleteProfile={setShowCompleteProfile}
+      />
 
       <BrowserRouter>
         <div className="flex flex-col">
@@ -69,17 +74,39 @@ function App() {
                   }
                 />
                 <Route path="/Student" element={<StudentMainScreen />} />
-                <Route path="/Institute" element={<InstituteMainScreen />} />
-                <Route path="/search" element={<SearchPage/>}/>
-                <Route path="/booklab" element={<LabBooking/>}/>
-                <Route path="/dashboard" element={<ResearchDashBoard/>}/>
-                <Route path="/hostdetail" element={<HostDetail/>}/>
-                <Route path="/instituteinfo" element={<InstituteInfo/>}/>
+                <Route
+                  path="/Institute"
+                  element={
+                    <InstituteMainScreen
+                      ShowAddCurriculumCard={ShowAddCurriculumCard}
+                      setShowAddCurriculumCard={setShowAddCurriculumCard}
+                      ShowCompleteProfile={ShowCompleteProfile}
+                      setShowCompleteProfile={setShowCompleteProfile}
+                    />
+                  }
+                />
                 <Route
                   path="/CreateCurriculum"
                   element={<CreateCurriculum />}
                 />
+                <Route path="/search/:id" element={<SearchPage />} />
               </Routes>
+
+              {/* <Component ShowModal={ShowModal} setShowModal={setShowModal} /> */}
+              {/* <LandingPage /> */}
+              {/* <LoginPage/> */}
+              {/* <Search/> */}
+
+              {/* <CreateCurriculam/>  */}
+              {/* <LabDetails/> */}
+              {/* <LabBooking/> */}
+              {/* <StudentMainScreen/> */}
+              {/* <InstituteMainScreen/> */}
+              {/* <InstituteInfo/> */}
+              {/* <HostDetail/> */}
+              {/* <InstituteInfo/> */}
+              {/* <StudentMainScreen/> */}
+              {/* <InstituteInfo/> */}
             </>
           ) : (
             <></>
