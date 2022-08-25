@@ -6,6 +6,11 @@ import Banner from "../../components/Banner";
 import AddCurriculumCard from "../../components/Navbar/AddCurriculumCard";
 
 export default function Index() {
+
+  const [Items, setItems] = useState([]);
+  const [ActiveIndex, setActiveIndex] = useState(0);
+  const [SubjectCode, setSubjectCode] = useState("-1");
+
   const [ShowModal, setShowModal] = useState(false);
   const [ShowAddCurriculumCard, setShowAddCurriculumCard] = useState(false);
 

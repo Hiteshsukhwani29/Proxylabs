@@ -17,7 +17,7 @@ import { Login, TrendingUp } from "heroicons-react";
 
 function Index() {
   const [ShowModal, setShowModal] = useState(false);
-
+  
   return (
     <div className="bg-bg1 flex flex-col justify-center">
       <Navbar isAlreadyLoggedIn={false} setShowModal={setShowModal}/>
