@@ -1,6 +1,5 @@
 import React from 'react'
 import { Button } from "@mui/material";
-import { X } from "heroicons-react";
 
 export default function index({  }) {
   return (

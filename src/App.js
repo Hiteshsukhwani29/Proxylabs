@@ -1,6 +1,8 @@
 import { BrowserRouter } from "react-router-dom";
 import StudentMainScreen from "./pages/StudentMainScreen";
-import InstituteMainScreen from "./pages/InstituteMainScreen";
+import Login from "./pages/Login";
+import { Routes, Route, Link } from "react-router-dom";
+import StudentMainScreen from "./pages/StudentMainScreen";
 import Login from "./pages/Login";
 
 import { useDispatch } from "react-redux";
@@ -47,28 +49,21 @@ function App() {
     }
   }, []);
 
-  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  //    let Component
+  // switch (window.location.pathname) {
+  //   case "/":
+  //     Component = Login
+  //     break;
+  //     case "/Institute":
+  //       Component = InstituteMainScreen;
+  //       break;
+  //     case "/Student":
+  //       Component = StudentMainScreen;
+  //       break;
 
-  const DelayOfOneSec = async () => {
-    await delay(3000);
-  };
-
-  let Component;
-  switch (window.location.pathname) {
-    case "/":
-      Component = Login;
-      break;
-    case "/Institute":
-      Component = InstituteMainScreen;
-      DelayOfOneSec();
-      break;
-    case "/Student":
-      Component = StudentMainScreen;
-      DelayOfOneSec();
-      break;
-    default:
-      break;
-  }
+  //     default:
+  //       break;
+  //   }
 
   return (
     <div className="flex-col justify-center">
@@ -78,13 +73,34 @@ function App() {
         <div className="flex flex-col">
           {loaded === true ? (
             <>
-              <Component ShowModal={ShowModal} setShowModal={setShowModal} />
+              <Routes>
+                <Route path="/" element={<Login  ShowModal={ShowModal} setShowModal={setShowModal}/>} />
+                <Route path="/Student" element={< StudentMainScreen/>} />
+                <Route path="/upload" element={ <uploadExperimentCard/>} />
+              </Routes>
+
+              {/* <Component ShowModal={ShowModal} setShowModal={setShowModal} /> */}
+              {/* <LandingPage /> */}
+              {/* <LoginPage/> */}
+              {/* <Search/> */}
+
+              {/* <CreateCurriculam/>  */}
+              {/* <LabDetails/> */}
+              {/* <LabBooking/> */}
+              {/* <StudentMainScreen/> */}
+              {/* <InstituteMainScreen/> */}
+              {/* <InstituteInfo/> */}
+              {/* <HostDetail/> */}
+              {/* <InstituteInfo/> */}
+              {/* <StudentMainScreen/> */}
+              {/* <InstituteInfo/> */}
             </>
           ) : (
             <></>
           )}
         </div>
       </BrowserRouter>
+      
     </div>
   );
 }
