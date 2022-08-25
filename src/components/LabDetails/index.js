@@ -79,7 +79,7 @@ export default function Index({ Course, SubjectCode, setTotalLabsCompleted }) {
       {Items.map(({ labcode, labname, maxmarks, Completed }) => {
         return (
           <div
-            className="my-10 rounded-xl shadow-lg"
+            className="my-10 rounded-xl shadow-lg bg-white"
             style={{ border: "1px solid #eeeeee" }}
           >
             <LabDetailItem

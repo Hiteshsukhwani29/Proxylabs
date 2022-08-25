@@ -105,7 +105,7 @@ function Index() {
   }, []);
 
   return (
-    <div className="flex flex-col mx-48 my-10">
+    <div className="flex flex-col mx-48">
       <div className="font-semibold font-montserrat">My Curriculum</div>
 
       <div className="flex mt-4">

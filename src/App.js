@@ -74,7 +74,7 @@ function App() {
       <Navbar isAlreadyLoggedIn={false} setShowModal={setShowModal} />
 
       <BrowserRouter>
-        <div className="">
+        <div className="flex flex-col">
           {loaded === true ? (
             <>
               <Component ShowModal={ShowModal} setShowModal={setShowModal}/>
