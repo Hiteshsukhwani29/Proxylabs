@@ -2,7 +2,6 @@ import { BrowserRouter } from "react-router-dom";
 import StudentMainScreen from "./pages/StudentMainScreen";
 import Login from "./pages/Login";
 import { Routes, Route, Link } from "react-router-dom";
-
 import { useDispatch } from "react-redux";
 import { actionCreators } from "./state/index";
 import db from "./firebase";
@@ -74,34 +73,25 @@ function App() {
           {loaded === true ? (
             <>
               <Routes>
-                <Route path="/" element={<Login  ShowModal={ShowModal} setShowModal={setShowModal}/>} />
-                <Route path="/Student" element={< StudentMainScreen/>} />
-                <Route path="/Institute" element={ <InstituteMainScreen/>} />
-                <Route path="/CreateCurriculum" element={ <CreateCurriculum/>} />
+                <Route
+                  path="/"
+                  element={
+                    <Login ShowModal={ShowModal} setShowModal={setShowModal} />
+                  }
+                />
+                <Route path="/Student" element={<StudentMainScreen />} />
+                <Route path="/Institute" element={<InstituteMainScreen />} />
+                <Route
+                  path="/CreateCurriculum"
+                  element={<CreateCurriculum />}
+                />
               </Routes>
-
-              {/* <Component ShowModal={ShowModal} setShowModal={setShowModal} /> */}
-              {/* <LandingPage /> */}
-              {/* <LoginPage/> */}
-              {/* <Search/> */}
-
-              {/* <CreateCurriculam/>  */}
-              {/* <LabDetails/> */}
-              {/* <LabBooking/> */}
-              {/* <StudentMainScreen/> */}
-              {/* <InstituteMainScreen/> */}
-              {/* <InstituteInfo/> */}
-              {/* <HostDetail/> */}
-              {/* <InstituteInfo/> */}
-              {/* <StudentMainScreen/> */}
-              {/* <InstituteInfo/> */}
             </>
           ) : (
             <></>
           )}
         </div>
       </BrowserRouter>
-      
     </div>
   );
 }

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import LabViewDetails from "../LabViewDetails";
 import CompletedIcon from "../../../assets/completed_icon.png";
-import UploadDocuments from "../../UploadDocuments";
+import UploadDocuments from "../../../smallcomponents/UploadDocuments";
+import LabReview from "../LabReview";
 
 export default function Index({
   LabName,
@@ -24,6 +25,7 @@ export default function Index({
   const [ViewDetails, setViewDetails] = useState(false);
 
   const [ShowUploadModal, setShowUploadModal] = useState(false);
+  const [showReviewModel, setshowReviewModel] = useState(false)
 
   useEffect(() => {
     console.log("working",uploadExperimentUrl)
@@ -35,6 +37,10 @@ export default function Index({
             {ShowUploadModal?
         <div className="relative z-20">
         <UploadDocuments setuploadExperimentUrl={setuploadExperimentUrl} setuploadPituresUrl={setuploadPituresUrl} setuploadBookingReceitUrl={setuploadBookingReceitUrl} setShowUploadModal={setShowUploadModal}/>
+        </div>:<></>}
+        {showReviewModel?
+        <div className="relative z-20">
+        <LabReview/>
         </div>:<></>}
       <div className="my-6 py-4">
         <div>
