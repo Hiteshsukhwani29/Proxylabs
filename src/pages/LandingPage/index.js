@@ -15,12 +15,10 @@ import LabDetails from "../../components/LabDetails"
 import { Button } from "@mui/material";
 import { Login, TrendingUp } from "heroicons-react";
 
-function Index() {
-  const [ShowModal, setShowModal] = useState(false);
+function Index({ShowModal, setShowModal}) {
   
   return (
-    <div className="bg-bg1 flex flex-col justify-center">
-      <Navbar isAlreadyLoggedIn={false} setShowModal={setShowModal}/>
+    <div className="bg-bg1 flex">
       {/* <Button onClick={() => setShowModal(true)}>Show Login screen</Button> */}
       {ShowModal?<LoginComponent ShowModal={ShowModal} setShowModal={setShowModal}/>:
       <div className="flex-1">

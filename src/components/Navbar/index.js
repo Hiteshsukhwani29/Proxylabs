@@ -25,7 +25,7 @@ function Index({ setShowModal , setShowAddCurriculumCard, ShowAddCurriculumCard}
 
   return (
     <>
-      <div className="flex items-start pt-6 px-4 flex-0">
+      <div className="flex items-start pt-6 px-4 flex-0 bg-bg1">
         <img className="h-9 flex-0 mr-10 ml-5" src={logo} alt="Logo" />
         <div className="flex text-xs sm:text-[10px] flex-1 justify-between md:text-sm lg:text-[1rem] ml-10">
           <div className="hover:font-semibold focus:font-semibold active:font-semibold transition ease-out hover:ease-in duration-150">
