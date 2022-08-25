@@ -1,16 +1,22 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { LocationMarker } from "heroicons-react";
 import SearchCircle from "../../assets/search_circle.png";
-import { CustomSelect, StyledOption } from "../Dropdown/Index";
+// import { CustomSelect, StyledOption } from "../Dropdown/Index";
 
-function Index({ text="" }) {
-
-  const [SearchText, setSearchText] = useState(text);
+function Index({ SearchText, setSearchText }) {  
   
+  let navigate = useNavigate();
+
+  const SearchResults = (e) => {
+    e.preventDefault();
+    navigate('/search',{Key:SearchText});
+  }
+
   return (
     <>
       <div
-        className="shadow-[0_16px_33px_rgba(89,163,201,0.35)] rounded-full inline-block m-4 bg-white  py-1"
+        className="shadow-[0_16px_33px_rgba(89,163,201,0.35)] rounded-full inline-block m-4 bg-white py-1"
         style={{ border: "1px solid #eeeeee" }}
       >
         <div className="flex items-center mx-1">
@@ -32,12 +38,15 @@ function Index({ text="" }) {
               <StyledOption value={20}>Twenty</StyledOption>
               <StyledOption value={30}>Thirty</StyledOption>
             </CustomSelect> */}
+            <form onSubmit={SearchResults}>
             <input
               className="outline-none px-4 w-40 !h-4"
               onChange={(e) => {
                 setSearchText(e.target.value);
               }}
-              value={SearchText}            />
+              value={SearchText} 
+              />
+              </form>
           </div>
           <img className="!h-8 mx-1" src={SearchCircle} />
         </div>

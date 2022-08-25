@@ -2,14 +2,14 @@ import { BrowserRouter } from "react-router-dom";
 import StudentMainScreen from "./pages/StudentMainScreen";
 import Login from "./pages/Login";
 import { Routes, Route, Link } from "react-router-dom";
-import StudentMainScreen from "./pages/StudentMainScreen";
-import Login from "./pages/Login";
 
 import { useDispatch } from "react-redux";
 import { actionCreators } from "./state/index";
 import db from "./firebase";
 import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
+import CreateCurriculum from "./components/CreateCurriculam";
+import InstituteMainScreen from "./pages/InstituteMainScreen";
 
 function App() {
   const token = JSON.parse(localStorage.getItem("token"));
@@ -76,7 +76,8 @@ function App() {
               <Routes>
                 <Route path="/" element={<Login  ShowModal={ShowModal} setShowModal={setShowModal}/>} />
                 <Route path="/Student" element={< StudentMainScreen/>} />
-                <Route path="/upload" element={ <uploadExperimentCard/>} />
+                <Route path="/Institute" element={ <InstituteMainScreen/>} />
+                <Route path="/CreateCurriculum" element={ <CreateCurriculum/>} />
               </Routes>
 
               {/* <Component ShowModal={ShowModal} setShowModal={setShowModal} /> */}
