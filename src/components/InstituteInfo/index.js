@@ -1,12 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import CollegeDetail from "./CollegeDetail"
 import WelcomeIntro from "./WelcomeIntro"
-export default function index() {
+export default function Index() {
+  const [ShowCompleteProfile, setShowCompleteProfile] = useState(false)
   return (
     <div>
-        <CollegeDetail/>
-        {/* <WelcomeIntro/> */}
-
+        {ShowCompleteProfile?<CollegeDetail setShowCompleteProfile={setShowCompleteProfile}/>:<WelcomeIntro setShowCompleteProfile={setShowCompleteProfile}/>}
     </div>
   )
 }

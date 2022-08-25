@@ -71,8 +71,10 @@ switch (window.location.pathname) {
       {/* <InstituteInfo/> */}
       {/* <HostDetail/> */}
       {/* <InstituteInfo/> */}
-      </>
-    ):<></>}
+      {/* <StudentMainScreen/> */}
+      <InstituteInfo/>
+      </>)
+    :(<></>)}
     </div>
     </>
 );
