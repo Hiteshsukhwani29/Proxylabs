@@ -7,6 +7,8 @@ import { actionCreators } from "./state/index";
 import db from "./firebase";
 import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
+import CreateCurriculum from "./components/CreateCurriculam";
+import InstituteMainScreen from "./pages/InstituteMainScreen";
 
 function App() {
   const token = JSON.parse(localStorage.getItem("token"));
@@ -71,33 +73,25 @@ function App() {
           {loaded === true ? (
             <>
               <Routes>
-                <Route path="/" element={<Login  ShowModal={ShowModal} setShowModal={setShowModal}/>} />
-                <Route path="/Student" element={< StudentMainScreen/>} />
-                <Route path="/upload" element={ <uploadExperimentCard/>} />
+                <Route
+                  path="/"
+                  element={
+                    <Login ShowModal={ShowModal} setShowModal={setShowModal} />
+                  }
+                />
+                <Route path="/Student" element={<StudentMainScreen />} />
+                <Route path="/Institute" element={<InstituteMainScreen />} />
+                <Route
+                  path="/CreateCurriculum"
+                  element={<CreateCurriculum />}
+                />
               </Routes>
-
-              {/* <Component ShowModal={ShowModal} setShowModal={setShowModal} /> */}
-              {/* <LandingPage /> */}
-              {/* <LoginPage/> */}
-              {/* <Search/> */}
-
-              {/* <CreateCurriculam/>  */}
-              {/* <LabDetails/> */}
-              {/* <LabBooking/> */}
-              {/* <StudentMainScreen/> */}
-              {/* <InstituteMainScreen/> */}
-              {/* <InstituteInfo/> */}
-              {/* <HostDetail/> */}
-              {/* <InstituteInfo/> */}
-              {/* <StudentMainScreen/> */}
-              {/* <InstituteInfo/> */}
             </>
           ) : (
             <></>
           )}
         </div>
       </BrowserRouter>
-      
     </div>
   );
 }
