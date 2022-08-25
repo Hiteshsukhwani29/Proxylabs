@@ -13,4 +13,4 @@ function Index({ ShowModal, setShowModal }) {
   )
 }
 
-export default Index
+export default Index;

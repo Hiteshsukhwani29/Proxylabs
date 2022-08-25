@@ -1,20 +1,14 @@
 import { BrowserRouter } from "react-router-dom";
-import LoginPage from "./pages/Login";
-import CreateCurriculam from "./components/CreateCurriculam";
-import LabDetails from "./components/LabDetails";
-import InstituteInfo from "./components/InstituteInfo";
 import StudentMainScreen from "./pages/StudentMainScreen";
-import InstituteMainScreen from "./pages/InstituteMainScreen";
-import HostDetail from "./components/HostDetail";
 import Login from "./pages/Login";
 import { Routes, Route, Link } from "react-router-dom";
-import uploadExperimentCard from "./smallcomponents/uploadExperimentCard"
+import StudentMainScreen from "./pages/StudentMainScreen";
+import Login from "./pages/Login";
 
 import { useDispatch } from "react-redux";
 import { actionCreators } from "./state/index";
 import db from "./firebase";
 import { useEffect, useState } from "react";
-import Map from "./components/Map";
 import Navbar from "./components/Navbar";
 
 function App() {
