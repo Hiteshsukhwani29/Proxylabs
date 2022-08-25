@@ -5,13 +5,13 @@ module.exports = {
   ],
   theme: {
     colors:{
-      accent: "#6597E2",
+      accent: "#F47518",
       white: "#ffffff",
       black: "#000000",
       gray: "#C4C4C4",
       temp: "#71F1B3",
       temp2: "#EDF3F6",
-      bg1: "#EDF3F6",
+      bg1: "#ffffff",
       focus_color_1: "#FFEEE1",
       close: "#ff605c"
     },
