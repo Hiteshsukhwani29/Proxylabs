@@ -2,9 +2,6 @@ import { BrowserRouter } from "react-router-dom";
 import StudentMainScreen from "./pages/StudentMainScreen";
 import Login from "./pages/Login";
 import { Routes, Route, Link } from "react-router-dom";
-import StudentMainScreen from "./pages/StudentMainScreen";
-import Login from "./pages/Login";
-
 import { useDispatch } from "react-redux";
 import { actionCreators } from "./state/index";
 import db from "./firebase";

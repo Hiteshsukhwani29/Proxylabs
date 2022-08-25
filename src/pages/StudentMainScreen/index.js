@@ -4,6 +4,9 @@ import PageIntro from "../../components/PageIntro";
 import Landing_bg from "../../assets/Landing_bg.png";
 
 function index() {
+
+  
+
   return (
     <div className="w-screen bg-bg1">
       <PageIntro
