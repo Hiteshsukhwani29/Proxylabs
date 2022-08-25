@@ -30,6 +30,7 @@ function Index({ Email, setShowPasswordBox }) {
         localStorage.setItem("type", JSON.stringify("Institute"));
         setShowPasswordBox(false);
         navigate("/Institute");
+        refreshPage();
       } catch (err) {
         setIsLoginPasswordCorrect(false);
         setIncorrectLoginPasswordHelpertext("Incorrect password");
@@ -39,6 +40,10 @@ function Index({ Email, setShowPasswordBox }) {
       setIncorrectLoginPasswordHelpertext("Password cannot be empty");
     }
   };
+
+  function refreshPage() {
+    window.location.reload(false);
+  }
 
   return (
     <div className="flex flex-col">

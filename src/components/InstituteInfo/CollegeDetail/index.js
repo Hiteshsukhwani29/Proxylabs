@@ -2,31 +2,46 @@ import React from "react";
 import { TextField, Button } from "@mui/material";
 import { Upload } from "heroicons-react";
 import { CustomSelect, StyledOption } from "../../Dropdown/Index";
+import db from "../../../firebase";
 
 export default function index() {
+  const InstituteRef = db
+    .collection("Institutes")
+    .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2");
+
+    const submitDetails = () => {
+      InstituteRef.get().then(snapshot=>{
+        InstituteRef.set({...snapshot, name:"Hitesh"})
+      })
+    }
+
   return (
-    <div className="flex flex-col w-[48rem] overflow-x-clip px-8 py-5 rounded-xl bg-white  m-auto drop-shadow-xl">
+    <div className="flex flex-col w-[48rem] overflow-x-clip px-8 py-5 rounded-xl bg-white m-auto drop-shadow-xl h-[38rem] overflow-y-scroll">
       <div className="w-full text-xl font-semibold m-4">College Details</div>
       <div className="grid grid-cols-2">
         <div className="mx-6 my-4">
-          <input
-            className="w-full h-10 px-5 my-3 border rounded-full "
-            type="text"
-            placeholder="Head of Institute"
-            style={{ border: "1px solid #CBCBCB" }}
-          />
-
+            <input
+              className="w-full h-10 px-5 my-3 border rounded-full"
+              type="text"
+              placeholder="Head of Institute"
+              style={{ border: "1px solid #CBCBCB" }}
+            />
           <CustomSelect
-            className="h-10 !rounded-full w-full !mx-0 !text-base !px-5 !my-3 border"
+            className="h-10 !rounded-full !w-full !mx-0 !text-base !px-5 !my-3 border"
             defaultValue={40}
             style={{ border: "1px solid #CBCBCB" }}
           >
-            <StyledOption value={40} disabled>
+            <StyledOption value="" disabled>
               Type of University
             </StyledOption>
-            <StyledOption value={10}>Ten</StyledOption>
-            <StyledOption value={20}>Twenty</StyledOption>
-            <StyledOption value={30}>Thirty</StyledOption>
+            <StyledOption value="Central Govt.">Central Govt.</StyledOption>
+            <StyledOption value="State Govt.">State Govt.</StyledOption>
+            <StyledOption value="Deemed University ( Govt./ Pvt )">
+              Deemed University ( Govt./ Pvt )
+            </StyledOption>
+            <StyledOption value="Private University">
+              Deemed University ( Govt./ Pvt )
+            </StyledOption>
           </CustomSelect>
 
           <CustomSelect
@@ -37,9 +52,9 @@ export default function index() {
             <StyledOption value={40} disabled>
               Type of Institute
             </StyledOption>
-            <StyledOption value={10}>Ten</StyledOption>
-            <StyledOption value={20}>Twenty</StyledOption>
-            <StyledOption value={30}>Thirty</StyledOption>
+            <StyledOption value="Government.">Government</StyledOption>
+            <StyledOption value="Private">Private</StyledOption>
+            <StyledOption value="Autonomous">Autonomous</StyledOption>
           </CustomSelect>
 
           <CustomSelect
@@ -50,9 +65,16 @@ export default function index() {
             <StyledOption value={40} disabled>
               College Course Domain
             </StyledOption>
-            <StyledOption value={10}>Ten</StyledOption>
-            <StyledOption value={20}>Twenty</StyledOption>
-            <StyledOption value={30}>Thirty</StyledOption>
+            <StyledOption value="Techinal ( Engg, B.Sc )">
+              Techinal ( Engg, B.Sc )
+            </StyledOption>
+            <StyledOption value="Design">Design</StyledOption>
+            <StyledOption value="Architecture">Architecture</StyledOption>
+            <StyledOption value="Hotel Management">
+              Hotel Management
+            </StyledOption>
+            <StyledOption value="M.B.B.S">M.B.B.S</StyledOption>
+            <StyledOption value="Dental">Dental</StyledOption>
           </CustomSelect>
 
           <input

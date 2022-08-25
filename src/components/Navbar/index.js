@@ -6,7 +6,7 @@ import LoginComponent from "../LoginComponent";
 import { Menu } from "heroicons-react";
 import { useSelector } from "react-redux";
 
-function Index({ setShowModal , setShowAddCurriculumCard, ShowAddCurriculumCard}) {
+function Index({ setShowModal , setShowAddCurriculumCard, ShowAddCurriculumCard, ShowCompleteProfile, setShowCompleteProfile}) {
   const state = useSelector((state) => state.t1);
 
   const [coins, setcoins] = useState(100);
@@ -54,6 +54,7 @@ function Index({ setShowModal , setShowAddCurriculumCard, ShowAddCurriculumCard}
           className={`bg-white border !border-accent flex h-min w-max px-6 py-1 rounded-full flex-0 justify-center cursor-pointer ${
             type==="Institute" ? "block" : "hidden"
           }`}
+          onClick={() => setShowCompleteProfile(true)}
         >
           Complete Profile
         </div>

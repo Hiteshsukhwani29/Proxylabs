@@ -1,39 +1,46 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import PageIntro from "../../components/PageIntro";
 import Navbar from "../../components/Navbar";
 import LoginComponent from "../../components/LoginComponent";
 import Banner from "../../components/Banner";
 import AddCurriculumCard from "../../components/Navbar/AddCurriculumCard";
+import CollegeDetail from "../../components/InstituteInfo/CollegeDetail";
 
-export default function Index() {
-
+export default function Index({
+  ShowAddCurriculumCard,
+  setShowAddCurriculumCard,
+  ShowCompleteProfile,
+  setShowCompleteProfile
+}) {
   const [Items, setItems] = useState([]);
   const [ActiveIndex, setActiveIndex] = useState(0);
   const [SubjectCode, setSubjectCode] = useState("-1");
 
   const [ShowModal, setShowModal] = useState(false);
-  const [ShowAddCurriculumCard, setShowAddCurriculumCard] = useState(false);
 
   useEffect(() => {
-    console.log("im clicked")
-  
-  }, [ShowAddCurriculumCard])
-  
+    console.log("im clicked");
+  }, [ShowAddCurriculumCard]);
 
   return (
-    <div className="bg-bg1 flex flex-col">
-      <Navbar isAlreadyLoggedIn={false}  setShowAddCurriculumCard={setShowAddCurriculumCard} ShowAddCurriculumCard={ShowAddCurriculumCard} />
-      {/* <Button onClick={() => setShowModal(true)}>Show Login screen</Button> */}
-      <div className="flex-1"  onClick={() => setShowAddCurriculumCard(false)}>
+    <div className="flex flex-col">
+      <div className="flex-1" onClick={() => setShowAddCurriculumCard(false)}>
+        <div className="absolute bg-white left-0 right-0 top-[15%]">
+          {ShowCompleteProfile?
+            <CollegeDetail
+              ShowCompleteProfile={ShowCompleteProfile}
+              setShowCompleteProfile={setShowCompleteProfile}
+            />:<></>
+          }
+        </div>
+        <div className="">
           <PageIntro />
           <Banner />
         </div>
+      </div>
       {ShowAddCurriculumCard ? (
-        <div className="absolute mt-[5%] ml-[40%]">
-        <AddCurriculumCard
-          ShowModal={ShowAddCurriculumCard}
-          setShowModal={setShowAddCurriculumCard}
-        />
+        <div className="absolute mt-[1%] ml-[50%]">
+          <AddCurriculumCard />
         </div>
       ) : (
         <></>

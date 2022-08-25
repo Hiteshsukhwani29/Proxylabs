@@ -113,12 +113,17 @@ function Index({ Email, setShowRegistrationBox }) {
           localStorage.setItem("token", JSON.stringify(user.uid));
           localStorage.setItem("type", JSON.stringify("Student"));
           navigate("/Student");
+          refreshPage()
         });
     } catch (err) {
       console.error(err);
       alert(err.message);
     }
   };
+
+  function refreshPage() {
+    window.location.reload(false);
+  }
 
   return (
     <div className="flex flex-col mt-4">

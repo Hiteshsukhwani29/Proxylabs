@@ -65,10 +65,10 @@ const StyledButton = styled('button')(
 const StyledListbox = styled('ul')(
   ({ theme }) => `
   font-family: IBM Plex Sans, sans-serif;
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   padding: 5px;
   margin: 5px 0 0 0;
-  min-width: 120px;
+  min-width: 295px;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.25);
   background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
   border-radius: 0.75em;

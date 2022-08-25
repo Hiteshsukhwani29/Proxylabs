@@ -53,6 +53,7 @@ function Index({ Email, setShowPasswordBox }) {
         setShowPasswordBox(false);
         setToken(uid);
         navigate("/Student");
+        refreshPage();
       } catch (err) {
         setIsLoginPasswordCorrect(false);
         setIncorrectLoginPasswordHelpertext("Incorrect password");
