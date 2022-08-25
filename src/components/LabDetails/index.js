@@ -94,7 +94,6 @@ export default function Index({ Course, SubjectCode, setTotalLabsCompleted }) {
           </div>
         );
       })}
-      <LabReview />
     </>
   );
 }

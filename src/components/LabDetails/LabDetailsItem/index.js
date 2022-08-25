@@ -25,7 +25,7 @@ export default function Index({
   const [ViewDetails, setViewDetails] = useState(false);
 
   const [ShowUploadModal, setShowUploadModal] = useState(false);
-  const [showReviewModel, setshowReviewModel] = useState(false)
+  const [showReviewModel, setshowReviewModel] = useState(false);
 
   useEffect(() => {
     console.log("working",uploadExperimentUrl)
@@ -108,6 +108,7 @@ export default function Index({
           setrefresh={setrefresh}
           setTotalLabsCompleted={setTotalLabsCompleted}
           setShowUploadModal={setShowUploadModal}
+          setshowReviewModel={setshowReviewModel}
           uploadExperimentUrl={uploadExperimentUrl}
           uploadPituresUrl={uploadPituresUrl}
           uploadBookingReceitUrl={uploadBookingReceitUrl}
