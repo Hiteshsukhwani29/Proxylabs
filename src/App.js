@@ -1,14 +1,14 @@
 import { BrowserRouter } from "react-router-dom";
-import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/Login";
 import CreateCurriculam from "./components/CreateCurriculam";
-import LabDetails from "./components/LabDetails"
-import InstituteInfo from "./components/InstituteInfo"
-import StudentMainScreen from "./pages/StudentMainScreen"
-import InstituteMainScreen from "./pages/InstituteMainScreen"
-import HostDetail from "./components/HostDetail"
-import Navbar from "./components/Navbar"
-import Login from "./pages/Login"
+import LabDetails from "./components/LabDetails";
+import InstituteInfo from "./components/InstituteInfo";
+import StudentMainScreen from "./pages/StudentMainScreen";
+import InstituteMainScreen from "./pages/InstituteMainScreen";
+import HostDetail from "./components/HostDetail";
+import Login from "./pages/Login";
+import { Routes, Route, Link } from "react-router-dom";
+import uploadExperimentCard from "./smallcomponents/uploadExperimentCard"
 
 import { useDispatch } from "react-redux";
 import { actionCreators } from "./state/index";
@@ -18,9 +18,9 @@ import Map from "./components/Map";
 import Navbar from "./components/Navbar";
 
 function App() {
-   const token = JSON.parse(localStorage.getItem("token"));
+  const token = JSON.parse(localStorage.getItem("token"));
   const type = JSON.parse(localStorage.getItem("type"));
-   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const [loaded, setloaded] = useState(false);
 
@@ -39,37 +39,37 @@ function App() {
           }
         });
       }
-      if(type==="Student"){
-       var userRef = db.collection("users").doc(token).get();
-       userRef.then((docSnapshot) => {
-         if (docSnapshot.exists) {
-          userRef.then((snapshot) => {
-             dispatch(actionCreators.setUser(snapshot.data()));
-             setloaded(true);
-           });
-         }
-       });
-       }
-     } else {
-       setloaded(true);
+      if (type === "Student") {
+        var userRef = db.collection("users").doc(token).get();
+        userRef.then((docSnapshot) => {
+          if (docSnapshot.exists) {
+            userRef.then((snapshot) => {
+              dispatch(actionCreators.setUser(snapshot.data()));
+              setloaded(true);
+            });
+          }
+        });
+      }
+    } else {
+      setloaded(true);
     }
   }, []);
 
-   let Component
-switch (window.location.pathname) {
-  case "/":
-    Component = Login 
-    break;
-    case "/Institute":
-      Component = InstituteMainScreen;
-      break;
-    case "/Student":
-      Component = StudentMainScreen;
-      break;
+  //    let Component
+  // switch (window.location.pathname) {
+  //   case "/":
+  //     Component = Login
+  //     break;
+  //     case "/Institute":
+  //       Component = InstituteMainScreen;
+  //       break;
+  //     case "/Student":
+  //       Component = StudentMainScreen;
+  //       break;
 
-    default:
-      break;
-  }
+  //     default:
+  //       break;
+  //   }
 
   return (
     <div className="flex-col justify-center">
@@ -79,7 +79,13 @@ switch (window.location.pathname) {
         <div className="flex flex-col">
           {loaded === true ? (
             <>
-              <Component ShowModal={ShowModal} setShowModal={setShowModal}/>
+              <Routes>
+                <Route path="/" element={<Login  ShowModal={ShowModal} setShowModal={setShowModal}/>} />
+                <Route path="/Student" element={< StudentMainScreen/>} />
+                <Route path="/upload" element={ <uploadExperimentCard/>} />
+              </Routes>
+
+              {/* <Component ShowModal={ShowModal} setShowModal={setShowModal} /> */}
               {/* <LandingPage /> */}
               {/* <LoginPage/> */}
               {/* <Search/> */}
@@ -100,6 +106,7 @@ switch (window.location.pathname) {
           )}
         </div>
       </BrowserRouter>
+      
     </div>
   );
 }
