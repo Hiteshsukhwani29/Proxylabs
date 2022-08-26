@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import LabInstruments from "./LabInstruments";
 import ClgGuidelines from "./ClgGuidelines";
 import PhotoGallery from "./PhotoGallery";
@@ -7,6 +7,7 @@ import LabPerform from "./LabPerform";
 import InstituteBanner from "../InstituteBanner";
 import LabsetCalender from "./LabCalender/LabsetCalender";
 import Amenities from "./Amenities";
+import db from "../../firebase";
 import icon from "../../assets/nav_profile_icon.png";
 
 export default function Index({ LabIndex }) {
@@ -17,16 +18,28 @@ export default function Index({ LabIndex }) {
   const [instruments, setinstruments] = useState("");
   const [amenities, setamenities] = useState("");
   const [guidelines, setguidelines] = useState("");
+  const [imgurl, setimgurl] = useState("");
+  const [imgurl1, setimgurl1] = useState("");
+  const [imgurl2, setimgurl2] = useState("");
+  const [imgurl3, setimgurl3] = useState("");
+  const [imgurl4, setimgurl4] = useState("");
+  const [ExperimentName, setExperimentName] = useState("");
   
   useEffect(() => {
-    db.collection("RemoteLabs").doc("8oMBffsZwMONpHoz5GKtyMIhGD53").collection("Labs").doc("11111").onSnapshot((snapshot)=>{
-      console.log(snapshot.data().clgname);
+    db.collection("RemoteLabs").doc("tvODQnB9Kgau5vEWWebveLVJl0n1").collection("Labs").doc("11111").onSnapshot((snapshot)=>{
+      console.log(snapshot.data());
+      setclgname(snapshot.data().clgname);
+      setlabname(snapshot.data().clgname);
+      setclgname(snapshot.data().clgname);
+      setclgname(snapshot.data().clgname);
+      setclgname(snapshot.data().clgname);
+      setclgname(snapshot.data().clgname);
       
     })
   }, []);
   
-  let splitedexperiment = experiments.split(',').map(item => item.trim());
-    return splitedexperiment.join("\n &#8226;");
+  // let splitedexperiment = experiments.split(',').map(item => item.trim());
+  //   return splitedexperiment.join("\n &#8226;");
 
   return (
     <div className=" mx-24">
