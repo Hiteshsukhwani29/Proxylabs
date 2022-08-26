@@ -15,6 +15,7 @@ export default function Index({ setExperimentName }) {
   const [dates, setdates] = useState(new Date());
 
   const [ActiveIndex, setActiveIndex] = useState("1");
+  const [ActiveIndexTime, setActiveIndexTime] = useState("");
 
   var monthList = [
     "JAN",
@@ -139,25 +140,42 @@ export default function Index({ setExperimentName }) {
 
       {/* Time */}
 
-      <div className="flex flex-col">
+      <div className="flex flex-col mt-6">
         <div className="flex my-1 ">
-          <div className="border w-fit px-4 py-1  rounded-lg mr-1 ">
-            10:00 - 11:00 am
+          <div className={`${
+            ActiveIndexTime === "1" ? "bg-accent text-white" : "bg-white"
+          } border w-fit px-4 py-1  rounded-lg mr-1 hover:bg-accent hover:text-white`}
+          onClick={() => setActiveIndexTime("1")}
+          >
+            17:00 - 18:00 
           </div>
-          <div className="border w-fit px-4 py-1  rounded-lg ml-1 ">
-            10:00 - 11:00 am
+          <div className={`${
+            ActiveIndexTime === "2" ? "bg-accent text-white" : "bg-white"
+          } border w-fit px-4 py-1  rounded-lg mr-1 hover:bg-accent hover:text-white`}
+          onClick={() => setActiveIndexTime("2")}
+          >
+            18:00 - 19:00 
           </div>
         </div>
 
         <div className="flex my-1">
-          <div className="border w-fit px-4 py-1  rounded-lg mr-1 ">
-            10:00 - 11:00 am
+        <div className={`${
+            ActiveIndexTime === "3" ? "bg-accent text-white" : "bg-white"
+          } border w-fit px-4 py-1  rounded-lg mr-1 hover:bg-accent hover:text-white`}
+          onClick={() => setActiveIndexTime("3")}
+          >
+            19:00 - 20:00 
           </div>
-          <div className="border w-fit px-4 py-1  rounded-lg ml-1">
-            10:00 - 11:00 am
+          <div className={`${
+            ActiveIndexTime === "4" ? "bg-accent text-white" : "bg-white"
+          } border w-fit px-4 py-1  rounded-lg mr-1 hover:bg-accent hover:text-white`}
+          onClick={() => setActiveIndexTime("4")}
+          >
+            21:00 - 22:00
           </div>
         </div>
       </div>
+
 
       <div className="flex items-center justify-between mt-3 ">
         <div className="w-[22rem]">

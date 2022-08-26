@@ -8,8 +8,6 @@ import InstituteBanner from "../InstituteBanner";
 import LabsetCalender from "./LabCalender/LabsetCalender";
 import Amenities from "./Amenities";
 import db from "../../firebase";
-import icon from "../../assets/nav_profile_icon.png";
-import db from "../../firebase";
 
 export default function Index({ LabIndex }) {
 
@@ -30,11 +28,17 @@ export default function Index({ LabIndex }) {
     db.collection("RemoteLabs").doc("tvODQnB9Kgau5vEWWebveLVJl0n1").collection("Labs").doc("11111").onSnapshot((snapshot)=>{
       console.log(snapshot.data());
       setclgname(snapshot.data().clgname);
-      setlabname(snapshot.data().clgname);
-      setclgname(snapshot.data().clgname);
-      setclgname(snapshot.data().clgname);
-      setclgname(snapshot.data().clgname);
-      setclgname(snapshot.data().clgname);
+      setlabname(snapshot.data().labname);
+      setexperiments(snapshot.data().experiments);
+      setinstruments(snapshot.data().instruments);
+      setamenities(snapshot.data().amenities);
+      setguidelines(snapshot.data().guidelines);
+      setimgurl(snapshot.data().imgurl);
+      setimgurl1(snapshot.data().imgurl1);
+      setimgurl2(snapshot.data().imgurl2);
+      setimgurl3(snapshot.data().imgurl3);
+      setimgurl4(snapshot.data().imgurl4);
+      
       
     })
   }, []);
@@ -48,13 +52,13 @@ export default function Index({ LabIndex }) {
 
       <div className="bg-gray flex-1 h-[1px] my-3 "></div>
 
-      <div classname="text-lg">{labname}</div>
+      <div classname="text-lg font-bold">{labname}</div>
 
       <PhotoGallery imgurl={imgurl} imgurl1={imgurl1} imgurl2={imgurl2} imgurl3={imgurl3} imgurl4={imgurl4}/>
 
       <div className="grid grid-cols-2 my-6 mt-16">
         <div>
-          <div className="mb-12">
+          <div className="mb-12 ">
             <LabPerform experiments={experiments} />
           </div>
           <div className="my-12">
