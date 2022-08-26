@@ -9,21 +9,14 @@ import db from "../../firebase";
 export default function Index() {
   const [Items, setItems] = useState([]);
   const [ActiveIndex, setActiveIndex] = useState(0);
-  const [ActiveDoc, setActiveDoc] = useState(0);
+  const [ActiveDoc, setActiveDoc] = useState();
   const [LabCode, setLabCode] = useState("-1");
 
   const [ShowHostForm, setShowHostForm] = useState(false);
 
   const [LabName, setLabName] = useState("");
   const [LabDescription, setLabDescription] = useState("");
-  const [Experiments, setExperiments] = useState([
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-  ]);
+  const [Experiments, setExperiments] = useState([]);
   const [Instruments, setInstruments] = useState([]);
   const [Amenities, setAmenities] = useState([]);
   const [CollegeGuidelines, setCollegeGuidelines] = useState("");
@@ -63,6 +56,7 @@ export default function Index() {
   useEffect(() => {
     if(IsSubmitClicked===true){
     if (ActiveIndex === "-1") {
+      console.log("working")
       var randomLabCode = "";
       var numbers = "123456789";
       for (var i = 0; i < 7; i++) {

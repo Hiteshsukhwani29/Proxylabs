@@ -5,13 +5,8 @@ import Landing_bg from "../../assets/Landing_bg.png";
 import HostIntro1 from "../../assets/HostIntro1.png"
 import HostIntro2 from "../../assets/HostIntro2.png"
 import HostIntro3 from "../../assets/HostIntro3.png"
-import AOS from "aos";
 
 export default function Index() {
-  useEffect(() => {
-    AOS.init();
-    AOS.refresh();
-  }, []);
 
   let navigate = useNavigate();
   const routeChange = () => {

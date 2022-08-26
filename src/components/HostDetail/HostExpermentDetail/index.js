@@ -186,9 +186,9 @@ export default function Index({
             type="text"
             placeholder="Add college guidelines"
             onChange={(e) => {
-              setAmenities(e.target.value);
+              setCollegeGuidelines(e.target.value);
             }}
-            value={Amenities}
+            value={CollegeGuidelines}
           />
         </div>
       </div>
