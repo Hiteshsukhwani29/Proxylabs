@@ -4,7 +4,7 @@ import { Upload } from "heroicons-react";
 import { CustomSelect, StyledOption } from "../../Dropdown/Index";
 import db from "../../../firebase";
 
-export default function Index() {
+export default function Index({ setShowCompleteProfile }) {
   const [inputValues, setInputValue] = useState({
     Address: "",
     City: "",
@@ -90,7 +90,8 @@ export default function Index() {
   };
 
   return (
-    <div className="flex flex-col w-[48rem] overflow-x-clip px-8 py-5 rounded-xl bg-white  m-auto drop-shadow-xl">
+    <div className="flex flex-col w-[48rem] h-[42rem] px-8 py-5 rounded-xl bg-white mx-auto -my-[2%] drop-shadow-xl">
+      <div className=" overflow-y-scroll">
       <div className="flex items-center">
         <div class="w-10 h-10 rounded-full border-4 border-accent text-accent flex justify-center items-center">
           <p>1</p>
@@ -347,11 +348,13 @@ export default function Index() {
         </div>
         <div className=" bg-gray flex-1 h-[1px] -mx-8 mb-8 "></div>
       </div>
+      </div>
 
-      <div className="flex justify-between">
+      <div className="flex justify-between py-2">
         <Button
           className=" !text-black !px-6  !py-2 !rounded-2xl"
           variant="outlined"
+          onClick={()=>setShowCompleteProfile(false)}
         >
           Continue later
         </Button>

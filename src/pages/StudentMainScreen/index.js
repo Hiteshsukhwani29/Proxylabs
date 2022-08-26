@@ -5,8 +5,7 @@ import Landing_bg from "../../assets/Landing_bg.png";
 import Searchbar from "../../components/Searchbar";
 import { useState } from "react";
 
-function Index() {
-  const [SearchText, setSearchText] = useState("");
+function Index({ SearchText, setSearchText }) {
 
   return (
     <div className="w-screen bg-bg1">

@@ -26,6 +26,8 @@ function App() {
   const [ShowAddCurriculumCard, setShowAddCurriculumCard] = useState(false);
   const [ShowCompleteProfile, setShowCompleteProfile] = useState(false);
 
+  const [SearchText, setSearchText] = useState("");
+
   useEffect(() => {
     if (token) {
       if (type === "Institute") {
@@ -76,7 +78,9 @@ function App() {
                     <Login ShowModal={ShowModal} setShowModal={setShowModal} />
                   }
                 />
-                <Route path="/Student" element={<StudentMainScreen />} />
+                <Route path="/Student" element={<StudentMainScreen 
+                      SearchText={SearchText}
+                      setSearchText={setSearchText} />} />
                 <Route
                   path="/Institute"
                   element={
@@ -92,7 +96,7 @@ function App() {
                   path="/CreateCurriculum"
                   element={<CreateCurriculum />}
                 />
-                <Route path="/search/:id" element={<SearchPage />} />
+                <Route path="/search" element={<SearchPage SearchText={SearchText} setSearchText={setSearchText} />} />
                 <Route path="/instituteinfo" element={<InstituteInfo />} />
                 <Route path="/hostLab" element={<HostLandingPage/>} />
                 <Route path="/host" element={<HostDetail/>} />

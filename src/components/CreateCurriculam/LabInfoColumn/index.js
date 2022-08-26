@@ -16,8 +16,8 @@ function Index({ batchname, SubjectCode, LabCode, setLabCode }) {
   const [IsFocussed, setIsFocussed] = useState(false);
   const [refresh, setrefresh] = useState(false);
   const [LabAim, setLabAim] = useState("");
-  const [LabName, setLabName] = useState("")
-  const [LabTitle, setLabTitle] = useState("")
+  const [LabName, setLabName] = useState("");
+  const [LabTitle, setLabTitle] = useState("");
   const [LabDescription, setLabDescription] = useState("");
   console.log("from lab info", LabCode);
 
@@ -31,11 +31,13 @@ function Index({ batchname, SubjectCode, LabCode, setLabCode }) {
       .doc(SubjectCode)
       .collection("Lab")
       .doc(LabCode);
+
     LabRef.get().then((snapshot) => {
       console.log(snapshot.data());
       setLabAim(snapshot.data().aim);
       setLabName(snapshot.data().name);
       setLabTitle(snapshot.data().title);
+      setLabDescription(snapshot.data().desc);
     });
     // SubjectRef.onSnapshot((s) => {
     //   s.docs.map((doc) => {
@@ -48,11 +50,11 @@ function Index({ batchname, SubjectCode, LabCode, setLabCode }) {
     // });
   }, [refresh, LabCode]);
 
-  const addLabDetails = () => {
-    LabRef.get().then((snapshot) => {
-      LabRef.update({labname:LabName, aim:LabAim, title:LabTitle, desc:LabDescription});
-    })
-  }
+  // const addLabDetails = () => {
+  //   LabRef.get().then((snapshot) => {
+  //     LabRef.update({labname:LabName, aim:LabAim, title:LabTitle, desc:LabDescription});
+  //   })
+  // }
 
   useEffect(() => {
     if (IsFocussed === false) {
@@ -62,15 +64,15 @@ function Index({ batchname, SubjectCode, LabCode, setLabCode }) {
 
   const createLab = async (e) => {
     e.preventDefault();
-    var randomSubjectCode = "";
-    var numbers = "123456789";
-    for (var i = 0; i < 7; i++) {
-      randomSubjectCode += numbers.charAt(
-        Math.floor(Math.random() * numbers.length)
-      );
-    }
-    // await SubjectRef.doc(randomSubjectCode).set({ name: InputText });
-    // await SubjectRef.doc(randomSubjectCode).collection("Lab").doc("-1").set({});
+    console.log(LabAim,LabDescription,LabName)
+    // var randomLabCode = "";
+    // var numbers = "123456789";
+    // for (var i = 0; i < 7; i++) {
+    //   randomLabCode += numbers.charAt(
+    //     Math.floor(Math.random() * numbers.length)
+    //   );
+    // }
+    await LabRef.update({ labname:LabName, aim:LabAim, title:LabTitle, desc:LabDescription });
     setIsFocussed(false);
     setrefresh(!refresh);
   };
@@ -92,7 +94,7 @@ function Index({ batchname, SubjectCode, LabCode, setLabCode }) {
       >
         <TextField
           multiline
-          className="!w-96 !text-xs !m-4"
+          className="!w-96 !text-xs !mx-4 !mt-4"
           variant="outlined"
           size="small"
           label="Lab Name"
@@ -104,7 +106,7 @@ function Index({ batchname, SubjectCode, LabCode, setLabCode }) {
 
         <TextField
           multiline
-          className="!w-96 !text-xs !m-4"
+          className="!w-96 !text-xs !mx-4 !mt-4"
           variant="outlined"
           size="small"
           label="Title of experiment"
@@ -116,7 +118,7 @@ function Index({ batchname, SubjectCode, LabCode, setLabCode }) {
 
         <TextField
           multiline
-          className="!w-96 !text-xs !m-4"
+          className="!w-96 !text-xs !mx-4 !mt-4"
           variant="outlined"
           size="small"
           label="Aim of experiment"
@@ -128,7 +130,7 @@ function Index({ batchname, SubjectCode, LabCode, setLabCode }) {
         <TextField
           multiline
           minRows={7}
-          className="!w-96 !text-xs !mt-0 !m-4"
+          className="!w-96 !text-xs !mt-4 !mx-4"
           variant="outlined"
           size="small"
           label="Description"
