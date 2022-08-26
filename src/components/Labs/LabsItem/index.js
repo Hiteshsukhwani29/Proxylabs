@@ -1,9 +1,12 @@
 import React from "react";
 import Rating from "@mui/material/Rating";
+import { useNavigate } from "react-router-dom";
 
-function index({ collegename, category, imgurl, labname, lat, lon, rating }) {
+function Index({ collegename, category, imgurl, labname, lat, lon, rating }) {
   let currentLat = 21.313499;
   let currentLon = 76.217673;
+
+  const navigate = useNavigate();
 
   const toRadian = (n) => (n * Math.PI) / 180;
 
@@ -31,6 +34,7 @@ function index({ collegename, category, imgurl, labname, lat, lon, rating }) {
       <div
         className="rounded-lg bg-white grid grid-flow-col grid-cols-2 pr-4 mt-4 cursor-pointer "
         style={{ border: "1px solid #eeeeee" }}
+        onClick={navigate("/Booklab")}
       >
         <div className="flex items-center ml-2">
           {imgurl != "" ? (
@@ -72,4 +76,4 @@ function index({ collegename, category, imgurl, labname, lat, lon, rating }) {
   );
 }
 
-export default index;
+export default Index;

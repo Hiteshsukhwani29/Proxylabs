@@ -18,7 +18,7 @@ function Index({ SearchText }) {
     RemoteLabRef = db.collection("RemoteLabs");
     RemoteLabRef.get().then((snapshot) => {
       snapshot.docs.map((doc) => {
-        RemoteLabRef.doc(doc.id)
+        RemoteLabRef.doc("tvODQnB9Kgau5vEWWebveLVJl0n1")
           .collection("Labs")
           .doc("11111")
           .get()
@@ -26,6 +26,7 @@ function Index({ SearchText }) {
             console.log(s.data());
             if (SearchText.length !== s.data().labname.length) {
               return 0;
+              console.log("same")
             }
             let dist = 0;
             for (let i = 0; i < SearchText.length; i += 1) {
@@ -34,25 +35,26 @@ function Index({ SearchText }) {
               }
             }
             // if (SearchText === s.docs.data().name) {
-            console.log(dist);
-            if (dist < 10) {
+            console.log("dist");
+            if (dist > 10) {
               console.log(s.data().labname);
               console.log("working");
               var instituteuid = s.data().instituteuid;
               db.collection("Institutes")
                 .doc(instituteuid)
                 .get()
-                .then((s) => {
-                  var clgname = s.data().name;
-                  var clgicon = s.data().imgurl;
-                  var clglat = s.data().lat;
-                  var clglon = s.data().lon;
+                .then((ss) => {
+                  var clgname = ss.data().name;
+                  var clgicon = ss.data().imgurl;
+                  var clglat = ss.data().lat;
+                  var clglon = ss.data().lon;
                   TempList.push({
                     clgname: clgname,
                     clgicon: clgicon,
                     clglat: clglat,
                     clglon: clglon,
                   });
+                  Setitems(TempList)
                 });
             }
           });
@@ -73,28 +75,30 @@ function Index({ SearchText }) {
               }
             }
             // if (SearchText === s.docs.data().name) {
-            if (dist < 10) {
+            if (dist > 10) {
               console.log(s.data().labname);
               console.log("working");
               var instituteuid = s.data().instituteuid;
               db.collection("Institutes")
                 .doc(instituteuid)
                 .get()
-                .then((s) => {
-                  var clgname = s.data().name;
-                  var clgicon = s.data().imgurl;
-                  var clglat = s.data().lat;
-                  var clglon = s.data().lon;
+                .then((ss) => {
+                  console.log("Hitesh",s.data());
+                  var clgname = ss.data().name;
+                  var clgicon = ss.data().imgurl;
+                  var clglat = ss.data().lat;
+                  var clglon = ss.data().lon;
                   TempList.push({
                     clgname: clgname,
                     clgicon: clgicon,
                     clglat: clglat,
                     clglon: clglon,
                   });
+                  Setitems(TempList);
+
                 });
             }
           });
-        Setitems(TempList);
       });
     });
 
@@ -136,7 +140,7 @@ function Index({ SearchText }) {
     // });
     // });
     // });
-  }, [SearchText]);
+  }, []);
 
   useEffect(() => {
     db.collection("labs").onSnapshot((snapshot) =>
@@ -147,7 +151,7 @@ function Index({ SearchText }) {
     <div className="">
       {Items.map(({ clgname, clgicon, clgrating, clglat, clglon }) => (
         <LabsItem
-          collegename={clgname}
+          collegename="Indian Institute Of Guwahati"
           category="Tier 2"
           imgurl={clgicon}
           labname={labname}
