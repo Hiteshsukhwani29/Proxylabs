@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Plus } from "heroicons-react";
 import db from "../../../firebase";
 import ListItem from "../ListItem";
+import { useSelector } from "react-redux";
 
 function Index({ setIndex }) {
+  const state = useSelector(state => state.t1);
+
   const [Items, setItems] = useState([]);
   const [ItemsEmptyList, setItemsEmptyList] = useState([]);
   const [ActiveIndex, setActiveIndex] = useState(null);
@@ -19,7 +22,7 @@ function Index({ setIndex }) {
 
   const InstituteRef = db
     .collection("curriculum")
-    .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2");
+    .doc(state.user.uid);
 
   useEffect(() => {
     InstituteRef.get().then((snapshot) => {

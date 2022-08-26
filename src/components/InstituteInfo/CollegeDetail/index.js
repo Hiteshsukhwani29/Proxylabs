@@ -3,8 +3,11 @@ import { TextField, Button } from "@mui/material";
 import { Upload } from "heroicons-react";
 import { CustomSelect, StyledOption } from "../../Dropdown/Index";
 import db from "../../../firebase";
+import { useSelector } from "react-redux";
 
 export default function Index({ setShowCompleteProfile }) {
+  const state = useSelector(state => state.t1);
+
   const [inputValues, setInputValue] = useState({
     Address: "",
     City: "",
@@ -81,7 +84,7 @@ export default function Index({ setShowCompleteProfile }) {
 
   const InstituteRef = db
     .collection("Institutes")
-    .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2");
+    .doc(state.user.uid);
 
   const submitDetails = (e) => {
     InstituteRef.get().then((snapshot) => {

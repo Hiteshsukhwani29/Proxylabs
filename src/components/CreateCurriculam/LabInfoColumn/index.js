@@ -3,8 +3,10 @@ import { Minus } from "heroicons-react";
 import db from "../../../firebase";
 import { TextField, Button, withStyles } from "@mui/material";
 import { Refresh } from "heroicons-react";
+import { useSelector } from "react-redux";
 
 function Index({ batchname, SubjectCode, LabCode, setLabCode }) {
+  const state = useSelector(state => state.t1);
   const [Items, setItems] = useState([]);
   const [ItemsEmptyList, setItemsEmptyList] = useState([]);
   var TempList = [];
@@ -26,7 +28,7 @@ function Index({ batchname, SubjectCode, LabCode, setLabCode }) {
   useEffect(() => {
     LabRef = db
       .collection("curriculum")
-      .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2")
+      .doc(state.user.uid)
       .collection(batchname)
       .doc(SubjectCode)
       .collection("Lab")

@@ -22,14 +22,14 @@ export default function Index({ Course, SubjectCode, setTotalLabsCompleted }) {
     console.log(Course, SubjectCode);
     const SubjectRef = db
       .collection("curriculum")
-      .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2")
+      .doc(state.user.instituteuid)
       .collection(Course)
       .doc(SubjectCode)
       .collection("Lab");
 
     const StudentMarksRef = db
       .collection("StudentsMarks")
-      .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2")
+      .doc(state.user.instituteuid)
       .collection(Course)
       .doc(state.user.uid)
       .collection("subjects")

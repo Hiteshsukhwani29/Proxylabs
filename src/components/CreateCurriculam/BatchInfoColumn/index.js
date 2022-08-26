@@ -25,7 +25,7 @@ function Index({ batchindex, Batch, setBatch }) {
 
   const InstituteRef = db
   .collection("curriculum")
-  .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2");
+  .doc(state.user.uid);
 
   useEffect(() => {
     InstituteRef.get().then((snapshot) => {

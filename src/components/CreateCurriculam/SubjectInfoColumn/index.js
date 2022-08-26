@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Plus, Minus } from "heroicons-react";
 import db from "../../../firebase";
 import ListItem from "../ListItem";
+import { useSelector } from "react-redux";
 
 function Index({ batchname, setSubjectCode, setBatch }) {
   const [Items, setItems] = useState([]);
@@ -13,6 +14,8 @@ function Index({ batchname, setSubjectCode, setBatch }) {
   const [IsFocussed, setIsFocussed] = useState(false);
   const [refresh, setrefresh] = useState(false);
 
+  const state = useSelector(state => state.t1);
+
   var TempList = [];
   var TempList1 = [];
   var index = 0;
@@ -20,7 +23,7 @@ function Index({ batchname, setSubjectCode, setBatch }) {
 
   const BatchRef = db
     .collection("curriculum")
-    .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2")
+    .doc(state.user.uid)
     .collection(batchname);
 
   console.log("from subject info", batchname);

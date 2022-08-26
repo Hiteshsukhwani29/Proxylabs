@@ -55,12 +55,12 @@ function Index() {
 
   const BatchRef = db
     .collection("curriculum")
-    .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2")
+    .doc(state.user.instituteuid)
     .collection(state.user.course);
 
   const StudentMarksRef = db
     .collection("StudentsMarks")
-    .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2")
+    .doc(state.user.instituteuid)
     .collection(state.user.course)
     .doc(state.user.uid);
 

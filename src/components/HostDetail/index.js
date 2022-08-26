@@ -4,8 +4,11 @@ import HostForm from "./HostForm";
 import HostSchedular from "./HostSchedular";
 import HostExperimentDetail from "./HostExpermentDetail";
 import db from "../../firebase";
+import { useSelector } from "react-redux";
 
 export default function Index() {
+  const state = useSelector(state => state.t1);
+
   const [Items, setItems] = useState([]);
   const [ActiveIndex, setActiveIndex] = useState(0);
   const [ActiveDoc, setActiveDoc] = useState();
@@ -28,7 +31,7 @@ export default function Index() {
 
   const RemoteLabsRef = db
     .collection("RemoteLabs")
-    .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2")
+    .doc(state.user.uid)
     .collection("Labs");
 
   useEffect(() => {
