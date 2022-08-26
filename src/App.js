@@ -104,7 +104,7 @@ function App() {
                 <Route path="/hostLab" element={<HostLandingPage/>} />
                 <Route path="/host" element={<HostDetail/>} />
                 <Route path="/prodrop" element={<ProfileCard/>} />
-                <Route path="/Booking" element={<LabBookingPage/>} />
+                <Route path="/Booklab" element={<LabBookingPage/>} />
                 <Route path="/Approval" element={<ApprovalPage/>} />
   
               </Routes>

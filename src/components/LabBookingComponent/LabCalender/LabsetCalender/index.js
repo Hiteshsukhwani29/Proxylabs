@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Checkbox, Button } from "@mui/material";
+import { Checkbox, Button, Autocomplete, TextField } from "@mui/material";
 import DatePicker from "../datePicker";
 
 import "react-dates/initialize";
 
-export default function Index() {
+export default function Index({ setExperimentName }) {
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 
@@ -41,15 +41,29 @@ export default function Index() {
     }
   }, [ActiveIndex]);
 
+  const experimentsTemplate = ["Calibration of Pressure Gauge", "Calibration of Thermocouple", "Calibration of LVDT", "Calibration of Load cell", "Determination of modulus of elasticity of a mild steel specimen using strain gauges.", "Measurement of thread parameters using Optical Projector (Profile Projector)", "Measurement of thread parameters using Toolmaker Microscope", "Measurement of angle using Sine bar"]
+
   return (
     <div className="flex flex-col w-[30rem] overflow-x-clip px-8 py-5 rounded-xl bg-white  m-auto drop-shadow-xl">
       <div className="">
         <div className="font-semibold text-lg whitespace-normal">
           Prebook a lab
         </div>
-        <div>Dropdown</div>
+
       </div>
       {/* Calender */}
+
+      <Autocomplete
+        disableClearable
+        options={experimentsTemplate}
+        className="w-96 mt-4"
+        onChange={(e, v) => {
+          setExperimentName(v);
+        }}
+        renderInput={(params) => (
+          <TextField {...params} label="select experiment" />
+        )}
+      />
 
       <div className="flex items-center my-4">
         <div
