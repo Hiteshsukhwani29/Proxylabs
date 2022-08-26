@@ -3,7 +3,6 @@ import InstituteBanner from "../InstituteBanner";
 import HostForm from "./HostForm";
 import HostSchedular from "./HostSchedular";
 import HostExperimentDetail from "./HostExpermentDetail";
-import { TextareaAutosize } from "@mui/material";
 import db from "../../firebase";
 
 export default function Index() {
