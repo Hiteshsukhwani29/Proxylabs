@@ -7,6 +7,7 @@ import { Button } from "@mui/material";
 export default function Index({ Head, detail, imgUrl }) {
 
 
+const [SearchText, setSearchText] = useState("");
   const [AlreadyLoggedIn, setAlreadyLoggedIn] = useState(false);
   const [Token, setToken] = useState("");
   const type = JSON.parse(localStorage.getItem("type"));
@@ -49,9 +50,19 @@ export default function Index({ Head, detail, imgUrl }) {
             </Button>
           </div>
           ) : (
-            <Searchbar/>
+            <Searchbar SearchText={SearchText} setSearchText={setSearchText}/>
           )}
         
+
+        {AlreadyLoggedIn ? (
+            <div className={`flex items-center py-6 ${type==="Student"?"block":"hidden"}`} >
+            <Searchbar SearchText={SearchText} setSearchText={setSearchText}/>
+              
+          </div>
+          ) : (
+            <></>
+          )}
+
       </div>
       <div className="flex-0 mx-10">
         <img className="h-80 max-w-lg rounded-lg" src={imgUrl} alt="" />

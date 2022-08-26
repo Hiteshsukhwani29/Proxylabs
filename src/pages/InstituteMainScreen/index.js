@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import PageIntro from "../../components/PageIntro";
-import Navbar from "../../components/Navbar";
 import Banner from "../../components/Banner";
 import Landing_bg from "../../assets/Landing_bg.png";
 import AddCurriculumCard from "../../components/Navbar/AddCurriculumCard";
 import CollegeDetail from "../../components/InstituteInfo/CollegeDetail";
+import InstituteLanding from "../../assets/AdminLanding.png"
+import LandingContent from "../../components/LandingContent"
 
 export default function Index({
   ShowAddCurriculumCard,
@@ -35,13 +36,13 @@ export default function Index({
             <></>
           )}
         </div>
-        <div className="">
+        <div className="mx-16 ">
           <PageIntro
             Head="Register your students. Host your college for other students and get going! "
             detail="Allow your location, select your field and dive into the list of colleges at your disposal :)"
             imgUrl={Landing_bg}
+            
           />
-          <Banner />
         </div>
       </div>
       {ShowAddCurriculumCard ? (
@@ -51,6 +52,7 @@ export default function Index({
       ) : (
         <></>
       )}
+      <LandingContent/>
     </div>
   );
 }

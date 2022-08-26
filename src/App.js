@@ -13,7 +13,10 @@ import InstituteMainScreen from "./pages/InstituteMainScreen";
 import SearchPage from "./pages/SearchPage";
 import InstituteInfo from "./components/InstituteInfo";
 import HostLandingPage from "./pages/HostLandingPage";
-import HostDetail from "./components/HostDetail"
+import HostDetail from "./components/HostDetail";
+import ProfileCard from "./smallcomponents/ProfileCard";
+import LabBookingPage from "./pages/LabsBookingPage";
+import ApprovalPage from "./pages/ApprovalPage"
 
 function App() {
   const token = JSON.parse(localStorage.getItem("token"));
@@ -96,6 +99,10 @@ function App() {
                 <Route path="/instituteinfo" element={<InstituteInfo />} />
                 <Route path="/hostLab" element={<HostLandingPage/>} />
                 <Route path="/host" element={<HostDetail/>} />
+                <Route path="/prodrop" element={<ProfileCard/>} />
+                <Route path="/Booking" element={<LabBookingPage/>} />
+                <Route path="/Approval" element={<ApprovalPage/>} />
+  
               </Routes>
 
               {/* <Component ShowModal={ShowModal} setShowModal={setShowModal} /> */}

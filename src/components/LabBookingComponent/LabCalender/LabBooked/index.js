@@ -1,11 +1,14 @@
 import React from "react";
 import { Button } from "@mui/material";
+import LabBooked from "../../../../assets/labbooked.svg"
 
 export default function index() {
   return (
     <div className="flex flex-col w-[30rem] overflow-x-clip px-8 py-10 rounded-xl bg-white whitespace-normal m-auto drop-shadow-xl">
       <div className="flex justify-center">
-        <div className="h-44 w-44 bg-temp rounded-full m-2"></div>
+        <div className="h-44 w-44 rounded-full m-2">
+          <img src={LabBooked} alt="Booked..." />
+        </div>
       </div>
       <div className="flex flex-col items-center justify-center py-6">
         <div className="font-semibold text-lg">Congratulations!</div>

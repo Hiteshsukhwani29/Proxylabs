@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Checkbox, Button } from "@mui/material";
-import DatePicker from "../../../LabDetails/datePicker";
+import DatePicker from "../datePicker";
 
 import "react-dates/initialize";
 
 export default function Index() {
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
+
+
+  const [btnText, setbtnText] = useState("Request approval")
+  const changeText = (text) => setbtnText("Waiting for approval");
+
 
   const [dates, setdates] = useState(new Date());
 
@@ -154,8 +159,9 @@ export default function Index() {
       <Button
         className="!bg-accent !text-white !px-6 !my-4  !py-2 !rounded-full"
         variant="outlined"
+        onClick={() => changeText("newText")}
       >
-        Submit
+        {btnText}
       </Button>
 
       <div className="flex justify-between">
