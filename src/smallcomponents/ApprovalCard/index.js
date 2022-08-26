@@ -6,6 +6,7 @@ export default function Index() {
   const [ClgName, setClgName] = useState(
     "Bharati Vidyapeeth (Deemed to be University) College of Engineering, Pune"
   );
+  const [LabName, setLabName] = useState("Lab")
   const [uid, setuid] = useState("");
 
   return (
@@ -16,8 +17,8 @@ export default function Index() {
         <div className="font-bold">ID No. -</div>
         <div className="font-bold mx-1">{uid}</div>
       </div>
-      <div className="border py-1 rounded-lg px-2 my-2 text-center font-semibold">
-        Lab of Fluid Mechanics
+      <div className="border py-1 rounded-lg px-2 my-2  font-semibold">
+       {LabName}
       </div>
 
       <div className="flex justify-around">

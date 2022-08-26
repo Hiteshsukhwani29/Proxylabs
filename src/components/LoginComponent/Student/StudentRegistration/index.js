@@ -4,7 +4,6 @@ import { TextField, Button } from "@mui/material";
 import db from "../../../../firebase";
 import { auth } from "../../../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import ReCAPTCHA from "react-google-recaptcha";
 
 function Index({ Email, setShowRegistrationBox }) {
   let navigate = useNavigate();
