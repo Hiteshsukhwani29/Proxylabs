@@ -4,6 +4,7 @@ import Banner from "../../components/Banner";
 import Landing_bg from "../../assets/Landing_bg.png";
 import AddCurriculumCard from "../../components/Navbar/AddCurriculumCard";
 import CollegeDetail from "../../components/InstituteInfo/CollegeDetail";
+import WelcomeIntro from "../../components/InstituteInfo/WelcomeIntro";
 import InstituteLanding from "../../assets/AdminLanding.png"
 import LandingContent from "../../components/LandingContent"
 
@@ -23,10 +24,17 @@ export default function Index({
     console.log("im clicked");
   }, [ShowAddCurriculumCard]);
 
+  const IsWelcomeScreenShown = JSON.parse(localStorage.getItem("IsWelcomeScreenShown"));
+
+  const [refresh, setrefresh] = useState(false);
+
   return (
     <div className="flex flex-col">
       <div className="flex-1" onClick={() => setShowAddCurriculumCard(false)}>
-        <div className="absolute bg-white left-0 right-0 top-[15%]">
+      <div className="absolute left-0 right-0 top-[20%] z-30">
+      {IsWelcomeScreenShown!==true?<WelcomeIntro setShowCompleteProfile={setShowCompleteProfile} refresh={refresh} setrefresh={setrefresh}/>:<></>}
+      </div>
+        <div className="absolute left-0 right-0 top-[15%] z-30">
           {ShowCompleteProfile ? (
             <CollegeDetail
               ShowCompleteProfile={ShowCompleteProfile}

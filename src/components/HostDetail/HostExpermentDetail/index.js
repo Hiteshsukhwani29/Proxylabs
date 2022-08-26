@@ -1,14 +1,36 @@
-import React from "react";
-import { TextareaAutosize, Chip } from "@mui/material";
+import React, { useState } from "react";
+import { TextareaAutosize, Chip, Stack, TextField } from "@mui/material";
 import { XCircle } from "heroicons-react";
 
-export default function index() {
+export default function Index({
+  Experiments,
+  setExperiments,
+  Instruments,
+  setInstruments,
+  Amenities,
+  setAmenities,
+  CollegeGuidelines,
+  setCollegeGuidelines,
+}) {
   const handleClick = () => {
     console.info("You clicked the Chip.");
   };
 
   const handleDelete = () => {
     console.info("You clicked the delete icon.");
+  };
+
+  // const [Exp, setExp] = useState(['1','2']);
+
+  // const [Temp, setTemp] = useState([]);
+  // var Temp=[];
+  const [text, settext] = useState([]);
+
+  const addExperiment = (e) => {
+    e.preventDefault();
+    // Temp.push(text);
+    // setExperiments(Temp);
+    // setExp(...Exp,text);
   };
 
   return (
@@ -18,13 +40,33 @@ export default function index() {
           Experiments that can be performed in this lab
         </div>
         <div>
-          <input
-            className="w-[80%] h-12 px-5 my-3 border rounded-lg "
+          <TextField
+            className="!my-2 !w-[80%]"
             type="text"
+            size="medium"
             placeholder="+ Add experiments"
-            style={{ border: "1px solid #CBCBCB" }}
+            onChange={(e) => {
+              setExperiments(e.target.value);
+            }}
+            value={Experiments}
           />
-          <div className="grid grid-rows grid-cols-2 w-[80%] s  ">
+          {/* <div className="grid grid-rows grid-cols-2 w-[80%] ">
+            
+            <Chip
+            className="w-fit !mb-2"
+            label={res}
+            onClick={handleClick}
+            onDelete={handleDelete}
+            deleteIcon={<XCircle />}
+            />); */}
+
+          {/* <Chip
+              className="w-fit !mb-2"
+              label="Custom delete icon"
+              onClick={handleClick}
+              onDelete={handleDelete}
+              deleteIcon={<XCircle />}
+            />
             <Chip
               className="w-fit !mb-2"
               label="Custom delete icon"
@@ -32,7 +74,14 @@ export default function index() {
               onDelete={handleDelete}
               deleteIcon={<XCircle />}
             />
-          </div>
+            <Chip
+              className="w-fit !mb-2"
+              label="Custom delete icon"
+              onClick={handleClick}
+              onDelete={handleDelete}
+              deleteIcon={<XCircle />}
+            /> */}
+          {/* </div> */}
         </div>
       </div>
       <div>
@@ -41,13 +90,17 @@ export default function index() {
             Instruments available
           </div>
           <div>
-            <input
-              className="w-[80%] h-12 px-5 my-3 border rounded-lg "
+            <TextField
+              className="!my-2 !w-[80%]"
               type="text"
-              placeholder="+ Add instruments"
-              style={{ border: "1px solid #CBCBCB" }}
+              size="medium"
+              placeholder="+ Add Instruments"
+              onChange={(e) => {
+                setInstruments(e.target.value);
+              }}
+              value={Instruments}
             />
-            <div className="grid grid-rows grid-cols-2 w-[80%] space-y-1  ">
+            {/* <div className="grid grid-rows grid-cols-2 w-[80%] space-y-1  ">
               <Chip
                 className="w-fit !mb-2"
                 label="Custom delete icon"
@@ -55,20 +108,24 @@ export default function index() {
                 onDelete={handleDelete}
                 deleteIcon={<XCircle />}
               />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
       <div>
         <div className="text-xl font-semibold mt-4">Add amenities</div>
         <div>
-          <input
-            className="w-[80%] h-12 px-5 my-3 border rounded-lg "
+          <TextField
+            className="!my-2 !w-[80%]"
             type="text"
-            placeholder="+ Add amenities"
-            style={{ border: "1px solid #CBCBCB" }}
+            size="medium"
+            placeholder="+ Add Amenities"
+            onChange={(e) => {
+              setAmenities(e.target.value);
+            }}
+            value={Amenities}
           />
-          <div className="grid grid-rows grid-cols-2 w-[80%]   ">
+          {/* <div className="grid grid-rows grid-cols-2 w-[80%]   ">
             <Chip
               className="w-fit !mb-2"
               label="Custom delete icon"
@@ -76,7 +133,7 @@ export default function index() {
               onDelete={handleDelete}
               deleteIcon={<XCircle />}
             />
-          </div>
+          </div> */}
         </div>
         <div className=" bg-gray flex-1 h-[1px]  "></div>
         <div className=" my-4 text-sm font-medium">or select from here</div>
@@ -122,13 +179,16 @@ export default function index() {
         <div className=" bg-gray flex-1 h-[1px]  "></div>
         <div>
           <div className="text-xl font-semibold mt-4">College Guidelines</div>
-          <TextareaAutosize
-            aria-label="empty textarea"
-            minRows={5}
+          <TextField
+            multiline
+            rows={5}
+            className="!my-2 !w-[100%]"
+            type="text"
             placeholder="Add college guidelines"
-            className=" w-full rounded-lg py-2 px-4 my-5"
-            fullWidth
-            style={{ border: "1px solid #eeeeee" }}
+            onChange={(e) => {
+              setCollegeGuidelines(e.target.value);
+            }}
+            value={CollegeGuidelines}
           />
         </div>
       </div>

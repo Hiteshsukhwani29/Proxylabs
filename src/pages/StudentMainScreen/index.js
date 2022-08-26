@@ -6,8 +6,7 @@ import InstituteWelcome from "../../assets/AdminLanding.png";
 import Searchbar from "../../components/Searchbar";
 import { useState } from "react";
 
-function Index() {
-  const [SearchText, setSearchText] = useState("");
+function Index({ SearchText, setSearchText }) {
 
   return (
     <div className=" bg-bg1">

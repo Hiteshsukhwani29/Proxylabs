@@ -2,7 +2,7 @@ import React from "react";
 import { Checkbox, Button } from "@mui/material";
 import DateRange from "../../LabBookingComponent/LabCalender/daterangepicker"
 
-export default function index() {
+export default function index({ IsSubmitClicked, setIsSubmitClicked }) {
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
   return (
@@ -10,7 +10,6 @@ export default function index() {
       <div className="font-semibold ">Assign lab dates and times</div>
       <div className="">
         <DateRange/>
-        
       </div>
       <div>
         <div className="font-normal text-base">Preferred time slot</div>
@@ -50,6 +49,7 @@ export default function index() {
       <Button
         className="!bg-accent !text-white !px-6 !my-4  !py-2 !rounded-full"
         variant="outlined"
+        onClick={()=>setIsSubmitClicked(true)}
       >
         Submit
       </Button>

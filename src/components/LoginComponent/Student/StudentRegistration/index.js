@@ -4,9 +4,9 @@ import { TextField, Button } from "@mui/material";
 import db from "../../../../firebase";
 import { auth } from "../../../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import ReCAPTCHA from "react-google-recaptcha";
 
 function Index({ Email, setShowRegistrationBox }) {
-
   let navigate = useNavigate();
 
   const [FullName, setFullName] = useState("");
@@ -113,7 +113,7 @@ function Index({ Email, setShowRegistrationBox }) {
           localStorage.setItem("token", JSON.stringify(user.uid));
           localStorage.setItem("type", JSON.stringify("Student"));
           navigate("/Student");
-          refreshPage()
+          refreshPage();
         });
     } catch (err) {
       console.error(err);
@@ -174,6 +174,7 @@ function Index({ Email, setShowRegistrationBox }) {
         }}
         value={CreditCode}
       />
+      {/* <ReCAPTCHA sitekey="Your client site key" onChange={onChange} /> */}
       <Button
         className="!bg-accent !text-white !mt-6 !px-10  !py-2 !rounded-full"
         variant="outlined"

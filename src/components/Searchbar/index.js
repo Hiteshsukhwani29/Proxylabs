@@ -10,7 +10,7 @@ function Index({ SearchText, setSearchText }) {
 
   const SearchResults = (e) => {
     e.preventDefault();
-     navigate('/search',{Key:SearchText});
+     navigate('/search');
   }
 
   useEffect(() => {

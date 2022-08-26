@@ -4,19 +4,19 @@ import Labs from "../../components/Labs";
 import Map from "../../components/Map";
 import { AdjustmentsOutline } from "heroicons-react";
 
-export default function Index() {
+export default function Index({ SearchText, setSearchText }) {
 
 const [numofCollege, setnumofCollege] = useState("12")
 
   return (
     <div className="p-8">
       <div className="flex items-center ">
-        <Searchbar />
+        <Searchbar SearchText={SearchText} setSearchText={setSearchText} />
         <AdjustmentsOutline />
       </div>
       <div className="flex justify-around mt-8 p-4">
         <div className="w-[65%] ">
-          <Labs />
+          <Labs SearchText={SearchText} />
         </div>
         <div className="!w-[35%] pt-4 !px-12">
           <Map />

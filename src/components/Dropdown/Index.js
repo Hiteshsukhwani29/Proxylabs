@@ -116,7 +116,7 @@ export const StyledOption = styled(OptionUnstyled)(
 );
 
 const StyledPopper = styled(PopperUnstyled)`
-  z-index: 1;
+  z-index: 20;
 `;
 
 export const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
