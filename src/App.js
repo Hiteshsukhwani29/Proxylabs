@@ -16,7 +16,8 @@ import HostLandingPage from "./pages/HostLandingPage";
 import HostDetail from "./components/HostDetail";
 import ProfileCard from "./smallcomponents/ProfileCard";
 import LabBookingPage from "./pages/LabsBookingPage";
-import ApprovalPage from "./pages/ApprovalPage"
+import ApprovalPage from "./pages/ApprovalPage";
+import ResearchDashbord from "./pages/ResearchDashboard";
 
 function App() {
   const token = JSON.parse(localStorage.getItem("token"));
@@ -105,7 +106,8 @@ function App() {
                 <Route path="/host" element={<HostDetail/>} />
                 <Route path="/prodrop" element={<ProfileCard/>} />
                 <Route path="/Booklab" element={<LabBookingPage/>} />
-                <Route path="/Approval" element={<ApprovalPage/>} />
+                <Route path="/approval" element={<ApprovalPage/>} />
+                <Route path="/dashboard" element={<ResearchDashbord/>} />
   
               </Routes>
 
