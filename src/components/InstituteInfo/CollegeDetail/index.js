@@ -1,32 +1,28 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { TextField, Button } from "@mui/material";
 import { Upload } from "heroicons-react";
 import { CustomSelect, StyledOption } from "../../Dropdown/Index";
 import db from "../../../firebase";
 
 export default function Index() {
-
-
-
   const [inputValues, setInputValue] = useState({
-    Address: '',
-    City: '',
-    Pincode: '',
-    State: '',
-    AdminName: '',
-    AdminEmail:'',
-    adminPhone:''
-    
+    Address: "",
+    City: "",
+    Pincode: "",
+    State: "",
+    AdminName: "",
+    AdminEmail: "",
+    adminPhone: "",
   });
 
   const [validation, setValidation] = useState({
-    Address: '',
-    City: '',
-    Pincode: '',
-    State: '',
-    AdminName: '',
-    AdminEmail:'',
-    adminPhone:''
+    Address: "",
+    City: "",
+    Pincode: "",
+    State: "",
+    AdminName: "",
+    AdminEmail: "",
+    adminPhone: "",
   });
 
   //handle submit updates
@@ -37,63 +33,61 @@ export default function Index() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let errors = {...validation}
-
+    let errors = { ...validation };
 
     if (!inputValues.Address.trim()) {
-      errors.Address = 'Address is required';
+      errors.Address = "Address is required";
     } else {
-      errors.Address = '';
+      errors.Address = "";
     }
-    
+
     if (!inputValues.City.trim()) {
-      errors.City = 'City is required';
+      errors.City = "City is required";
     } else {
-      errors.City = '';
+      errors.City = "";
     }
 
     if (!inputValues.Pincode.trim()) {
-      errors.Pincode = 'Pincode is required';
+      errors.Pincode = "Pincode is required";
     } else {
-      errors.Pincode = '';
+      errors.Pincode = "";
     }
 
     if (!inputValues.State.trim()) {
-      errors.State = 'State is required';
+      errors.State = "State is required";
     } else {
-      errors.State = '';
+      errors.State = "";
     }
 
     if (!inputValues.AdminName.trim()) {
-      errors.AdminName = 'Admin Name is required';
+      errors.AdminName = "Admin Name is required";
     } else {
-      errors.AdminName = '';
+      errors.AdminName = "";
     }
 
     if (!inputValues.AdminEmail.trim()) {
-      errors.AdminEmail = 'Admin Email is required';
+      errors.AdminEmail = "Admin Email is required";
     } else {
-      errors.AdminEmail = '';
+      errors.AdminEmail = "";
     }
 
     if (!inputValues.adminPhone.trim()) {
-      errors.AdminPhone = 'Admin Phone is required';
+      errors.AdminPhone = "Admin Phone is required";
     } else {
-      errors.AdminPhone = '';
+      errors.AdminPhone = "";
     }
     return setValidation(errors);
   };
-
 
   const InstituteRef = db
     .collection("Institutes")
     .doc(" nfQv08nR0Eh0FeCZBLY3S0AXCID2");
 
-    const submitDetails = (e) => {
-      InstituteRef.get().then(snapshot=>{
-        InstituteRef.set({...snapshot, name:"Hitesh"})
-      })
-    }
+  const submitDetails = (e) => {
+    InstituteRef.get().then((snapshot) => {
+      InstituteRef.set({ ...snapshot, name: "Hitesh" });
+    });
+  };
 
   return (
     <div className="flex flex-col w-[48rem] overflow-x-clip px-8 py-5 rounded-xl bg-white  m-auto drop-shadow-xl">
@@ -118,12 +112,13 @@ export default function Index() {
       <div className="w-full text-xl font-semibold m-4">College Details</div>
       <div className="grid grid-cols-2">
         <div className="mx-6 my-4">
-            <input
-              className="w-full h-10 px-5 my-3 border rounded-full"
-              type="text"
-              placeholder="Head of Institute"
-              style={{ border: "1px solid #CBCBCB" }}
-            />
+          <TextField
+            className="!w-full !text-xs"
+            variant="outlined"
+            size="medium"
+            label="Head of Institute"
+          />
+
           <CustomSelect
             className="h-10 !rounded-full !w-full !mx-0 !text-base !px-5 !my-3 border"
             defaultValue={40}
@@ -175,46 +170,54 @@ export default function Index() {
             <StyledOption value="Dental">Dental</StyledOption>
           </CustomSelect>
 
-          <input
-            className="w-full h-10 px-5 mt-8 mb-3 border rounded-full"
-            type="text"
-            placeholder="Address"
+          <TextField
+            className="!w-full !text-xs"
+            variant="outlined"
+            size="medium"
+            label="Address"
             name="Address"
-            style={{ border: "1px solid #CBCBCB" }}
             onChange={(e) => handleChange(e)}
-              value={inputValues.Address}
+            value={inputValues.Address}
           />
           {validation.Address && <p>{validation.Address}</p>}
-        
+
           <div className="grid grid-cols-2 mb-4 my-3">
             <div>
-              <input
-                className="w-full h-10 px-5  border rounded-full"
-                type="text"
-                placeholder="City"
+              <TextField
+                className="!w-full !text-xs"
+                variant="outlined"
+                size="medium"
+                label="City"
                 name="City"
-                style={{ border: "1px solid #CBCBCB" }}
                 onChange={(e) => handleChange(e)}
-              value={inputValues.City}
+                value={inputValues.City}
               />
               {validation.City && <p>{validation.City}</p>}
             </div>
             <div>
-              <input
-                className="w-full h-10 px-3  border rounded-full"
-                type="text"
-                placeholder="Pincode"
-                style={{ border: "1px solid #CBCBCB" }}
+              <TextField
+                className="!w-full !text-xs"
+                variant="outlined"
+                size="medium"
+                label="Pincode"
+                name="Pincode"
+                onChange={(e) => handleChange(e)}
+                value={inputValues.Pincode}
               />
               {validation.Pincode && <p>{validation.Pincode}</p>}
             </div>
           </div>
-          <input
-            className="w-full h-10 px-5 border rounded-full my-3"
-            type="text"
-            placeholder="State"
-            style={{ border: "1px solid #CBCBCB" }}
+
+          <TextField
+            className="!w-full !text-xs"
+            variant="outlined"
+            size="medium"
+            label="State"
+            name="State"
+            onChange={(e) => handleChange(e)}
+            value={inputValues.State}
           />
+
           {validation.State && <p>{validation.State}</p>}
         </div>
         <div className="mx-6 my-4">
@@ -248,43 +251,56 @@ export default function Index() {
         </div>
         <div className="grid grid-cols-2">
           <div className="mx-6 my-4">
-            <input
-              className="w-full h-10 px-5 my-3 border rounded-full "
-              type="text"
-              placeholder="Admin Name"
-              style={{ border: "1px solid #CBCBCB" }}
+            <TextField
+              className="!w-full !text-xs !mb-2"
+              variant="outlined"
+              size="medium"
+              label="Admin Name"
+              name="AdmimName"
+              onChange={(e) => handleChange(e)}
+              value={inputValues.AdminName}
             />
+
             {validation.AdminName && <p>{validation.AdminName}</p>}
 
-            <input
-              className="w-full h-10 px-5 my-3 border rounded-full "
-              type="text"
-              placeholder="Admin Phone"
-              style={{ border: "1px solid #CBCBCB" }}
+            <TextField
+              className="!w-full !text-xs !my-2"
+              variant="outlined"
+              size="medium"
+              label="Admin Phone"
+              name="AdminPhone"
+              onChange={(e) => handleChange(e)}
+              value={inputValues.AdminPhone}
             />
-{validation.AdminPhone && <p>{validation.AdminPhone}</p>}
-            <input
-              className="w-full h-10 px-5 my-3 border rounded-full "
-              type="text"
-              placeholder="Add Admin"
-              style={{ border: "1px solid #CBCBCB" }}
+
+            {validation.AdminPhone && <p>{validation.AdminPhone}</p>}
+
+            <TextField
+              className="!w-full !text-xs !mt-2"
+              variant="outlined"
+              size="medium"
+              label="Add Admin"
             />
           </div>
           <div className="mx-6 my-4">
-            <input
-              className="w-full h-10 px-5 my-3 border rounded-full "
-              type="text"
-              placeholder="Admin Email"
-              style={{ border: "1px solid #CBCBCB" }}
+          <TextField
+              className="!w-full !text-xs !mb-2"
+              variant="outlined"
+              size="medium"
+              label="Admin Email"
+              name="AdminEmail"
+              onChange={(e) => handleChange(e)}
+              value={inputValues.AdminEmail}
             />
             {validation.AdminEmail && <p>{validation.AdminEmail}</p>}
 
-            <input
-              className="w-full h-10 px-5 my-3 border rounded-full "
-              type="text"
-              placeholder="Alternate Phone"
-              style={{ border: "1px solid #CBCBCB" }}
+            <TextField
+              className="!w-full !text-xs !my-2"
+              variant="outlined"
+              size="medium"
+              label="Alternate Phone"
             />
+            
           </div>
         </div>
       </div>
@@ -303,7 +319,7 @@ export default function Index() {
             <div className="flex items-center justify-between font-semibold h-full">
               <div>Total number of students</div>
               <TextField
-                className="!w-14 !text-xs"
+                className="!w-14 !text-xs "
                 variant="outlined"
                 size="small"
                 sx={{
