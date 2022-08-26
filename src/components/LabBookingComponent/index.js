@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import LabInstruments from "./LabInstruments";
 import ClgGuidelines from "./ClgGuidelines";
 import PhotoGallery from "./PhotoGallery";
@@ -8,6 +8,7 @@ import InstituteBanner from "../InstituteBanner";
 import LabsetCalender from "./LabCalender/LabsetCalender";
 import Amenities from "./Amenities";
 import icon from "../../assets/nav_profile_icon.png";
+import db from "../../firebase";
 
 export default function Index({ LabIndex }) {
 
@@ -17,10 +18,26 @@ export default function Index({ LabIndex }) {
   const [instruments, setinstruments] = useState("");
   const [amenities, setamenities] = useState("");
   const [guidelines, setguidelines] = useState("");
+  const [imgUrl, setimgUrl] = useState()
+  const [imgUrl1, setimgUrl1] = useState()
+  const [imgUrl2, setimgUrl2] = useState()
+  const [imgUrl3, setimgUrl3] = useState()
+  const [imgUrl4, setimgUrl4] = useState()
   
   useEffect(() => {
-    db.collection("RemoteLabs").doc("8oMBffsZwMONpHoz5GKtyMIhGD53").collection("Labs").doc("11111").onSnapshot((snapshot)=>{
+    db.collection("RemoteLabs").doc("tvODQnB9Kgau5vEWWebveLVJl0n1").collection("Labs").doc("11113").onSnapshot((snapshot)=>{
       console.log(snapshot.data().clgname);
+      setclgname(snapshot.data().clgname);
+      setlabname(snapshot.data().labname);
+      setexperiments(snapshot.data().experiments);
+      setinstruments(snapshot.data().instruments);
+      setamenities(snapshot.data().amenities);
+      setguidelines(snapshot.data().guidelines);
+      setimgUrl(snapshot.data().imgUrl);
+      setimgUrl1(snapshot.data().imgUrl1);
+      setimgUrl2(snapshot.data().imgUrl2);
+      setimgUrl3(snapshot.data().imgUrl3);
+      setimgUrl4(snapshot.data().imgUrl4);
       
     })
   }, []);
