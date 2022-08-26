@@ -10,7 +10,7 @@ function Index() {
     );
   }, []);
   return (
-    <div className='mt-20 p-4'>
+    <div className=' '>
       {Items.map((res) => (
         <LabsItem
           collegename={res.name}

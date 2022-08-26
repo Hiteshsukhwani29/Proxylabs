@@ -24,14 +24,6 @@ export default class DatePicker extends React.Component {
           onFocusChange={({ focused }) => this.setState({ focused })}
           focused={this.state.focused}
         />
-
-        <div
-          onClick={({ focused }) =>
-            this.setState({ focused })(console.log("true"))
-          }
-        >
-          ljgengnegdfhgnfhj
-        </div>
       </div>
     );
   }

@@ -11,7 +11,9 @@ import Navbar from "./components/Navbar";
 import CreateCurriculum from "./components/CreateCurriculam";
 import InstituteMainScreen from "./pages/InstituteMainScreen";
 import SearchPage from "./pages/SearchPage";
-import Host from "./components/HostDetail";
+import InstituteInfo from "./components/InstituteInfo";
+import HostLandingPage from "./pages/HostLandingPage";
+import HostDetail from "./components/HostDetail"
 
 function App() {
   const token = JSON.parse(localStorage.getItem("token"));
@@ -91,7 +93,9 @@ function App() {
                   element={<CreateCurriculum />}
                 />
                 <Route path="/search/:id" element={<SearchPage />} />
-                <Route path="/host" element={<Host />} />
+                <Route path="/instituteinfo" element={<InstituteInfo />} />
+                <Route path="/hostLab" element={<HostLandingPage/>} />
+                <Route path="/host" element={<HostDetail/>} />
               </Routes>
 
               {/* <Component ShowModal={ShowModal} setShowModal={setShowModal} /> */}

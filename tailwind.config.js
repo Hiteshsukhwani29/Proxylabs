@@ -13,7 +13,8 @@ module.exports = {
       temp2: "#EDF3F6",
       bg1: "#ffffff",
       focus_color_1: "#FFEEE1",
-      close: "#ff605c"
+      close: "#ff605c",
+      green:"#3E9B58"
     },
     extend: {
       animation:{

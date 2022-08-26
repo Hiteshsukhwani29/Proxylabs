@@ -29,7 +29,7 @@ function index({ collegename, category, imgurl, labname, lat, lon, rating }) {
   return (
     <>
       <div
-        className="rounded-lg bg-white grid grid-flow-col grid-cols-2 pr-4 mt-4"
+        className="rounded-lg bg-white grid grid-flow-col grid-cols-2 pr-4 mt-4 cursor-pointer "
         style={{ border: "1px solid #eeeeee" }}
       >
         <div className="flex items-center ml-2">
