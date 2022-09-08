@@ -1,13 +1,11 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Searchbar from "../Searchbar"
+import Searchbar from "../Searchbar";
 
 import { Button } from "@mui/material";
 
 export default function Index({ Head, detail, imgUrl }) {
-
-
-const [SearchText, setSearchText] = useState("");
+  const [SearchText, setSearchText] = useState("");
   const [AlreadyLoggedIn, setAlreadyLoggedIn] = useState(false);
   const [Token, setToken] = useState("");
   const type = JSON.parse(localStorage.getItem("type"));
@@ -20,11 +18,11 @@ const [SearchText, setSearchText] = useState("");
     }
   }, [Token]);
 
-  let navigate = useNavigate(); 
-  const routeChange = () =>{ 
-    let path = `/hostLab`; 
+  let navigate = useNavigate();
+  const routeChange = () => {
+    let path = `/hostLab`;
     navigate(path);
-  }
+  };
 
   return (
     <div className="flex justify-between items-center my-24 p-4">
@@ -33,7 +31,11 @@ const [SearchText, setSearchText] = useState("");
         <div className="text-sm font-light my-2">{detail}</div>
 
         {AlreadyLoggedIn ? (
-            <div className={`flex items-center py-6 ${type==="Institute"?"block":"hidden"}`} >
+          <div
+            className={`flex items-center py-6 ${
+              type === "Institute" ? "block" : "hidden"
+            }`}
+          >
             <Button
               className={`!bg-white !text-black !px-6  !py-2 !rounded-3xl !mr-4 `}
               variant="outlined"
@@ -41,7 +43,7 @@ const [SearchText, setSearchText] = useState("");
             >
               Host My College
             </Button>
-  
+
             <Button
               className="!bg-accent !text-white !px-6  !py-2 !rounded-3xl"
               variant="outlined"
@@ -49,20 +51,25 @@ const [SearchText, setSearchText] = useState("");
               Get Credits
             </Button>
           </div>
-          ) : (
-            <Searchbar SearchText={SearchText} setSearchText={setSearchText}/>
-          )}
-        
+        ) : (
+<Button
+              className="!bg-accent !text-white !px-6 !py-2 !rounded-3xl !mt-5"
+              variant="outlined"
+            >
+              Get Credits
+            </Button>        )}
 
         {AlreadyLoggedIn ? (
-            <div className={`flex items-center py-6 ${type==="Student"?"block":"hidden"}`} >
-            <Searchbar SearchText={SearchText} setSearchText={setSearchText}/>
-              
+          <div
+            className={`flex items-center py-6 ${
+              type === "Student" ? "block" : "hidden"
+            }`}
+          >
+            <Searchbar SearchText={SearchText} setSearchText={setSearchText} />
           </div>
-          ) : (
-            <></>
-          )}
-
+        ) : (
+          <></>
+        )}
       </div>
       <div className="flex-0 mx-10">
         <img className="h-80 max-w-lg rounded-lg" src={imgUrl} alt="" />

@@ -8,7 +8,7 @@ function Index({ ShowModal, setShowModal }) {
     <div className="bg-bg1 flex flex-col justify-center">
       {ShowModal?<LoginComponent ShowModal={ShowModal} setShowModal={setShowModal}/>:
       <div className="flex-1">
-      <PageIntro Head="Laboratories at everyone’s comfort. Laboratories at" detail="Allow your location, select your field and dive into the list of colleges at your disposal :)" imgUrl={Landing_bg}/>
+      <PageIntro Head="Join hands with us and get laboratories at your disposal" detail="Allow your location, select your field and dive into the list of colleges at your disposal :)" imgUrl={Landing_bg}/>
     </div>}
     </div>
   )

@@ -61,6 +61,45 @@ function App() {
     }
   }, []);
 
+  const HomePage = () => {
+    if (type === null) {
+      return (
+        <Route
+          path="/"
+          element={<Login ShowModal={ShowModal} setShowModal={setShowModal} />}
+        />
+      );
+    }
+    if (type === "Institute") {
+      return (
+        <Route
+          path="/"
+          element={
+            <InstituteMainScreen
+              ShowAddCurriculumCard={ShowAddCurriculumCard}
+              setShowAddCurriculumCard={setShowAddCurriculumCard}
+              ShowCompleteProfile={ShowCompleteProfile}
+              setShowCompleteProfile={setShowCompleteProfile}
+            />
+          }
+        />
+      );
+    }
+    if (type === "Student") {
+      return (
+        <Route
+          path="/"
+          element={
+            <StudentMainScreen
+              SearchText={SearchText}
+              setSearchText={setSearchText}
+            />
+          }
+        />
+      );
+    }
+  };
+
   return (
     <div className="flex-col justify-center">
       <Navbar
@@ -76,15 +115,16 @@ function App() {
           {loaded === true ? (
             <>
               <Routes>
+                {HomePage}
                 <Route
-                  path="/"
+                  path="/Student"
                   element={
-                    <Login ShowModal={ShowModal} setShowModal={setShowModal} />
+                    <StudentMainScreen
+                      SearchText={SearchText}
+                      setSearchText={setSearchText}
+                    />
                   }
                 />
-                <Route path="/Student" element={<StudentMainScreen 
-                      SearchText={SearchText}
-                      setSearchText={setSearchText} />} />
                 <Route
                   path="/Institute"
                   element={
@@ -100,15 +140,22 @@ function App() {
                   path="/CreateCurriculum"
                   element={<CreateCurriculum />}
                 />
-                <Route path="/search" element={<SearchPage SearchText={SearchText} setSearchText={setSearchText} />} />
+                <Route
+                  path="/search"
+                  element={
+                    <SearchPage
+                      SearchText={SearchText}
+                      setSearchText={setSearchText}
+                    />
+                  }
+                />
                 <Route path="/instituteinfo" element={<InstituteInfo />} />
-                <Route path="/hostLab" element={<HostLandingPage/>} />
-                <Route path="/host" element={<HostDetail/>} />
-                <Route path="/prodrop" element={<ProfileCard/>} />
-                <Route path="/Booklab" element={<LabBookingPage/>} />
-                <Route path="/approval" element={<ApprovalPage/>} />
-                <Route path="/dashboard" element={<ResearchDashbord/>} />
-  
+                <Route path="/hostLab" element={<HostLandingPage />} />
+                <Route path="/host" element={<HostDetail />} />
+                <Route path="/prodrop" element={<ProfileCard />} />
+                <Route path="/Booklab" element={<LabBookingPage />} />
+                <Route path="/approval" element={<ApprovalPage />} />
+                <Route path="/dashboard" element={<ResearchDashbord />} />
               </Routes>
 
               {/* <Component ShowModal={ShowModal} setShowModal={setShowModal} /> */}
