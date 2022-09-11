@@ -22,8 +22,7 @@ function Index({ SearchText, setSearchText }) {
   return (
     <>
       <div
-        className="shadow-[0_16px_33px_rgba(89,163,201,0.35)] rounded-full inline-block m-4 bg-white py-1"
-        style={{ border: "1px solid #eeeeee" }}
+        className="rounded-full inline-block m-4 bg-white py-1 shadow-accent-searchbar border-gray1"
       >
         <div className="flex items-center mx-1">
           <div className="flex items-center p-1 ml-3">

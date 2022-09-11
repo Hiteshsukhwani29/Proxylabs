@@ -5,8 +5,7 @@ import Landing_bg from "../../assets/Landing_bg.png";
 import AddCurriculumCard from "../../components/Navbar/AddCurriculumCard";
 import CollegeDetail from "../../components/InstituteInfo/CollegeDetail";
 import WelcomeIntro from "../../components/InstituteInfo/WelcomeIntro";
-import InstituteLanding from "../../assets/AdminLanding.png"
-import LandingContent from "../../components/LandingContent"
+import InstituteLanding from "../../assets/AdminLanding.png";
 
 export default function Index({
   ShowAddCurriculumCard,
@@ -60,7 +59,6 @@ export default function Index({
       ) : (
         <></>
       )}
-      <LandingContent/>
     </div>
   );
 }

@@ -61,45 +61,6 @@ function App() {
     }
   }, []);
 
-  const HomePage = () => {
-    if (type === null) {
-      return (
-        <Route
-          path="/"
-          element={<Login ShowModal={ShowModal} setShowModal={setShowModal} />}
-        />
-      );
-    }
-    if (type === "Institute") {
-      return (
-        <Route
-          path="/"
-          element={
-            <InstituteMainScreen
-              ShowAddCurriculumCard={ShowAddCurriculumCard}
-              setShowAddCurriculumCard={setShowAddCurriculumCard}
-              ShowCompleteProfile={ShowCompleteProfile}
-              setShowCompleteProfile={setShowCompleteProfile}
-            />
-          }
-        />
-      );
-    }
-    if (type === "Student") {
-      return (
-        <Route
-          path="/"
-          element={
-            <StudentMainScreen
-              SearchText={SearchText}
-              setSearchText={setSearchText}
-            />
-          }
-        />
-      );
-    }
-  };
-
   return (
     <div className="flex-col justify-center">
       <Navbar
@@ -115,7 +76,29 @@ function App() {
           {loaded === true ? (
             <>
               <Routes>
-                {HomePage}
+                <Route
+                  path="/"
+                  element={
+                    type === "Institute" ? (
+                      <InstituteMainScreen
+                        ShowAddCurriculumCard={ShowAddCurriculumCard}
+                        setShowAddCurriculumCard={setShowAddCurriculumCard}
+                        ShowCompleteProfile={ShowCompleteProfile}
+                        setShowCompleteProfile={setShowCompleteProfile}
+                      />
+                    ) : type === "Student" ? (
+                      <StudentMainScreen
+                        SearchText={SearchText}
+                        setSearchText={setSearchText}
+                      />
+                    ) : (
+                      <Login
+                        ShowModal={ShowModal}
+                        setShowModal={setShowModal}
+                      />
+                    )
+                  }
+                />
                 <Route
                   path="/Student"
                   element={
