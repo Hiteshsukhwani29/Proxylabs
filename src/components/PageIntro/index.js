@@ -4,7 +4,7 @@ import Searchbar from "../Searchbar";
 
 import { Button } from "@mui/material";
 
-export default function Index({ Head, detail, imgUrl }) {
+export default function Index({ Head, detail, imgUrl, setShowModal }) {
   const [SearchText, setSearchText] = useState("");
   const [AlreadyLoggedIn, setAlreadyLoggedIn] = useState(false);
   const [Token, setToken] = useState("");
@@ -51,8 +51,9 @@ export default function Index({ Head, detail, imgUrl }) {
           <Searchbar SearchText={SearchText} setSearchText={setSearchText} />
         ) : (
           <Button
-            className="!bg-accent !text-white !px-6  !py-2 !rounded-3xl shadow-accent-btn"
+            className="!bg-accent !text-white !px-6  !py-2 !rounded-3xl shadow-accent-btn !mt-12"
             variant="outlined"
+            onClick={()=> setShowModal(true)}
           >
             Get Started
           </Button>

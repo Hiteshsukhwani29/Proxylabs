@@ -29,7 +29,11 @@ body {
 }
 
 .border-gray1 {
-  border: "1px solid #eeeeee";
+  border: 1px solid #eeeeee !important;
+}
+
+.border-accent1 {
+  border: 1px solid #F47518 !important;
 }
 
 code {

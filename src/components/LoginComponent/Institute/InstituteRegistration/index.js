@@ -113,7 +113,6 @@ function Index({ Email, setShowRegistrationBox }) {
         className="w-96 !mt-4"
         id="outlined-basic"
         label="NIRF Institute ID"
-        placeholder="I have a code from my college (optional)"
         variant="outlined"
         onChange={(e) => {
           setNirfId(e.target.value);
@@ -125,6 +124,7 @@ function Index({ Email, setShowRegistrationBox }) {
         helperText={UnsafePasswordHelpertext}
         className="w-96 !mt-4"
         id="outlined-basic"
+        type="password"
         label="Password"
         variant="outlined"
         onChange={(e) => {
@@ -137,6 +137,7 @@ function Index({ Email, setShowRegistrationBox }) {
         helperText={DifferentConfirmPasswordHelpertext}
         className="w-96 !mt-4"
         id="outlined-basic"
+        type="password"
         label="Confirm Password"
         variant="outlined"
         onChange={(e) => {
@@ -162,7 +163,7 @@ function Index({ Email, setShowRegistrationBox }) {
       </div>
 
       <Button
-        className="!bg-accent !text-white !mt-6 !px-10  !py-2 !rounded-full"
+        className="!bg-accent !text-white !mt-6 !px-10  !py-2 !rounded-full !border-none"
         variant="outlined"
         onClick={checkInstituteBeforeRegistration}
       >

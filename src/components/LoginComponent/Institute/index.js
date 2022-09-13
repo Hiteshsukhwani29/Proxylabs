@@ -105,7 +105,7 @@ function Index({ setwelcomeText }) {
             value={Email}
           />
           <Button
-            className="!bg-accent !text-white !mt-6 !px-10  !py-2 !rounded-full"
+            className="!bg-accent !text-white !mt-6 !px-10  !py-2 !rounded-full !border-none"
             variant="outlined"
             onClick={checkMailId}
           >

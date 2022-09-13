@@ -5,7 +5,7 @@ import ListItem from "../ListItem";
 import { useSelector } from "react-redux";
 
 function Index({ setIndex }) {
-  const state = useSelector(state => state.t1);
+  const state = useSelector((state) => state.t1);
 
   const [Items, setItems] = useState([]);
   const [ItemsEmptyList, setItemsEmptyList] = useState([]);
@@ -20,33 +20,35 @@ function Index({ setIndex }) {
   var TempList1 = [];
   var index = 0;
 
-  const InstituteRef = db
-    .collection("curriculum")
-    .doc(state.user.uid);
+  const InstituteRef = db.collection("curriculum").doc(state.user.uid);
 
   useEffect(() => {
-    InstituteRef.get().then((snapshot) => {
-      console.log("Main is called");
-      console.log(snapshot.data().Batches);
-      setBatches(snapshot.data().Batches);
-      snapshot.data().Batches.map((res) => {
-        console.log(index, res.name);
-        TempList.push({
-          index: index,
-          name: res.name,
+    InstituteRef.onSnapshot((s) => {
+      if (s.exists) {
+        InstituteRef.get().then((snapshot) => {
+          console.log("Main is called");
+          console.log(snapshot.data().Batches);
+          setBatches(snapshot.data().Batches);
+          snapshot.data().Batches.map((res) => {
+            console.log(index, res.name);
+            TempList.push({
+              index: index,
+              name: res.name,
+            });
+            index++;
+            InstituteRef.collection(res.name).onSnapshot((ss) => {
+              if (ss.size == 1) {
+                TempList1.push(true);
+                setItemsEmptyList(TempList1);
+              } else {
+                TempList1.push(false);
+                setItemsEmptyList(TempList1);
+              }
+            });
+            setItems(TempList);
+          });
         });
-        index++;
-        InstituteRef.collection(res.name).onSnapshot((ss) => {
-          if (ss.size == 1) {
-            TempList1.push(true);
-            setItemsEmptyList(TempList1);
-          } else {
-            TempList1.push(false);
-            setItemsEmptyList(TempList1);
-          }
-        });
-        setItems(TempList);
-      });
+      }
     });
   }, [refresh]);
 
@@ -59,9 +61,16 @@ function Index({ setIndex }) {
   const createBatch = async (e) => {
     e.preventDefault();
     await InstituteRef.collection(InputText).doc("-1").set({});
-    await InstituteRef.set({
-      Batches: [...Batches, { name: InputText, totalstudents: 0 }],
-    });
+    if (Batches !== null) {
+      await InstituteRef.set({
+        Batches: [...Batches, { name: InputText, totalstudents: 0 }],
+      });
+    }
+    else{
+      await InstituteRef.set({
+        Batches: [{ name: InputText, totalstudents: 0 }]
+      });
+    }
     setIsFocussed(false);
     setrefresh(!refresh);
   };
@@ -103,7 +112,10 @@ function Index({ setIndex }) {
       ) : (
         <></>
       )}
-      <div className="flex-1 overflow-y-scroll" onClick={() => setIsFocussed(false)}>
+      <div
+        className="flex-1 overflow-y-scroll"
+        onClick={() => setIsFocussed(false)}
+      >
         {Items.map(({ index, name }) => {
           return (
             <div

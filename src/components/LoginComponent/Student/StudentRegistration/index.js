@@ -141,6 +141,7 @@ function Index({ Email, setShowRegistrationBox }) {
         helperText={UnsafePasswordHelpertext}
         className="w-96 !mt-4"
         id="outlined-basic"
+        type="password"
         label="Password"
         variant="outlined"
         onChange={(e) => {
@@ -153,6 +154,7 @@ function Index({ Email, setShowRegistrationBox }) {
         helperText={DifferentConfirmPasswordHelpertext}
         className="w-96 !mt-4"
         id="outlined-basic"
+        type="password"
         label="Confirm Password"
         variant="outlined"
         onChange={(e) => {
@@ -175,7 +177,7 @@ function Index({ Email, setShowRegistrationBox }) {
       />
       {/* <ReCAPTCHA sitekey="Your client site key" onChange={onChange} /> */}
       <Button
-        className="!bg-accent !text-white !mt-6 !px-10  !py-2 !rounded-full"
+        className="!bg-accent !text-white !mt-6 !px-10  !py-2 !rounded-full !border-none"
         variant="outlined"
         onClick={checkUserBeforeRegistration}
       >

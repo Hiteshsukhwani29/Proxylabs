@@ -73,7 +73,7 @@ function Index({ setShowModal , setShowAddCurriculumCard, ShowAddCurriculumCard,
           </div>
           {!AlreadyLoggedIn ? (
             <div
-              className="bg-white flex h-min w-max px-6 py-1 rounded-full flex-0 justify-center cursor-pointer"
+              className="bg-white flex h-min w-max px-6 py-1 rounded-full flex-0 justify-center cursor-pointer border-accent1"
               onClick={() => setShowModal(true)}
             >
               <div>Sign Up</div>
