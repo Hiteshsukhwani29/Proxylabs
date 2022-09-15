@@ -3,8 +3,13 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Montserrat";
+  font-family: "Montserrat-Semibold";
   src: url("../public/fonts/Montserrat-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "Montserrat-Regular";
+  src: url("../public/fonts/Montserrat-Regular.ttf");
 }
 
 @layer components {
@@ -28,12 +33,22 @@ body {
   border: none !important
 }
 
+.shadow-gray-btn {
+  border: 1px solid #CBCBCB;
+  box-shadow: 0px 16px 33px rgba(201, 201, 201, 0.35);
+  border-radius: 27.5px;
+}
+
 .border-gray1 {
   border: 1px solid #eeeeee !important;
 }
 
 .border-accent1 {
   border: 1px solid #F47518 !important;
+}
+
+.border-black1 {
+  border: 1px solid #000000 !important;
 }
 
 code {

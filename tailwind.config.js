@@ -21,7 +21,8 @@ module.exports = {
         'bounce-short': 'bounce 1s ease-in-out 5'
       },
       fontFamily: {
-        'montserrat': ['Montserrat'],
+        'montserrat-semibold': ['Montserrat-Semibold'],
+        'montserrat-regular': ['Montserrat-Regular'],
         'lato': ['Lato'],
         'garamond': ['Garamond']
     }

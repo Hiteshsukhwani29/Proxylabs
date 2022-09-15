@@ -29,6 +29,7 @@ function App() {
   const [ShowModal, setShowModal] = useState(false);
   const [ShowAddCurriculumCard, setShowAddCurriculumCard] = useState(false);
   const [ShowCompleteProfile, setShowCompleteProfile] = useState(false);
+  const [ShowExpandedMenu, setShowExpandedMenu] = useState(false);
 
   const [SearchText, setSearchText] = useState("");
 
@@ -61,14 +62,23 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    console.log("working");
+  }, [ShowExpandedMenu]);
+
   return (
     <div className="flex-col justify-center">
+      {ShowCompleteProfile?
+      <div className="absolute w-screen h-screen bg-black opacity-60 z-20"></div>:<></>
+}
       <Navbar
         isAlreadyLoggedIn={false}
         setShowModal={setShowModal}
         setShowAddCurriculumCard={setShowAddCurriculumCard}
         ShowCompleteProfile={ShowCompleteProfile}
         setShowCompleteProfile={setShowCompleteProfile}
+        ShowExpandedMenu={ShowExpandedMenu}
+        setShowExpandedMenu={setShowExpandedMenu}
       />
 
       <BrowserRouter>
@@ -85,6 +95,8 @@ function App() {
                         setShowAddCurriculumCard={setShowAddCurriculumCard}
                         ShowCompleteProfile={ShowCompleteProfile}
                         setShowCompleteProfile={setShowCompleteProfile}
+                        ShowExpandedMenu={ShowExpandedMenu}
+                        setShowExpandedMenu={setShowExpandedMenu}
                       />
                     ) : type === "Student" ? (
                       <StudentMainScreen
@@ -116,6 +128,8 @@ function App() {
                       setShowAddCurriculumCard={setShowAddCurriculumCard}
                       ShowCompleteProfile={ShowCompleteProfile}
                       setShowCompleteProfile={setShowCompleteProfile}
+                      ShowExpandedMenu={ShowExpandedMenu}
+                      setShowExpandedMenu={setShowExpandedMenu}
                     />
                   }
                 />

@@ -6,7 +6,14 @@ import LoginComponent from "../LoginComponent";
 import { Menu } from "heroicons-react";
 import { useSelector } from "react-redux";
 
-function Index({ setShowModal , setShowAddCurriculumCard, ShowAddCurriculumCard, ShowCompleteProfile, setShowCompleteProfile}) {
+function Index({
+  setShowModal,
+  setShowAddCurriculumCard,
+  ShowAddCurriculumCard,
+  setShowCompleteProfile,
+  ShowExpandedMenu,
+  setShowExpandedMenu
+}) {
   const state = useSelector((state) => state.t1);
 
   const [coins, setcoins] = useState(100);
@@ -43,24 +50,10 @@ function Index({ setShowModal , setShowAddCurriculumCard, ShowAddCurriculumCard,
         </div>
         <div className="flex-1"></div>
 
-        <div
-          className={`bg-white border !border-accent flex h-min w-max mx-4 px-6 py-1 rounded-full flex-0 justify-center cursor-pointer ${
-            type==="Institute" ? "block" : "hidden"
-          }`}
-          onClick={() => {setShowAddCurriculumCard(!ShowAddCurriculumCard);(console.log("true"))}}>
-          Add Curriculum
-        </div>
-        <div
-          className={`bg-white border !border-accent flex h-min w-max px-6 py-1 rounded-full flex-0 justify-center cursor-pointer ${
-            type==="Institute" ? "block" : "hidden"
-          }`}
-          onClick={() => setShowCompleteProfile(true)}
-        >
-          Complete Profile
-        </div>
+        <div className="flex justify-around flex-1 mr-6">
 
-        <div className="flex justify-around flex-1">
-          <div
+          {/* Coins Part */}
+          {/* <div
             className={`flex-0 flex items-center ${
               AlreadyLoggedIn ? "block" : "hidden"
             }`}
@@ -70,18 +63,44 @@ function Index({ setShowModal , setShowAddCurriculumCard, ShowAddCurriculumCard,
               {coins}&nbsp;
               <div className="font-normal">coins left </div>
             </div>
+          </div> */}
+
+          <div
+            className={`bg-white border !border-accent flex h-min w-max mx-4 px-6 py-1 rounded-full flex-0 justify-center cursor-pointer ${
+              type === "Institute" ? "block" : "hidden"
+            }`}
+            onClick={() => {
+              setShowAddCurriculumCard(true);
+              setShowExpandedMenu(false);
+              setShowCompleteProfile(false);
+              console.log("true");
+            }}
+          >
+            Add Curriculum
           </div>
+          <div
+            className={`bg-white border !border-accent flex h-min w-max mr-4 px-6 py-1 rounded-full flex-0 justify-center cursor-pointer ${
+              type === "Institute" ? "block" : "hidden"
+            }`}
+            onClick={() => {setShowCompleteProfile(true);setShowExpandedMenu(false);setShowAddCurriculumCard(false);
+            }}
+          >
+            Complete Profile
+          </div>
+
           {!AlreadyLoggedIn ? (
             <div
               className="bg-white flex h-min w-max px-6 py-1 rounded-full flex-0 justify-center cursor-pointer border-accent1"
-              onClick={() => setShowModal(true)}
+              onClick={() => {setShowModal(true);setShowExpandedMenu(false);}}
             >
               <div>Sign Up</div>
               <img className="h-6 w-6 ml-2" src={OutlinePerson} />
             </div>
           ) : (
-            <div className="bg-white flex h-min w-max px-4 py-1 rounded-full flex-0 justify-center cursor-pointer">
-              <Menu className="text-gray"/>
+            <div className="bg-white flex h-min w-max px-4 py-1 rounded-full flex-0 justify-center cursor-pointer border-black1"
+            onClick={() => {setShowExpandedMenu(true);setShowAddCurriculumCard(false);setShowCompleteProfile(false);}}
+            >
+              <Menu className="text-gray" />
               <img className="h-6 w-6 ml-2" src={OutlinePerson} />
             </div>
           )}

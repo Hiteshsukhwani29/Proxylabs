@@ -62,6 +62,7 @@ function Index({ setIndex }) {
     e.preventDefault();
     await InstituteRef.collection(InputText).doc("-1").set({});
     if (Batches !== null) {
+      console.log("correct")
       await InstituteRef.set({
         Batches: [...Batches, { name: InputText, totalstudents: 0 }],
       });

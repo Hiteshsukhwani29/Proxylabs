@@ -6,17 +6,7 @@ import { Button } from "@mui/material";
 
 export default function Index({ Head, detail, imgUrl, setShowModal }) {
   const [SearchText, setSearchText] = useState("");
-  const [AlreadyLoggedIn, setAlreadyLoggedIn] = useState(false);
-  const [Token, setToken] = useState("");
   const type = JSON.parse(localStorage.getItem("type"));
-
-  useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("token"));
-    if (token) {
-      setAlreadyLoggedIn(true);
-      setToken(token);
-    }
-  }, [Token]);
 
   let navigate = useNavigate();
   const routeChange = () => {
@@ -27,13 +17,17 @@ export default function Index({ Head, detail, imgUrl, setShowModal }) {
   return (
     <div className="flex justify-between items-center my-24 p-4">
       <div className="m-14 flex-0 ">
-        <div className="text-4xl font-bold  min-w-full ">{Head}</div>
-        <div className="text-sm font-light my-2">{detail}</div>
+        <div className="text-4xl font-bold  min-w-full text-montserrat-semibold">
+          {Head}
+        </div>
+        <div className="text-lg mt-4 font-light my-2 text-montserrat-regular">
+          {detail}
+        </div>
 
         {type === "Institute" ? (
           <div className={`flex items-center py-6`}>
             <Button
-              className={`!bg-white !text-black !px-6  !py-2 !rounded-3xl !mr-4 `}
+              className="!bg-white !text-black !px-6  !py-2 !rounded-3xl !mr-4 shadow-gray-btn border-gray1"
               variant="outlined"
               onClick={routeChange}
             >
@@ -41,7 +35,7 @@ export default function Index({ Head, detail, imgUrl, setShowModal }) {
             </Button>
 
             <Button
-              className="!bg-accent !text-white !px-6  !py-2 !rounded-3xl"
+              className="!bg-accent !text-white !px-6  !py-2 !rounded-3xl shadow-accent-btn"
               variant="outlined"
             >
               Get Credits
@@ -53,7 +47,7 @@ export default function Index({ Head, detail, imgUrl, setShowModal }) {
           <Button
             className="!bg-accent !text-white !px-6  !py-2 !rounded-3xl shadow-accent-btn !mt-12"
             variant="outlined"
-            onClick={()=> setShowModal(true)}
+            onClick={() => setShowModal(true)}
           >
             Get Started
           </Button>
