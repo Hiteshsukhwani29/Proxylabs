@@ -18,6 +18,7 @@ import ProfileCard from "./smallcomponents/ProfileCard";
 import LabBookingPage from "./pages/LabsBookingPage";
 import ApprovalPage from "./pages/ApprovalPage";
 import ResearchDashbord from "./pages/ResearchDashboard";
+import ExpandedMenu from "./components/Navbar/ExpandedMenu";
 
 function App() {
   const token = JSON.parse(localStorage.getItem("token"));
@@ -67,21 +68,23 @@ function App() {
   }, [ShowExpandedMenu]);
 
   return (
-    <div className="flex-col justify-center">
-      {ShowCompleteProfile?
-      <div className="absolute w-screen h-screen bg-black opacity-60 z-20"></div>:<></>
-}
-      <Navbar
-        isAlreadyLoggedIn={false}
-        setShowModal={setShowModal}
-        setShowAddCurriculumCard={setShowAddCurriculumCard}
-        ShowCompleteProfile={ShowCompleteProfile}
-        setShowCompleteProfile={setShowCompleteProfile}
-        ShowExpandedMenu={ShowExpandedMenu}
-        setShowExpandedMenu={setShowExpandedMenu}
-      />
+    <BrowserRouter>
+      <div className="flex-col justify-center">
+        {ShowCompleteProfile ? (
+          <div className="absolute w-screen h-screen bg-black opacity-60 z-20"></div>
+        ) : (
+          <></>
+        )}
+        <Navbar
+          isAlreadyLoggedIn={false}
+          setShowModal={setShowModal}
+          setShowAddCurriculumCard={setShowAddCurriculumCard}
+          ShowCompleteProfile={ShowCompleteProfile}
+          setShowCompleteProfile={setShowCompleteProfile}
+          ShowExpandedMenu={ShowExpandedMenu}
+          setShowExpandedMenu={setShowExpandedMenu}
+        />
 
-      <BrowserRouter>
         <div className="flex flex-col">
           {loaded === true ? (
             <>
@@ -147,7 +150,7 @@ function App() {
                   }
                 />
                 <Route path="/instituteinfo" element={<InstituteInfo />} />
-                <Route path="/hostLab" element={<HostLandingPage />} />
+                <Route path="/hostLab" element={<HostLandingPage setShowExpandedMenu={setShowExpandedMenu} />} />
                 <Route path="/host" element={<HostDetail />} />
                 <Route path="/prodrop" element={<ProfileCard />} />
                 <Route path="/Booklab" element={<LabBookingPage />} />
@@ -174,9 +177,18 @@ function App() {
           ) : (
             <></>
           )}
+          {ShowExpandedMenu ? (
+        <div className="absolute right-[22.5rem] mt-[1%]">
+          <ExpandedMenu />
         </div>
-      </BrowserRouter>
-    </div>
+      ) : (
+        <></>
+      )}
+        </div>
+        
+      </div>
+      
+    </BrowserRouter>
   );
 }
 

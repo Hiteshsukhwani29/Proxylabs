@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import PageIntro from "../../components/PageIntro";
+import PageIntroInstitute from "../../components/PageIntroInstitute";
 import Banner from "../../components/Banner";
-import Landing_bg from "../../assets/Landing_bg.png";
 import AddCurriculumCard from "../../components/Navbar/AddCurriculumCard";
-import ExpandedMenu from "../../components/Navbar/ExpandedMenu";
 import CollegeDetail from "../../components/InstituteInfo/CollegeDetail";
 import WelcomeIntro from "../../components/InstituteInfo/WelcomeIntro";
 import InstituteLanding from "../../assets/AdminLanding.png";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
 
 export default function Index({
   ShowAddCurriculumCard,
@@ -34,7 +34,13 @@ export default function Index({
 
   return (
     <div className="flex flex-col">
-      <div className="flex-1" onClick={() => {setShowAddCurriculumCard(false);setShowExpandedMenu(false);}}>
+      <div
+        className="flex-1"
+        onClick={() => {
+          setShowAddCurriculumCard(false);
+          setShowExpandedMenu(false);
+        }}
+      >
         <div className="absolute left-0 right-0 top-[20%] z-30">
           {IsWelcomeScreenShown !== true ? (
             <WelcomeIntro
@@ -56,25 +62,11 @@ export default function Index({
             <></>
           )}
         </div>
-        <div className="mx-16 ">
-          <PageIntro
-            Head="Register your students. Host your college for other students and get going! "
-            detail="Allow your location, select your field and dive into the list of colleges at your disposal :)"
-            imgUrl={Landing_bg}
-          />
-        </div>
+        <PageIntroInstitute/>
       </div>
       {ShowAddCurriculumCard ? (
-        <div className="absolute mt-[1%] ml-[50%]">
+        <div className="absolute mt-[1%] ml-[52.5%]">
           <AddCurriculumCard />
-        </div>
-      ) : (
-        <></>
-      )}
-
-      {ShowExpandedMenu ? (
-        <div className="absolute right-[22.5rem] mt-[1%]">
-          <ExpandedMenu />
         </div>
       ) : (
         <></>

@@ -1,20 +1,17 @@
 import React,{useState} from 'react'
-import PageIntro from "../../components/PageIntro";
+import PageIntro from "../../components/PageIntroInstitute";
 import Landing_bg from "../../assets/Landing_bg.png"
 import DashboardComponent from "../../components/DashboardComponent"
-
+import Headings from "../../components/Headings";
 
 export default function Index() {
     const [SearchText, setSearchText] = useState("");
   return (
     
     <div>
-     <PageIntro
+     <Headings
         Head="Laboratories at everyone’s comfort. Laboratories at"
         detail="Allow your location, select your field and dive into the list of colleges at your disposal :)"
-        imgUrl={Landing_bg}
-        SearchText={SearchText}
-        setSearchText={setSearchText}
       />  
       <div className='w-[80%] m-auto pb-10'>
             <div className='font-semibold text-lg py-1'>Your Booking</div>

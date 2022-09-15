@@ -1,8 +1,9 @@
 import React from "react";
-import PageIntro from "../../components/PageIntro";
+import PageIntro from "../../components/PageIntroInstitute";
 import LoginComponent from "../../components/LoginComponent";
 import Landing_bg from "../../assets/Landing_bg.png";
 import LandingContent from "../../components/LandingContent";
+import { Button } from "@mui/material";
 
 function Index({ ShowModal, setShowModal }) {
   return (
@@ -17,6 +18,13 @@ function Index({ ShowModal, setShowModal }) {
             detail="Allow your location, select your field and dive into the list of colleges at your disposal :)"
             imgUrl={Landing_bg}
           />
+          <Button
+            className="!bg-accent !text-white !px-6  !py-2 !rounded-3xl shadow-accent-btn !mt-12"
+            variant="outlined"
+            onClick={() => setShowModal(true)}
+          >
+            Get Started
+          </Button>
           <LandingContent />
         </div>
       )}
