@@ -29,22 +29,12 @@ export default function Index({ Head, detail, imgUrl, setShowModal }) {
                 imgUrl={Landing_bg}
               />
 
-              <div className={`flex items-center py-6`}>
-                <Button
-                  className="!bg-white !text-black !px-6  !py-2 !rounded-3xl !mr-4 shadow-gray-btn border-gray1"
-                  variant="outlined"
-                  onClick={routeChange}
-                >
-                  Host My College
-                </Button>
-
                 <Button
                   className="!bg-accent !text-white !px-6 !py-2 !rounded-3xl shadow-accent-btn"
                   variant="outlined"
                 >
-                  Get Credits
+                  Get Started
                 </Button>
-              </div>
             </div>
             <div className="flex-0 mx-10">
               <img

@@ -114,7 +114,7 @@ function App() {
                     )
                   }
                 />
-                <Route
+                {/* <Route
                   path="/Student"
                   element={
                     <StudentMainScreen
@@ -122,8 +122,8 @@ function App() {
                       setSearchText={setSearchText}
                     />
                   }
-                />
-                <Route
+                /> */}
+                {/* <Route
                   path="/Institute"
                   element={
                     <InstituteMainScreen
@@ -135,7 +135,7 @@ function App() {
                       setShowExpandedMenu={setShowExpandedMenu}
                     />
                   }
-                />
+                /> */}
                 <Route
                   path="/CreateCurriculum"
                   element={<CreateCurriculum />}
